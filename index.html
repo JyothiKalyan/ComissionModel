@@ -333,8 +333,35 @@
 
 
 
+
     </div>
     </div>
+    <div id='scenario' style='display:none'>
+    <table class="table"  >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+             <th scope='col'>TARGET></th>
+             <th scope="col">%EEEE-TARGET </th>
+             <th scope="col">General Manager Target</th>
+             <th scope="col">Staff comission%</th>
+
+            <th scope="col">EEEE Achievement % </th>
+            <th scope="col">NON-EEEE Achievement % </th>
+            <th scope="col">Operational Cost</th>
+            <th scope="col">CapX Cost</th>
+            <th scope="col">Net Profit</th>
+            <th scope="col">Managaer Payout</th>
+           
+           
+           
+          </tr>
+        </thead>
+        <tbody id='failed_scenarios'>
+         
+        </tbody>
+      </table>
+</div>
     <div id='section_2' style='padding-left:100px;padding-top:20px;height:350px;position:relative;width:100%; clear:both;background-color: black;'>
         <div  style='display:inline; float:left;width:400px' class='Insights_title' id='Target_Staff_Percentage_Title' >
        
@@ -511,7 +538,7 @@
             $("#Min_Net_Profit").html(formatNumber(Math.round(min_net_profit)))
             $("#Max_Net_Profit").html(formatNumber(Math.round(max_net_profit)))
             $("#simulate_update").html(" ");
-            
+            ALL_Results = ALL_Results.flat()
             
             axis_details =  {'value_numerator':'C_TTL', 'value_column':'per','sub_plot_dimension_1':'emar_achievement_percent','sub_plot_dimension_2':'non_emar_achievement_percent','x_axis_column': 'operation_cost','y_axis_column': 'TARGET','sub_plot_x_domain' : emar_achievement_percent_range,'sub_plot_y_domain' : non_emar_achievement_percent_range}
             Heat_Map_Sub_Plots("#HeatMapSubPlot",1, ALL_Results_new.flat() ,axis_details)
@@ -520,7 +547,7 @@
             nested_x_axis_box_plot("#StaffPercentage_chart", ALL_Results_new.flat() ,axis_details)
 
             axis_details = {'x_axis':'TARGET', 'y_axis':'agent_emar_comission_percentage','conditioned_column':'cap_bucket','conditioned_value':'green'}
-            AreaChart("#Target_Staff_Percentage_Trend", ALL_Results.flat(),axis_details)
+            AreaChart("#Target_Staff_Percentage_Trend", ALL_Results,axis_details)
             
            
         }
@@ -834,7 +861,18 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
             })					
         .on("mouseout", function(d) {		
             div.style("opacity", 0);	
-        });
+        }).on("click",function(event,d){
+
+            populate_table(d.x_axis_level_1,d.x_axis_level_2)
+            
+        }).on("dblclick",function(event,d){
+
+            $("#scenario").hide();
+            d3.select("#failed_scenarios").selectAll("*").remove();
+
+
+})
+        ;
 
     boxes.append("g").selectAll().data(data).enter().append("text").attr("class","text_labels").attr("text-anchor","middle").attr("x",d=>x(d.x_axis_level_1)+x.bandwidth()/2 - 2).attr("y",d=> { return( yscale(d.q3) + (yscale(d.q1) - yscale(d.q3))/2 ) } ).text( d=> d.color_value).attr("fill",d=> {if(d.color_value <= 3){return "black"} else{return "white"}}) 
 
@@ -843,6 +881,55 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
 
   
    
+
+
+
+}
+function populate_table(agent_comission, target_value){
+
+  
+
+    $("#scenario").show();
+
+   var html_string = ''
+   i = 0
+     ALL_Results.map(d => {
+     if(d.TARGET==target_value){
+         
+         if(d.agent_emar_comission_percentage==agent_comission){
+             if(d.cap_bucket!='green'){
+                html_string = html_string+`<thead>
+          <tr>
+            <th scope="row">`+i+`</th>
+            <td>`+ formatValue(d.TARGET) +`</td>
+            <td>`+Math.round(d.emar_target_percentage*100)+`%</td>
+            <td >`+Math.round(d.GM_TARGET*100)+`%</td>
+
+            <td >`+Math.round(d.agent_emar_comission_percentage*100)+`%</td>
+
+            <td >`+ Math.round(d.emar_achievement_percent*100)  +`% </td>
+            <td >`+ Math.round(d.non_emar_achievement_percent*100) +`% </td>
+      
+
+            <td >`+ formatValue(d.operation_cost) +`</td>
+            <td>`+ Math.round(d.cap*100,2) +`%</td>
+            <td >`+ formatValue(d.Net_Profit) +`</td>
+            <td>`+ formatValue(d.Manager_payout) +`</td>
+      
+            
+          </tr>`
+                i = i+1
+             }
+         }
+        }
+     });
+     d3.select("#failed_scenarios").html(html_string);
+
+
+  
+
+     
+ //'Agent_emar_payout':,'Agent_non_emar_payout':  ,'Manager_payout':,'General_Manager_Payout':,'Net_Profit'
 
 
 
@@ -964,13 +1051,9 @@ var i = 0
 
 //const tooltip = working_space.append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "white").style("border", "solid") .style("border-width", "2px") .style("border-radius", "5px").style("padding", "5px")
 
-mouseover = function(event,d) {tooltip.style("opacity", 1) ; d3.select(this).style("stroke", "black").style("opacity", 1)}
-mousemove = function(event,d) {tooltip.html("The exact value of<br>this cell is: " + d.val).style("left", (event.x)/2 + "px").style("top", (event.y)/2 + "px")}
-mouseleave = function(event,d) {tooltip.style("opacity", 0) ; d3.select(this).style("stroke", "none").style("opacity", 0.8)}
-
 
 working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
-.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() ).style("fill", function(d) { return myColor(Math.min(+d.numerator,10))} ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8).on("mouseover", mouseover).on("mousemove", mousemove).on("mouseleave", mouseleave)
+.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() ).style("fill", function(d) { return myColor(Math.min(+d.numerator,10))} ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
 legend = working_space.append("g")
 /* legend.selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;}).join("text").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) +5})
 .text(function(d) { return Math.round(d.val,2)*100} ).attr('text-size','6px')*/
