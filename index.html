@@ -191,10 +191,11 @@
 }
 .tooltip{
     background-color: black;
-    font-size: 18px;
+    font-size: 10px;
     color:white;
     font-family: 'Open Sans', sans-serif;
     padding:10px;
+    width:300px;
     pointer-events: none;
 }
 
@@ -877,7 +878,7 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
       
             div.style("opacity", 1);		
             div	.html(  "for all the simulations that are run for the Target "+  formatValue(d.x_axis_level_2)+", and Agent comission "+ Math.round(d.x_axis_level_1*100) +"% <br> the Net profit ranged mostly between " + formatValue(d.q1) +" and "+ formatValue(d.q3) +` with few extremities marked by the line. <br> 
-        Of these simulations `+ d.color_value +' simulations failed to adhere 18% cap <span class="small-text"> (which is the color of the bar)</span>')	
+        Of these simulations `+ d.color_value +' simulations failed to adhere 18% cap <span style="font-size:8px"> (which is the color of the bar)</span>')	
                 .style("left", (event.pageX) + "px")		
                 .style("top", (event.pageY - 28) + "px");	
             })					
