@@ -242,7 +242,7 @@
         <div>
        <span class='section-title'> Factors which are known</span> 
        <span class ='input_box_span' > Operation Cost: <input type="range" min="500000" max="5000000" value="1000000" step='50000' class="slider si" id="operational_cost" > <label id='operational_cost_label'>1,000,000</label> </span>
-      <span class ='input_box_span'> %EMAAR Target: <input type="range" min="1" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label'>20</label> %</span> <br>
+      <span class ='input_box_span'> %EEEE Target: <input type="range" min="1" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label'>20</label> %</span> <br>
     </div>
     <div style='clear:both;padding-top:20px'>
         <span class='section-title'> Factors which in Control</span> 
@@ -253,7 +253,7 @@
 
       <div style='clear:both;padding-top:20px'>
             <table class='plan_table' >
-                <th>PLAN-1 (EMAAR, Target_Achieved)</th> 
+                <th>PLAN-1 (EEEE, Target_Achieved)</th> 
                 <tr><td><85%</td><td> 0 </td></tr>
                 <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c1_p1"></td></tr>
                 <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c2_p1"></td></tr>
@@ -286,8 +286,8 @@
     <div style='clear:both;position: relative;padding-top:60px' class='simulation_parameters'>
         <span class='section-title'> Factors which are Futuristic & are not in control</span> <br>
         <div style='clear:both;padding-left:300px'>
-        <span  class ='input_box_span'> EMAAR Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
-        <span class ='input_box_span'> NON-EMAAR Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
+        <span  class ='input_box_span'> EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
+        <span class ='input_box_span'> NON-EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
          </div>
      
     </div>
@@ -723,7 +723,7 @@ function nested_x_axis_box_plot(chart_id,data,axis){
     var bottom_axis_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1700).attr("height",30).attr("transform", `translate(${margin.left}, 0)`); 
     bottom_axis_text = bottom_axis_svg.append("text").text("Agent Comission").attr("x",0).attr("y",15).attr("font-size","20px").attr("fill","blue" )
     bottom_axis_svg.append("line").style("stroke", "blue").attr("stroke-opacity",.2).style("stroke-width", 2).attr("x2", 1600  ).attr("x1",100).attr("y2",10).attr("y1",10)
-    bottom_axis_text.attr("transform", function() {return ( "translate(" + (1700 - nodeWidth(this))/2 + ",0)"  )});
+    bottom_axis_text.attr("transform", function() {return ( "translate(" + (1400 - nodeWidth(this))/2 + ",0)"  )});
    
     const myColor = d3.scaleLinear().range(["#e97452", "#8b0001"]).domain([1,10])
     var color_legend = svg_org.append("g")
@@ -872,7 +872,7 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
 
     var xaxissvg = d3.select(chart_id).append("div").append("svg").attr("width", width ).attr("height", 80 ).attr("transform", "translate("+220+", 0)").append("g")
     xaxissvg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", width).attr("y2", 20); 
-    subplot_x_text = xaxissvg.append("g").attr("class","subplot_axis_label").append("text").text("EMAAR Achievement%").attr("y", 0).attr("x", 0)
+    subplot_x_text = xaxissvg.append("g").attr("class","subplot_axis_label").append("text").text("EEEE Achievement%").attr("y", 0).attr("x", 0)
 
 
 
