@@ -7,19 +7,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <link href=https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css rel=stylesheet>
+  
+  <!--<table data-sort-name=stargazers_count data-sort-order=desc  -->
+    <script src=https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js></script>
+
+
+
+
+
 
     <style>
 
 
 .custom-scroll{
     position:relative;
-    direction:rtl;overflow-y: scroll;padding-left:100px;margin-left:100px ; height:300px
+    /*direction:rtl;*/
+    overflow-y: scroll;
+    position: relative;
+    margin-bottom: 100px;
+    display: inline-block;
+    float: left;
+width: 1400px;
+    overflow-x: scroll;
+    
 
 }
 
+thead, tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+        
 .anti-dir{
     position:relative;
-    direction:ltr
+   /*direction:ltr*/
     
 }
 
@@ -121,7 +146,7 @@
 }
 .halfsize {
    position:relative;
-   width:80%
+   width:80%;
    height:300px;
 }
 
@@ -231,7 +256,7 @@
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
-<body>
+<body style='width:1600px;margin: auto;position: absolute;'>
 
 <div >
     
@@ -337,31 +362,29 @@
 
     </div>
     </div>
-    <div id='scenario' style='display:none'>
-    <table class="table"  >
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-             <th scope='col'>TARGET></th>
-             <th scope="col">%EEEE-TARGET </th>
-             <th scope="col">General Manager Target</th>
-             <th scope="col">Staff comission%</th>
+    <div id='scenario' >
+<table id='scenario_table'>
 
-            <th scope="col">EEEE Achievement % </th>
-            <th scope="col">NON-EEEE Achievement % </th>
-            <th scope="col">Operational Cost</th>
-            <th scope="col">Net Profit</th>
-            <th scope="col">Managaer Payout</th>
-           
-           
-           
-          </tr>
-        </thead>
-        <tbody id='failed_scenarios'>
-         
-        </tbody>
-      </table>
+</table>
+      
+
+  
+
+       
+        
+       
+
+
 </div>
+
+<div id='Section_21' class='Insights_title' style='padding-bottom:40px'>
+
+    <br> &#10004 Target is spiked up to accomodate higher achievement% 
+    <br> &#10004 Higher the target, less the probability for higher achievement %
+  
+
+</div>
+
     <div id='section_2' style='padding-left:100px;padding-top:20px;height:350px;position:relative;width:100%; clear:both;background-color: black;'>
         <div  style='display:inline; float:left;width:300px' class='Insights_title' id='Target_Staff_Percentage_Title' >
        
@@ -376,7 +399,7 @@
    
 
     <div id='section_3' style='padding-top:50px;background-color:#eee'>
-        <div class='chart_title'>  to adhere 18% capx, Target should be spiked up to accomodate higher achievement% </div>
+        <div class='chart_title'>  to adhere 18% capx, Target are spiked up to accomodate higher achievement% </div>
         <div class='chart_sub_title'> </div>
        
     <div id='HeatMapSubPlot' >
@@ -534,8 +557,8 @@
             o = 0
            while(it < ALL_Results.length){
                 it = it + 5;
-               // new_Target_Range.push(ALL_Results[ALL_Results.length-it][0].TARGET)
-               // ALL_Results_new.push(ALL_Results[ALL_Results.length-it])
+                new_Target_Range.push(ALL_Results[ALL_Results.length-it][0].TARGET)
+                ALL_Results_new.push(ALL_Results[ALL_Results.length-it])
                o = o+1
                 if(stop_in_next_3 > 0){
                     stop_in_next_3 = stop_in_next_3 -1
@@ -550,12 +573,12 @@
                 
                 
             }
-            console.log(o)
-       if(ALL_Results.length >= 40){
-            new_Target_Range = [ALL_Results[ALL_Results.length-1][0].TARGET,ALL_Results[ALL_Results.length-5][0].TARGET, ALL_Results[ALL_Results.length-10][0].TARGET,ALL_Results[ALL_Results.length-15][0].TARGET,ALL_Results[ALL_Results.length-20][0].TARGET]
-             ALL_Results_new = [ALL_Results[ALL_Results.length-1],ALL_Results[ALL_Results.length-5],ALL_Results[ALL_Results.length-10],ALL_Results[ALL_Results.length-15],ALL_Results[ALL_Results.length-20] ]
+           
+     /*  if(ALL_Results.length >= 40){
+            new_Target_Range = [ALL_Results[ALL_Results.length-1][0].TARGET,ALL_Results[ALL_Results.length-5][0].TARGET, ALL_Results[ALL_Results.length-10][0].TARGET,ALL_Results[ALL_Results.length-15][0].TARGET,ALL_Results[ALL_Results.length-20][0].TARGET,ALL_Results[ALL_Results.length-25][0].TARGET]
+             ALL_Results_new = [ALL_Results[ALL_Results.length-1],ALL_Results[ALL_Results.length-5],ALL_Results[ALL_Results.length-10],ALL_Results[ALL_Results.length-15],ALL_Results[ALL_Results.length-20],ALL_Results[ALL_Results.length-25] ]
                
-    }
+    }*/
             $("#Target_result").html(formatNumber(TARGET))
             $("#GM_Target_result").html(formatNumber(TARGET*gm_target_factor/100))
             $("#Min_Net_Profit").html(formatNumber(Math.round(min_net_profit)))
@@ -564,7 +587,7 @@
             ALL_Results = ALL_Results.flat()
             
             axis_details =  {'value_numerator':'C_TTL', 'value_column':'per','sub_plot_dimension_1':'emar_achievement_percent','sub_plot_dimension_2':'non_emar_achievement_percent','x_axis_column': 'operation_cost','y_axis_column': 'TARGET','sub_plot_x_domain' : emar_achievement_percent_range,'sub_plot_y_domain' : non_emar_achievement_percent_range}
-            Heat_Map_Sub_Plots("#HeatMapSubPlot",1, ALL_Results_new.flat() ,axis_details)
+            Heat_Map_Sub_Plots("#HeatMapSubPlot",{'subx':new_Target_Range.length,'suby':operation_cost_Range.length}, ALL_Results_new.flat() ,axis_details)
 
             axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'Net_Profit'}
             nested_x_axis_box_plot("#StaffPercentage_chart", ALL_Results_new.flat() ,axis_details)
@@ -783,7 +806,7 @@ function nested_x_axis_box_plot(chart_id,data,axis){
     var svg =  d3.select(chart_id).append("div").attr("class","horizontal_scroll").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.bottom).attr("transform", `translate(0, 0)`);
     var bottom_axis_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1700).attr("height",30).attr("transform", `translate(${margin.left}, 0)`); 
     bottom_axis_text = bottom_axis_svg.append("text").text("Agent Comission").attr("x",0).attr("y",15).attr("font-size","20px").attr("fill","blue" )
-    bottom_axis_svg.append("line").style("stroke", "blue").attr("stroke-opacity",.2).style("stroke-width", 2).attr("x2", 1600  ).attr("x1",100).attr("y2",10).attr("y1",10)
+    bottom_axis_svg.append("line").style("stroke", "blue").attr("stroke-opacity",.2).style("stroke-width", 2).attr("x2", 1200  ).attr("x1",100).attr("y2",10).attr("y1",10)
     bottom_axis_text.attr("transform", function() {return ( "translate(" + (1400 - nodeWidth(this))/2 + ",0)"  )});
    
     const myColor = d3.scaleLinear().range(["#e97452", "#8b0001"]).domain([1,10])
@@ -823,7 +846,7 @@ while(i < 10){
 'median':d3.quantile(v.map(function(d) { return d[axis.y_axis];}).sort(d3.ascending),.5),
 'cv' : d3.max(v,d=>{ if(ttl_min_net_profit > d[axis.y_axis]){ttl_min_net_profit =d[axis.y_axis] }  if(ttl_max_net_profit < d[axis.y_axis]){ttl_max_net_profit =d[axis.y_axis] }  return 0})} } ,d => d[axis.x_axis_level_2],d => d[axis.x_axis_level_1]  )
 
-    var sub_plot_x_scale_level_2 = d3.scaleBand().domain(axis.x_axis_level_2_domain).range([margin.left,(sub_plot_width*5) ]).paddingInner(0.05)  ;
+    var sub_plot_x_scale_level_2 = d3.scaleBand().domain(axis.x_axis_level_2_domain).range([margin.left,(sub_plot_width*axis.x_axis_level_2_domain.length ) ]).paddingInner(0.05)  ;
   
     
     const yscale = d3.scaleLinear().range([ height , 10 ]).domain([ttl_min_net_profit,ttl_max_net_profit]);
@@ -879,7 +902,7 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
             div.style("opacity", 1);		
             div	.html(  "for all the simulations that are run for the Target "+  formatValue(d.x_axis_level_2)+", and Agent comission "+ Math.round(d.x_axis_level_1*100) +"% <br> the Net profit ranged mostly between " + formatValue(d.q1) +" and "+ formatValue(d.q3) +` with few extremities marked by the line. <br> 
         Of these simulations `+ d.color_value +' simulations failed to adhere 18% cap <span style="font-size:8px"> (which is the color of the bar)</span>')	
-                .style("left", (event.pageX) + "px")		
+                .style("left", (event.pageX-220) + "px")		
                 .style("top", (event.pageY - 28) + "px");	
             })					
         .on("mouseout", function(d) {		
@@ -890,8 +913,12 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
             
         }).on("dblclick",function(event,d){
 
-            $("#scenario").hide();
-            d3.select("#failed_scenarios").selectAll("*").remove();
+        if(start_script == 1){
+            sceanriotable.destroy();
+            start_script = 0
+        }
+
+          
 
 
 })
@@ -910,20 +937,25 @@ function BoxPlot(data,box_pot_svg,width,height,x_axis_level_1_domain, yscale){
 }
 function populate_table(agent_comission, target_value){
 
+
+    if(start_script == 1){
+            sceanriotable.destroy();
+            start_script = 0
+        }
+ 
+
   
-
-    $("#scenario").show();
-
-   var html_string = ''
+   var dataSet = []
    i = 0
+   html_string = ""
      ALL_Results.map(d => {
      if(d.TARGET==target_value){
          
          if(d.agent_emar_comission_percentage==agent_comission){
              if(d.cap_bucket!='green'){
-                html_string = html_string+`<thead>
+                html_string = html_string+`
           <tr>
-            <th scope="row">`+i+`</th>
+            <td">`+i+`</t>
             <td>`+ formatValue(d.TARGET) +`</td>
             <td>`+Math.round(d.emar_target_percentage*100)+`%</td>
             <td >`+Math.round(d.GM_Target_per*100)+`%</td>
@@ -939,19 +971,36 @@ function populate_table(agent_comission, target_value){
             <td >`+ formatValue(d.Net_Profit) +`</td>
             <td>`+ formatValue(d.Manager_payout) +`</td>
       
-            
+           
           </tr>`
+          //datatable.rows.add();
+          dataSet.push([i,formatValue(d.TARGET),Math.round(d.emar_target_percentage*100),Math.round(d.GM_Target_per*100),Math.round(d.agent_emar_comission_percentage*100),Math.round(d.emar_achievement_percent*100),Math.round(d.non_emar_achievement_percent*100),formatValue(d.operation_cost), Math.round(d.cap*100,2) , formatValue(d.Net_Profit), formatValue(d.Manager_payout)])
                 i = i+1
              }
          }
         }
      });
-     d3.select("#failed_scenarios").html(html_string);
-
-
-  
-
      
+     sceanriotable = $('#scenario_table').DataTable( {
+            data: dataSet,
+            columns: [
+                { title: "#" },
+                { title: "TARGET" },
+                { title: "%EEEE-TARGET" },
+                { title: "General Manager Target" },
+                { title: "Staff comission%" },
+                { title: "EEEE Achievement %" },
+                { title: "NON-EEEE Achievement % " },
+                { title: "Operational Cost" },
+                { title: "Net Profit" },
+                { title: "Managaer Payout" }
+            ]
+        } );
+    start_script = 1
+    // d3.select("#failed_scenarios").html(html_string);
+   
+
+
  //'Agent_emar_payout':,'Agent_non_emar_payout':  ,'Manager_payout':,'General_Manager_Payout':,'Net_Profit'
 
 
@@ -962,50 +1011,41 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
 
     d3.select(chart_id).selectAll("*").remove();
 
-    var sub_plots_x_column_name = axis.sub_plot_dimension_1
-    var sub_plots_y_column_name = axis.sub_plot_dimension_2
-    var y_axis_column = axis.x_axis_column
-    var x_axis_column = axis.y_axis_column
-    var value_column = 'percentage'
-    sub_plot_x_domain = axis.sub_plot_x_domain
-    sub_plot_y_domain = axis.sub_plot_y_domain
-
-
-    var sub_plot_width = 300
-    var margin = {top: 80, right: 25, bottom: 30, left: 40},width = (sub_plot_width*sub_plot_x_domain.length) - margin.left - margin.right,height = 380 *sub_plot_y_domain.length- margin.top - margin.bottom;
+    var sub_plots_x_column_name = axis.sub_plot_dimension_1; var sub_plots_y_column_name = axis.sub_plot_dimension_2
+    var y_axis_column = axis.x_axis_column; var x_axis_column = axis.y_axis_column; var value_column = 'percentage'
+    sub_plot_x_domain = axis.sub_plot_x_domain; sub_plot_y_domain = axis.sub_plot_y_domain;
+     var sub_plot_width = (dimension.subx*40+50); var sub_plot_heght= (dimension.suby*40+50); 
+     var margin = {top: 80, right: 25, bottom: 30, left: 40},
+     width = (sub_plot_width*sub_plot_x_domain.length) - margin.left - margin.right,
+     height = sub_plot_heght* sub_plot_y_domain.length- margin.top - margin.bottom;
     
 
 
-
-
-    data = d3.rollup(data, v => {return { 'x_axis_column': v[0][x_axis_column],'y_axis_column':v[0][y_axis_column] ,
-    'sub_plots_x_column_name': v[0][sub_plots_x_column_name],'sub_plots_y_column_name': v[0][sub_plots_y_column_name], 
-    'numerator':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){ ;return 1} else{;return 0} } ) ,'denominator': d3.sum(v, d => 1), 
-    'val' : (d3.sum(v,  d =>  {if(d.cap_bucket=="green"){return 1} else{return 0} } ) / d3.sum(v, d => 1))}}  ,
-    d => d[sub_plots_x_column_name],d => d[sub_plots_y_column_name],d => d[y_axis_column],d => d[x_axis_column]  )
+    data = d3.rollup(data, v => {return { 'x_axis_column': v[0][x_axis_column],'y_axis_column':v[0][y_axis_column] ,'sub_plots_x_column_name': v[0][sub_plots_x_column_name],'sub_plots_y_column_name': v[0][sub_plots_y_column_name], 'numerator':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){ ;return 1} else{;return 0} } ) ,'denominator': d3.sum(v, d => 1), 'val' : (d3.sum(v,  d =>  {if(d.cap_bucket=="green"){return 1} else{return 0} } ) / d3.sum(v, d => 1))}}  ,d => d[sub_plots_x_column_name],d => d[sub_plots_y_column_name],d => d[y_axis_column],d => d[x_axis_column]  )
+    var top_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1400 ).attr("height", 80 ).attr("transform", "translate("+0+", 0)").append("g")
+   
+    //var svg_y = d3.select(chart_id).append("div").attr("class",'horizontal_scroll_side_div').append("svg").attr("width",80).attr("height", sub_plot_heght+ margin.top+margin.bottom).attr("transform", `translate(0, 0)`);
+    var svg = d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height',sub_plot_heght+ margin.top+margin.bottom +'px').append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", height ).append("g");
 
 
     sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([margin.left,width - margin.right]);
     sub_plot_y_scale = d3.scaleBand().domain(sub_plot_y_domain).range([0,height - margin.bottom]);
 
-    var xaxissvg = d3.select(chart_id).append("div").append("svg").attr("width", width ).attr("height", 80 ).attr("transform", "translate("+220+", 0)").append("g")
-    xaxissvg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", width).attr("y2", 20); 
-    subplot_x_text = xaxissvg.append("g").attr("class","subplot_axis_label").append("text").text("EEEE Achievement%").attr("y", 0).attr("x", 0)
+    top_svg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", 1400).attr("y2", 20); 
+    subplot_x_text = top_svg.append("g").attr("class","subplot_axis_label").append("text").text("EEEE Achievement%").attr("y", 0).attr("x", 0).attr("text-anchor","center")
+    subplot_x_text.attr('transform', function() {return `translate(${(1400 - nodeWidth(this)) / 2},${25})`});
 
 
-
-    var axissvg= xaxissvg.append("g").attr("transform", "translate(0, 90)")
-    
-    //Labelling xaxis sub-plots
+   /* //Labelling xaxis sub-plots
     subplot_x_text.attr('transform', function() {return `translate(${(width - nodeWidth(this)) / 2},${25})`});
     sub_plot_x_domain.forEach(
         sub_x_domain => {
             //xaxissvg.append("rect").attr('height',20).attr('width',sub_plot_x_scale.bandwidth()/3).attr("x",(sub_plot_x_scale(sub_x_domain)+sub_plot_x_scale.bandwidth()/3)).attr("y",40);
-            xaxissvg.append("line").style("stroke", "#aaa").style("stroke-width", 2).attr("x1", sub_plot_x_scale(sub_x_domain)).attr("y1", 40).attr("x2", sub_plot_x_scale(sub_x_domain)+sub_plot_x_scale.bandwidth()-30 ).attr("y2", 40); 
-            xaxissvg.append("text").attr("x", sub_plot_x_scale(sub_x_domain)+(sub_plot_x_scale.bandwidth()-30)/2 ).attr("y", 40).text(sub_x_domain).attr("text-anchor", "middle")
+            top_svg.append("line").style("stroke", "#aaa").style("stroke-width", 2).attr("x1", sub_plot_x_scale(sub_x_domain)).attr("y1", 40).attr("x2", sub_plot_x_scale(sub_x_domain)+sub_plot_x_scale.bandwidth()-30 ).attr("y2", 40); 
+            top_svg.append("text").attr("x", sub_plot_x_scale(sub_x_domain)+(sub_plot_x_scale.bandwidth()-30)/2 ).attr("y", 40).text(sub_x_domain).attr("text-anchor", "middle")
 
         }
-    )
+    )*/
 
 
 //var yaxissvg = d3.select(chart_id).append("div").append("svg").attr("width", 30 ).attr("height", height ).append("g").attr("transform", "translate(0, 30)")
@@ -1016,8 +1056,7 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
 //axissvg.append("text").attr("class", "xaxis_label").attr("text-anchor", "start").attr("y", height+15).attr("x", 0).text("NON-EMAR ACHIEVEMENT%");
 
     
-    var svg = d3.select(chart_id).append("div").attr("class",'custom-scroll').append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", height ).append("g");
-
+  
 
     show_xaxis = true
     show_yaxis = true
@@ -1034,9 +1073,9 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
                     
                         consider_data.forEach(element => {element.forEach(ele2 => sub_plot_data.push(ele2))});
                     var working_svg = svg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", "+sub_plot_y_scale(sub_y_domain)+")")
-                    var axis_working = axissvg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", 0)")
+                    //var axis_working = axissvg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", 0)")
 
-                HeatMap(sub_plot_data,working_svg,(sub_plot_width-50) ,(sub_plot_width-50),sub_x_domain,show_yaxis, show_xaxis,axis_working)
+                HeatMap(sub_plot_data,working_svg,(sub_plot_width-70) ,(sub_plot_heght-70),sub_x_domain,true, true,'')
                 show_yaxis = false
                     }
                 );
@@ -1058,17 +1097,18 @@ const myVars = Array.from(new Set(data.map(d => d.y_axis_column)))
 const x = d3.scaleBand().range([ width,chart_margin ]).domain(myGroups).padding(0.02); 
 var borderPath = working_space.append("g").append("rect").attr("x", chart_margin).attr("y", 0).attr("height", height).attr("width", (width-chart_margin )).style("stroke", "black").style("fill", "none").style("stroke-width", "3px");
 
-if(show_xaxis){axissvg.append("g").style("font-size", 15).attr("transform", `translate(0, `+(-30)+`)`).call(d3.axisBottom(x).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()};
+if(show_xaxis){working_space.append("g").style("font-size", 12).attr("transform", `translate(0, `+(-30)+`)`).call(d3.axisBottom(x).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()};
   
 const y = d3.scaleBand().range([  0,height ]).domain(myVars).padding(0.05);
 if(show_yaxis){
-    working_space.append("g").style("font-size", 15).attr("transform", `translate( `+chart_margin+`,0)`).call(d3.axisLeft(y).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()
-    yaxis_label = working_space.append("text").text("Operational Cost").attr("text-anchor", "middle").attr("y", -15).attr("x", 0).attr("transform", "rotate(-90)")
-    yaxis_label.attr('x', function() {return (height - nodeHeight(this)/2) });
+    working_space.append("g").style("font-size", 12).attr("transform", `translate( `+chart_margin+`,0)`).call(d3.axisLeft(y).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()
+    yaxis_label = working_space.append("text").text("Operational Cost").attr("stroke","#aaa").attr("text-anchor", "middle").attr("x", height/2+20).attr("y",-3).attr("transform", "rotate(-90)")
+   // yaxis_label.attr('x', function() {return (-1* nodeHeight(this)/2 ) });
 }
 
 
-const myColor = d3.scaleLinear().range(["white", "#f13837"]).domain([1,10])
+
+const myColor = d3.scaleLinear().range(["#e97452", "#8b0001"]).domain([1,10])
 
 var i = 0
 
@@ -1076,7 +1116,7 @@ var i = 0
 
 
 working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
-.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() ).style("fill", function(d) { return myColor(Math.min(+d.numerator,10))} ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
+.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() ).style("fill", function(d) { if(d.numerator==0) {return "#5d8700"} else{ return myColor(Math.min(+d.numerator,10)) }   } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
 legend = working_space.append("g")
 /* legend.selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;}).join("text").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) +5})
 .text(function(d) { return Math.round(d.val,2)*100} ).attr('text-size','6px')*/
@@ -1189,5 +1229,11 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 </script>
 
 <script>
+    width = $(window).width();
+    ml = (width-1400)/2
+    if(ml > 0){
+    $(document.body).css('margin-left', ml);
+}
     $("#simulate_start").click()
+    start_script = 0
 </script>
