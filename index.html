@@ -382,7 +382,7 @@ thead, tbody tr {
            &#10004 Target influences  Manager & General Manger payout. 
         </div>
         <div  style='background-color:#eee;'>
-            <div class='chart_title'>  Higher Targets have low avg.capx   <span class='chart_sub_title'> so, the targets should not be too high</span></div>
+            <div class='chart_title'>  Higher Targets have low avg.capx   <span class='chart_sub_title'> so, the targets should be minimum possible adhering to capx 18%</span></div>
            
             <div class='chart_description'> *Distribution of Capx within target</div>
             <div id='Target_Capx_Achievement_Violin'></div>
@@ -397,11 +397,11 @@ thead, tbody tr {
 
         <div  class='Insights_title' style='padding-bottom:40px'>
 
-            &#10004 Targets can be reduced by trading off with staff comission
+            &#10004 Staff comission should be minimum possible to to keep capx in control 
         </div>
         <div style='background-color:#eee;'>
-            <div class='chart_title'> For a given target, lower agent comission have high adherence to capx 18% </div>
-            <div class='chart_sub_title'> The higher targets seem to fail at higher achievement % </div>
+            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to capx 18% </span>  <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
+           
             <div>
                 <div style='position:relative;display: inline;width:30px;float:left;'> 
                 
@@ -429,25 +429,21 @@ thead, tbody tr {
     <div id='section_3' style='clear:both'>
         <div  class='Insights_title' style='padding-bottom:40px'>
 
-          &#10004 It is tough to achieve higher achievement% for higher targets which further reduces the %payout <br>
-          &#10004 So, targets can be further reduced by trading-off with achievement%
+          &#10004 It is tough to achieve higher achievement% for higher targets  <br>
+          &#10004 So, targets can be further reduced by trading-off with achievement% with target
         </div>
         <div  style='background-color:#eee;'>
-            <div class='chart_title'>  Higher targets are needed to accomodate higher achievement% </div>
+            <div class='chart_title'>  TTL Achievement of simulations </div>
             <div class='chart_sub_title'> </div>
-            <div id='HeatMapSubPlot' ></div>
+            <div id='Actual_Achieved_byCapx' ></div>
         </div>
             
        
-        </div>
     </div>
-
-
-
-
+    
     <div style='section_5' style='clear:both'>
 
-        <div id='Actual_Achieved_byCapx'>
+        <div id='HeatMapSubPlot'>
 
         </div>
     </div>
@@ -1471,12 +1467,19 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
     $("#simulate_start").click()
     start_script = 0
 
+ 
+
 
 $("#section_2_metric").change(function () {
         metric = this.value;
         if(metric=='capx'){
+            $("#section_2_ct").html("For a given target, higher agent comission have lower adherence to capx 18% ")
+            $("#section_2_st").html("so, the staff comission should be minimum ")
+            
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
         }else{
+            $("#section_2_ct").html("For a given target, higher agent comission have lower Net Profit")
+            $("#section_2_st").html("so, the staff comission should be minimum")
             axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'Net_Profit'}
             
         }
