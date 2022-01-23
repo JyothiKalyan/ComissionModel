@@ -620,8 +620,8 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 
 
 
-svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])});
-//.attr('fill', d=> d[1][0].color ) .attr('fill-opacity', .3 )
+svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])}).attr('fill', d=> d[1][0].color ) 
+//.attr('fill-opacity', .3 )
 
 svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d3.format('.00%') ));
 
@@ -933,7 +933,7 @@ macha = d.max_Achieved
    var orecommendations = ""
    for(k in Other_Options){
        if (Other_Options[k].Target != TargetSet){
-       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission as "+ Math.round(Other_Options[k].max_staff_comission)*100 +"% <br>"
+       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission as "+ Math.round(Other_Options[k].max_staff_comission*100) +"% <br>"
        }
     }
 
