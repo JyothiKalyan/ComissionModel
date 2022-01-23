@@ -21,6 +21,14 @@
 
     <style>
 
+#comparison_target_4{
+    color:black
+}
+
+#comparison_comission_4{
+    color:black
+}
+       
 
 .custom-scroll{
     position:relative;
@@ -45,6 +53,10 @@ thead, tbody tr {
 
         .comparison_class{
             padding:10px;
+            position: relative;
+            width: 200px;
+            display: inline;
+            float: left;
         }
         
 .anti-dir{
@@ -329,7 +341,7 @@ thead, tbody tr {
     <div >
         
         <div class='page-title'>  WHAT SHOULD TARGET BE ?? <br>
-            <span style='font-size:20px'>For a given operation cost so that Capping is <= 18</span>
+            <span style='font-size:20px'>For a given operation cost so that capping is <= 18</span>
         </div>
         <div style='padding-left:50px;padding-right:50px'> 
         <div class='inputs' style='padding-left:150px'>
@@ -418,7 +430,7 @@ thead, tbody tr {
         
         from Analyzing  <span id='no_targets_analyzed' style='font-size:46px'></span> simulations<br>
 
-        The algorithm recommends to set target at <span id='target_computed' style='font-size:56px' ></span> with staff comission as <span style='font-size:56px' id='staff_comission_coomputed'></span> <br>
+        The algorithm recommends to set target at <span id='target_computed' style='font-size:56px' ></span> with staff comission at <span style='font-size:56px' id='staff_comission_coomputed'></span> <br>
         other recommendations are <span id='other_recommendations'> </span>
 
     </div>
@@ -483,10 +495,10 @@ thead, tbody tr {
           &#10004 So, targets can be further reduced by trading-off with achievement% with target
         </div>
         <div  style='background-color:#eee;'>
-            <div class='chart_title'> Achievements High %Target is a rare scenario which occurs with high target & high achievement %<br>
-                <span class='chart_sub_title'> Practically, %achievement scale inversly with target. so, identifying most common TTL Achievement </span> </div>  
+            <div class='chart_title'> Reaching high TTL Achievement <span style='font-size:12px' > (Target * achievement %)</span> is a rare scenario 
+                <span class='chart_sub_title'> so, looking at distribution, limit is set on TTL Achievement to ignore least possible scenarios </span> </div>  
                 <div class='chart_description' >  
-                    Probability & Cumulative Probability of occurance of Achiement    <span style='color:black;font-size:10px'> (click bar to filter for Achievement Threshold)</span> 
+                    Probability & Cumulative Probability of occurance of Achivement    <span style='color:black;font-size:10px'> (click bar to filter for Achievement Threshold)</span> 
         
                     </div> 
                 
@@ -506,7 +518,7 @@ thead, tbody tr {
 
     <div id='section_4' class='analyzing_results' style=' color:white;clear:both;position:relative;width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ; background-image: linear-gradient(  #ddc9b8, #4e2b0d  );'> 
         
-Filtering for Achievemnet% for which maximum Achievement is less than <span id='achievement_filter_value' style='font-size:25px'></span> 
+Filtering for Achievement% for which maximum Achievement is less than <span id='achievement_filter_value' style='font-size:25px'></span> 
     </div>
 
 
@@ -551,33 +563,36 @@ Filtering for Achievemnet% for which maximum Achievement is less than <span id='
 
   </div>
 
+
   <div style='clear:both'>
-    <button id='clear_all_scenarios' style='position:relative;display: inline;float: right;' type="button" class="btn btn-primary"> clear all comaprisions </button>
-  
-    <div style='clear:both;position:relative;float:left;width:400px;'>
-     <button id='start_comparision' style='position:relative;' type="button" class="btn btn-primary"> Compare plans below</button>
-        
-<div id='comparing_space'>
 
-</div>
+     <div style='position: relative;float: left;width: 40%;display: inline;'><button id='add_scenario' style='position:relative;background-color: #5b8f01;' type="button" class="btn btn-primary"> +Add Scenario to compare </button></div> 
+<div style='position: relative;float: right;width: 60%;display: inline;'>
+    
+     <button id='clear_all_scenarios' style='margin-left:20px;background-color:#a23b36; position:relative;display: inline;float: right;' type="button" class="btn btn-primary"> clear all comaprisions </button>
+     <button id='start_comparision' style='position:relative;display: inline;float: right;' type="button" class="btn btn-primary"> Compare plans below</button> 
+    </div>  
+<div style='clear:both' id='comparing_space'></div>
 
-
-<button id='add_scenario' style='position:relative;' type="button" class="btn btn-primary"> +Add Scenario to compare </button>
-</div>  
-<div style='position:relative;float:left;display:inline;width:950px>
-    <div class='chart_title'> The best plan should adhere to 18% capping in all simulation of Achievement%<br> 
-    <!--    <span class='chart_sub_title'> Practically, %achievement scale inversly with target. so, identifying most common TTL Achievement </span>-->
+<div id='comparision_insights'>
+<div class='Insights_title'>  &#10004 The best plan should adhere to 18% capping in all simulation of Achievement%<br> 
+     <span class='chart_sub_title'> probabillity distribution of best plan will have multiple peaks ~18% and a flat extreems </span>
      </div>  
     <div class='chart_description' >  
         Probability distribution of capping for all simulations in the plan
         </div> 
-            
-<div id='comparison_chart_area' '>
+</div>          
+<div id='comparison_chart_area' >
 
 </div> 
-</div> 
 
-</div>
+
+
+
+  </div>
+
+
+
 
 
 <div style='padding-top:400px' style='text-align-center;'>
@@ -605,7 +620,7 @@ function draw_area_comparisionchart(chart_id, data){
 
 d3.select(chart_id).selectAll("*").remove();
 
-var margin = {top: 20, right: 20, bottom: 60, left: 50}, width = 960 - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
+var margin = {top: 20, right: 20, bottom: 60, left: 50}, width = 1400 - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
 
 
 var x = d3.scaleLinear().domain( d3.extent(data.map(d=> d.cap))).range([0, width]);
@@ -620,7 +635,9 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 
 
 
-svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])}).attr('fill', d=> d[1][0].color ) 
+
+
+svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])}).attr('fill', 'none' ) 
 //.attr('fill-opacity', .3 )
 
 svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d3.format('.00%') ));
@@ -741,7 +758,11 @@ $("#add_scenario").click(function(){
     div.style.backgroundColor =comparison_color_pallet[added_plan]
     div.style.color = comparison_text_color_pallet[added_plan]
   
-    
+    var tag = document.createElement("span");
+   var text = document.createTextNode("Target");
+
+   tag.appendChild(text);
+   div.appendChild(tag);
     
     var target_options = document.createElement("select");
     target_options.id = "comparison_target_"+added_plan;
@@ -757,8 +778,8 @@ $("#add_scenario").click(function(){
 
     
     div.appendChild(target_options);
-  
-
+    var br = document.createElement("br");
+    div.appendChild(br);
     var tag = document.createElement("span");
    var text = document.createTextNode("Staff Comission");
 
@@ -793,6 +814,7 @@ $("#add_scenario").click(function(){
 
 function draw_mixed_plot(chart_id,data,axis,metric){
 
+    
 
     var margin = {top: 10, right: 30, bottom: 30, left: 40}, 
     chart_width = (80*metric) - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
@@ -802,7 +824,7 @@ function draw_mixed_plot(chart_id,data,axis,metric){
     d3.select(chart_id).selectAll("*").remove();
     metric = parseInt(metric)
     var factor = (axis.achievemed_max - axis.achievemed_min)/metric
- 
+   
 
         var plot_data2 = [] 
     var k = d3.rollup(data, v => { plot_data2.push({
@@ -831,18 +853,12 @@ function draw_mixed_plot(chart_id,data,axis,metric){
      var x = d3.scaleBand().range([0, chart_width]).domain(X_Domain).padding(0.1);
      TT_L =  d3.sum(d3.map(plot_data2 , d=> d.cnt))
 
-  TT_GREEN =  d3.sum(d3.map(plot_data2 , d=> d.cnt_green))
-     TT_GRAY =  d3.sum(d3.map(plot_data2 , d=> d.cnt_gray))
-     TT_RED =  d3.sum(d3.map(plot_data2 , d=> d.cnt_red))
-
-
+  
      
 i = 0
      while(i <plot_data2.length){
         plot_data2[i].per = plot_data2[i].cnt/TT_L;
-        plot_data2[i].per_green = plot_data2[i].cnt_green/TT_GREEN;
-        plot_data2[i].per_gray = plot_data2[i].cnt_gray/TT_GRAY;
-        plot_data2[i].per_red = plot_data2[i].cnt_red/TT_RED;
+      
          i = i+1
      }
      minval = d3.min(d3.map(plot_data2, d=> d.per ))
@@ -933,7 +949,7 @@ macha = d.max_Achieved
    var orecommendations = ""
    for(k in Other_Options){
        if (Other_Options[k].Target != TargetSet){
-       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission as "+ Math.round(Other_Options[k].max_staff_comission*100) +"% <br>"
+       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission at "+ Math.round(Other_Options[k].max_staff_comission*100) +"% <br>"
        }
     }
 
@@ -1953,8 +1969,9 @@ $("#section_2_metric").change(function () {
     $("#bins").change(function(){
 
         metric = this.value;
+     
         axis_details = {'x_axis':'Achievement_TTL', 'color_by':'cap_bucket', 'achievemed_min':achievemed_min, 'achievemed_max':achievemed_max}
-           draw_mixed_plot("#Actual_Achieved_byCapping",ALL_Results,axis_details,metric)
+           draw_mixed_plot("#Actual_Achieved_byCapx",ALL_Results,axis_details,parseInt(metric))
       
     })
 
