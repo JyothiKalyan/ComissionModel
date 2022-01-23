@@ -220,6 +220,18 @@ thead, tbody tr {
     background-color:rgb(237 237 237);
 
 }
+
+.horizontal_scroll_3{
+    position: relative;
+    overflow-x: scroll;
+    display: inline; 
+    float: left;
+    width:1200px;
+    background-color:rgb(237 237 237);
+
+}
+
+
 .horizontal_scroll{
     position: relative;
     overflow-x: scroll;
@@ -269,6 +281,23 @@ thead, tbody tr {
 }
 .white_axis_x text{
     fill: rgb(255, 255, 255);
+
+
+  
+}
+
+.red_axis line{
+    stroke: red
+
+}
+
+.red_axis path{
+  stroke: red
+}
+.red_axis text{
+    fill: red;
+    font-family: 'Open Sans';
+    font-weight: 100px;
 
 
   
@@ -413,8 +442,9 @@ thead, tbody tr {
             &#10004 Staff comission should be minimum possible to to keep capx in control 
         </div>
         <div style='background-color:#eee;'>
-            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to capx 18% </span>  <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
-           
+            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to capx 18% </span> 
+                 <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
+            <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>Capx</span> along staff comission within target</div>
             <div>
                 <div style='position:relative;display: inline;width:30px;float:left;'> 
                 
@@ -448,9 +478,19 @@ thead, tbody tr {
         </div>
         <div  style='background-color:#eee;'>
             <div class='chart_title'> Achievements High %Target is a rare scenario which occurs with high target & high achievement %<br>
-                <span class='chart_sub_title'> Practically, %achievement scale inversly with target. so, identifying most common TTL Achievement </span>    
-            </div>
+                <span class='chart_sub_title'> Practically, %achievement scale inversly with target. so, identifying most common TTL Achievement </span> </div>  
+                <div class='chart_description' >  
+                    Probability & Cumulative Probability of occurance of Achiement 
+                    </div> 
+                
+<div style='position:relative;width:100%'>
+    <div style='position:relative;left:40%'>
+                    <span  style='clear:both;color:black;font-size:8px;float:left;position:relative'>  <input type="range" min="10" max="150" value="20" step='2' style='display:inline;float:left;position:relative;width:100px'  id="bins" > 
+                        <span style='float:left;position:relative' id='bins_label'>20</span> bins </span>
+                    </div>
+                    </div>
            
+           <div style='clear:both'></div>
             <div id='Actual_Achieved_byCapx' ></div>
         </div>
             
@@ -548,15 +588,17 @@ $("#add_scenario").click(function(){
     added_plan = added_plan + 1
 })
 
-function draw_mixed_plot(chart_id,data,axis){
+function draw_mixed_plot(chart_id,data,axis,metric){
 
+    console.log(metric)
     var margin = {top: 10, right: 30, bottom: 30, left: 40}, 
-    chart_width = (50*40) - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
+    chart_width = (80*metric) - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
 
 
   
     d3.select(chart_id).selectAll("*").remove();
-    var factor = (axis.achievemed_max - axis.achievemed_min)/20
+    metric = parseInt(metric)
+    var factor = (axis.achievemed_max - axis.achievemed_min)/metric
  
 
         var plot_data2 = [] 
@@ -576,10 +618,13 @@ function draw_mixed_plot(chart_id,data,axis){
 
         X_Domain = []
         i = 1
-        while(i <=21){
+        while(i <= ( parseInt(metric) +1)){
             X_Domain.push(i*factor)
             i = i+1
         }
+
+       
+
      var x = d3.scaleBand().range([0, chart_width]).domain(X_Domain).padding(0.1);
      TT_L =  d3.sum(d3.map(plot_data2 , d=> d.cnt))
 
@@ -609,14 +654,27 @@ i = 0
     
 
     var y = d3.scaleLinear().domain([maxval, 0]).range([0, height]) 
+    var y2 = d3.scaleLinear().domain([1, 0]).range([0, height]) 
           
 var yaxis_svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll_side_div").append("svg").attr("width","80px").attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 75 + "," + margin.top + ")");
-var svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll").append("svg").attr("width", chart_width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 0 + "," + margin.top + ")");
+var svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll_3").append("svg").attr("width", chart_width ).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 0 + "," + margin.top + ")");
 
+
+yaxis_svg2 =  d3.select(chart_id).append("div").attr("class","horizontal_scroll_side_div").append("svg").attr("width","80px").attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(0 ," + margin.top + " )");
+
+
+
+
+/*svg.selectAll(".Line_cum").data(plot_data2).enter().append("rect").attr("class", "Line_cum").attr("x", function(d) { return x(d.max_Achieved); })
+  .attr("width", x.bandwidth()).attr("id",d=>{if(d.max_Achieved==select_bar){return 'default_clk'}}).attr("y", function(d) { return y(d.per); })
+  .attr("height", function(d) { return height - y(d.per); }).attr("fill","#bbb");
+  */
+
+  cum = 0
 
 
   // append the rectangles for the bar chart
-  svg.selectAll(".Hist_bar").data(plot_data2).enter().append("rect").attr("class", "Hist_bar").attr("x", function(d) { return x(d.max_Achieved); })
+  svg.append("g").selectAll(".Hist_bar").data(plot_data2).enter().append("rect").attr("class", "Hist_bar").attr("x", function(d) { return x(d.max_Achieved); })
   .attr("width", x.bandwidth()).attr("id",d=>{if(d.max_Achieved==select_bar){return 'default_clk'}}).attr("y", function(d) { return y(d.per); })
   .attr("height", function(d) { return height - y(d.per); }).attr("fill","#bbb")
   .on("click",function(event,d){
@@ -654,6 +712,16 @@ if(set_compuattion){
 }
    
   })
+
+
+
+  plot_data2 = plot_data2.slice().sort((a, b) => d3.ascending( parseInt(a.max_Achieved), parseInt(b.max_Achieved)) || d3.ascending(parseInt(a.max_Achieved), parseInt(b.max_Achieved)))
+ 
+
+  svg.append("path").datum(plot_data2).attr("fill", "none").attr("stroke", "red").attr("stroke-width", 2)
+ .attr("d", d3.line().x(d =>  { return(x(d.max_Achieved))}  ).y(d => {cum = cum + d.per; return y2(cum)} ))
+
+
   ;
 
 
@@ -661,6 +729,17 @@ if(set_compuattion){
 
   // add the y Axis
   yaxis_svg.append("g").call(d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.00%'))   );
+
+    yaxis_label = yaxis_svg.append("g").append("text").text("% simulations").attr("font-family","Open Sans").attr("font-weight","150").attr("y",-35).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2-50  });  
+ 
+    yaxis_svg2.append("g").attr("class","red_axis").call(d3.axisRight(y2).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.00%'))   );
+    yaxis_label2 = yaxis_svg2.append("g").append("text").attr("font-family","Open Sans").attr("font-weight","150").text("Cumulative % simulations").attr("stroke","red").attr("y",54).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label2.attr('x', function() {return (nodeHeight(this)-height )/2-90  });  
+
+ 
+ 
+
 
   jQuery.fn.d3Click = function () {
   this.each(function (i, e) {
@@ -923,7 +1002,7 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
             drawviolin("#Target_Capx_Achievement_Violin",ALL_Results_new.flat(),axis_details)
 
             axis_details = {'x_axis':'Achievement_TTL', 'color_by':'cap_bucket', 'achievemed_min':achievemed_min, 'achievemed_max':achievemed_max}
-           draw_mixed_plot("#Actual_Achieved_byCapx",ALL_Results,axis_details)
+           draw_mixed_plot("#Actual_Achieved_byCapx",ALL_Results,axis_details,20)
             
            
         }
@@ -1138,10 +1217,10 @@ function nested_x_axis_box_plot(chart_id,data,axis){
     var svg_y = d3.select(chart_id).append("div").attr("class",'horizontal_scroll_side_div').append("svg").attr("width",80).attr("height", height + margin.bottom).attr("transform", `translate(0, 0)`);
    
     var svg =  d3.select(chart_id).append("div").attr("class","horizontal_scroll_2").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.bottom).attr("transform", `translate(0, 0)`);
-    var bottom_axis_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1700).attr("height",30).attr("transform", `translate(${margin.left}, 0)`); 
-    bottom_axis_text = bottom_axis_svg.append("text").text("Agent Comission").attr("x",0).attr("y",15).attr("font-size","20px").attr("fill","blue" )
-    bottom_axis_svg.append("line").style("stroke", "blue").attr("stroke-opacity",.2).style("stroke-width", 2).attr("x2", 1200  ).attr("x1",100).attr("y2",10).attr("y1",10)
-    bottom_axis_text.attr("transform", function() {return ( "translate(" + (1400 - nodeWidth(this))/2 + ",0)"  )});
+   // var bottom_axis_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1700).attr("height",30).attr("transform", `translate(${margin.left}, 0)`); 
+   // bottom_axis_text = bottom_axis_svg.append("text").text("Agent Comission").attr("x",0).attr("y",15).attr("font-size","20px").attr("fill","blue" )
+   // bottom_axis_svg.append("line").style("stroke", "blue").attr("stroke-opacity",.2).style("stroke-width", 2).attr("x2", 1200  ).attr("x1",100).attr("y2",10).attr("y1",10)
+   // bottom_axis_text.attr("transform", function() {return ( "translate(" + (1400 - nodeWidth(this))/2 + ",0)"  )});
    
     const myColor = d3.scaleLinear().range(["#e97452", "#8b0001"]).domain([1,10])
     var color_legend = svg_org.append("g")
@@ -1579,17 +1658,35 @@ $("#section_2_metric").change(function () {
         if(metric=='capx'){
             $("#section_2_ct").html("For a given target, higher agent comission have lower adherence to capx 18% ")
             $("#section_2_st").html("so, the staff comission should be minimum ")
+            $("#metric_select_chart").html("Capx")
             
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
         }else{
             $("#section_2_ct").html("For a given target, higher agent comission have lower Net Profit")
             $("#section_2_st").html("so, the staff comission should be minimum")
             axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'Net_Profit'}
-            
+            $("#metric_select_chart").html("Net Profit")
         }
         nested_x_axis_box_plot("#StaffPercentage_chart", ALL_Results_new.flat() ,axis_details)
 
     });
+
+
+    $("#bins").change(function(){
+
+        metric = this.value;
+        axis_details = {'x_axis':'Achievement_TTL', 'color_by':'cap_bucket', 'achievemed_min':achievemed_min, 'achievemed_max':achievemed_max}
+           draw_mixed_plot("#Actual_Achieved_byCapx",ALL_Results,axis_details,metric)
+      
+    })
+
+
+
+
+
+
+
+
 </script>
 
 
