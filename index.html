@@ -42,6 +42,10 @@ thead, tbody tr {
             width:100%;
             table-layout:fixed;
         }
+
+        .comparison_class{
+            padding:10px;
+        }
         
 .anti-dir{
     position:relative;
@@ -325,7 +329,7 @@ thead, tbody tr {
     <div >
         
         <div class='page-title'>  WHAT SHOULD TARGET BE ?? <br>
-            <span style='font-size:20px'>For a given operation cost so that capx is <= 18</span>
+            <span style='font-size:20px'>For a given operation cost so that Capping is <= 18</span>
         </div>
         <div style='padding-left:50px;padding-right:50px'> 
         <div class='inputs' style='padding-left:150px'>
@@ -414,7 +418,8 @@ thead, tbody tr {
         
         from Analyzing  <span id='no_targets_analyzed' style='font-size:46px'></span> simulations<br>
 
-        The algorithm recommends to set target at <span id='target_computed' style='font-size:56px' ></span> with staff comission as <span style='font-size:56px' id='staff_comission_coomputed'></span>
+        The algorithm recommends to set target at <span id='target_computed' style='font-size:56px' ></span> with staff comission as <span style='font-size:56px' id='staff_comission_coomputed'></span> <br>
+        other recommendations are <span id='other_recommendations'> </span>
 
     </div>
 
@@ -424,9 +429,9 @@ thead, tbody tr {
            &#10004 Target influences  Manager & General Manger payout. 
         </div>
         <div  style='background-color:#eee;'>
-            <div class='chart_title'>  Higher Targets have low avg.capx   <span class='chart_sub_title'> so, the targets should be minimum possible adhering to capx 18%</span></div>
+            <div class='chart_title'>  Higher Targets have low avg.Capping   <span class='chart_sub_title'> so, the targets should be minimum possible adhering to Capping 18%</span></div>
            
-            <div class='chart_description'> *Distribution of Capx within target</div>
+            <div class='chart_description'> *Distribution of Capping within target</div>
             <div id='Target_Capx_Achievement_Violin'></div>
             
         </div>
@@ -439,19 +444,19 @@ thead, tbody tr {
 
         <div  class='Insights_title' style='padding-bottom:40px'>
 
-            &#10004 Staff comission should be minimum possible to to keep capx in control 
+            &#10004 Staff comission should be minimum possible to to keep Capping in control 
         </div>
         <div style='background-color:#eee;'>
-            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to capx 18% </span> 
+            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to Capping 18% </span> 
                  <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
-            <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>Capx</span> along staff comission within target</div>
+            <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>Capping</span> along staff comission within target</div>
             <div>
                 <div style='position:relative;display: inline;width:30px;float:left;'> 
                 
                     
 
                     <select  id="section_2_metric" style='transform: rotate(-90deg);top: 162px;left: -20px;position: relative;'>
-                        <option value="capx">CapX</option>
+                        <option value="capx">Capping</option>
                         <option value="np">NetProfit</option>
                        
                       </select>
@@ -532,15 +537,30 @@ Filtering for Achievemnet% for which maximum Achievement is less than <span id='
   </div>
 
   <div style='clear:both'>
-    <div>
-    Comparing plans
-</div>
-<div id='comapring_space'>
+    <div style='position:relative;float:left;width:400px;'>
+        <button id='clear_all_scenarios' style='position:relative;' type="button" class="btn btn-primary"> clear all comaprisions </button>
+    <button id='start_comparision' style='position:relative;' type="button" class="btn btn-primary"> Compare plans below</button>
+        
+<div id='comparing_space'>
 
 </div>
-<div id='add_scenario'>
-    +Add Scenario to compare
-</div>
+
+
+<button id='add_scenario' style='position:relative;' type="button" class="btn btn-primary"> +Add Scenario to compare </button>
+</div>  
+<div>
+    <div class='chart_title'> The best plan should adhere to 18% capping in all simulation of Achievement%<br> 
+    <!--    <span class='chart_sub_title'> Practically, %achievement scale inversly with target. so, identifying most common TTL Achievement </span>-->
+     </div>  
+    <div class='chart_description' >  
+        Probability distribution of capping for all simulations in the plan
+        </div> 
+            
+<div id='comparison_chart_area' style='position:relative;float:left;display:inline;width:950px'>
+
+</div> 
+</div> 
+
 </div>
 
 
@@ -549,44 +569,197 @@ Filtering for Achievemnet% for which maximum Achievement is less than <span id='
 
 </body>
 <script>
+
+function draw_area_comparisionchart(chart_id, data){
+
+
+d3.select(chart_id).selectAll("*").remove();
+
+var margin = {top: 20, right: 20, bottom: 60, left: 50}, width = 960 - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
+
+
+var x = d3.scaleLinear().domain( d3.extent(data.map(d=> d.cap))).range([0, width]);
+var y = d3.scaleLinear().domain( d3.extent(data.map(d=> d.per))).range([height, 0]);
+
+
+data = d3.group(data, d => d.Plan)
+
+
+
+var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+
+
+svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])});
+//.attr('fill', d=> d[1][0].color ) .attr('fill-opacity', .3 )
+
+svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d3.format('.00%') ));
+
+// add the y Axis
+svg.append("g").call(d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.00%'))   );
+
+yaxis_label = svg.append("g").append("text").text("% Simulations").attr("font-family","Open Sans").attr("font-weight","150").attr("y",-35).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2-50  });  
+ 
+    xaxis_label = svg.append("g").append("text").text("Capping").attr("font-family","Open Sans").attr("font-weight","150").attr("y",height+10).attr("text-align","middle")
+    xaxis_label.attr('x', function() {return (width - nodeHeight(this))/2-50  });  
+ 
+
+}
+
+
+
+comparison_color_pallet = ["#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]
+comparison_text_color_pallet = ["black","balck","black","black","white"]
+
+$("#clear_all_scenarios").click(function(){
+
+
+    d3.select("#comparison_chart_area").selectAll("*").remove();
+
+    d3.select("#comparing_space").selectAll("*").remove();
+   
+
+})
+
+$("#start_comparision").click(function(){
+
+
+    plot_data = []
+   
+    
+    var i = 0;
+    table_data = []
+    while(i < added_plan){
+
+        comaprision_target = $("#comparison_target_"+i).val()
+        comparision_comission = $("#comparison_comission_"+i).val()
+       
+temp_data = []
+       
+       
+    k =  d3.rollup( ALL_Results , v => { 
+
+        if( v[0].agent_non_emar_comission_percentage == comparision_comission ){
+        if( v[0].TARGET == comaprision_target ){
+        temp_data.push({
+        'Plan': 'Target '+ formatValue(comaprision_target) +'  with agent comission '+ comparision_comission*100+'%',
+        'cap':v[0].cap,
+        'cnt':d3.sum(v,d=> {return 1}),
+        'per':1,
+        'color': comparison_color_pallet[i]
+       })
+    }
+}
+    ;
+    return{'val':0}
+    },d=> d.TARGET == comaprision_target,
+     d => d.agent_non_emar_comission_percentage == comparision_comission , d => d.cap )
+     
+     
+     temp_data = temp_data.slice().sort((a, b) => d3.ascending( parseFloat(a.cap), parseFloat(b.cap)) || d3.ascending(parseFloat(a.cap), parseFloat(b.cap)))
+ 
+     var it = 0
+       s =  d3.sum(d3.map(temp_data , d=> d.cnt)) 
+       while(it < temp_data.length){
+        temp_data[it]['per'] = temp_data[it]['cnt']/s;
+        plot_data.push({
+             'Plan':  temp_data[it]['Plan']  ,
+             'cap':  temp_data[it]['cap']  ,
+             'cnt':  temp_data[it]['cnt']  ,
+             'color':  temp_data[it]['color']  ,
+             'per':  temp_data[it]['per']  
+    
+    
+    })
+        it = it + 1
+}
+
+
+    i = i+1
+        
+}
+
+
+
+draw_area_comparisionchart("#comparison_chart_area",plot_data)
+
+
+
+
+
+});
+
+
+
+
+
+
+
+  
+
+
     added_plan = 0
 $("#add_scenario").click(function(){
 
+
+   
+    if(added_plan < 5){
+
     var div = document.createElement("div");
-
-    var tag = document.createElement("span");
-    tag.className = "delete_plan";
-   var text = document.createTextNode("-");
-   tag.appendChild(text);
-   div.appendChild(tag);
+    div.className ='comparison_class'
+    div.style.backgroundColor =comparison_color_pallet[added_plan]
+    div.style.color = comparison_text_color_pallet[added_plan]
   
+    
+    
+    var target_options = document.createElement("select");
+    target_options.id = "comparison_target_"+added_plan;
 
-    var input = document.createElement("input");
-    input.type = "number";
-   
+    for (const val of TARGETS_RANGE)
+    {
+        var option = document.createElement("option");
+        option.value = val;
+        option.text = formatValue(val)
+        target_options.appendChild(option);
+    }
 
-   var tag = document.createElement("span");
-   var text = document.createTextNode("Target");
-   tag.appendChild(text);
-   div.appendChild(tag);
-    div.appendChild(input);
-   
+
+    
+    div.appendChild(target_options);
+  
 
     var tag = document.createElement("span");
    var text = document.createTextNode("Staff Comission");
+
    tag.appendChild(text);
    div.appendChild(tag);
-    var input2 = document.createElement("input");
-    input2.type = "number";
-    div.appendChild(input2);
 
 
-   var element = document.getElementById("comapring_space");
-   element.appendChild(div);
+   var comission_options = document.createElement("select");
+    comission_options.id = "comparison_comission_"+added_plan;
+
+    for (const val of agent_emar_comission_percentage_range)
+    {
+        var option = document.createElement("option");
+        option.value = val;
+        option.text = Math.round(val*100)+"%"
+        comission_options.appendChild(option);
+    }
+
+  
+    div.appendChild(comission_options);
+
+
+    var element = document.getElementById("comparing_space");
+   element.appendChild(div);       
 
 
     added_plan = added_plan + 1
+    }
 })
+
+
 
 function draw_mixed_plot(chart_id,data,axis,metric){
 
@@ -711,6 +884,7 @@ macha = d.max_Achieved
     
 
   Other_Options_temp = []
+
    k = d3.rollup(final_result, v => { 
     Other_Options_temp.push({'TARGET':v[0].Target, 'max_staff_comission': d3.max(v,d=>d.comission)  })
     return{
@@ -726,11 +900,19 @@ macha = d.max_Achieved
     }
    }, d=>  d['max_staff_comission']  )
 
-   console.log(Other_Options)
+   var orecommendations = ""
+   for(k in Other_Options){
+       if (Other_Options[k].Target != TargetSet){
+       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission as "+Other_Options[k].max_staff_comission*100 +"% <br>"
+       }
+    }
+
+
 
 if(set_compuattion){
    $("#target_computed").html(  formatValue(TargetSet)  )
-   $('#staff_comission_coomputed').html(Agent_Comission*100+"%")
+   $('#staff_comission_coomputed').html(Math.round(Agent_Comission*100)+"%")
+   $("#other_recommendations").html(orecommendations)
    set_compuattion = false
 }
    
@@ -807,7 +989,7 @@ var svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll").ap
 
 y = d3.scaleLinear().domain([axis.cap_min-.05, axis.cap_max]).range([height, 0])
 yaxis_svg.append("g").call( d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.0%')) )  
-yaxis_label = yaxis_svg.append("g").append("text").text("CapX").attr("y",-40).attr("transform", "rotate(-90)").attr("text-align","middle")
+yaxis_label = yaxis_svg.append("g").append("text").text("Capping").attr("y",-40).attr("transform", "rotate(-90)").attr("text-align","middle")
 yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2});
 
 
@@ -1250,7 +1432,7 @@ function nested_x_axis_box_plot(chart_id,data,axis){
 
     
     color_legend.append("text").attr("x",0).attr("y",10).text("color by #simulations")
-    color_legend.append("text").attr("x",10).attr("y",25).text("failed capx criteria")
+    color_legend.append("text").attr("x",0).attr("y",25).text("failed capping criteria")
     color_legend.append("circle").attr("cx",150).attr("cy",15).attr("r",10).attr("fill","#5d8700")
     color_legend.append("text").attr("x",150).attr("y",19).attr("text-anchor","middle").text("0")
     i = 0
@@ -1290,7 +1472,7 @@ while(i < 10){
     if(axis.y_axis=='cap')
     {
     yaxis_scale.append("g").style("font-size", 15).attr("transform", `translate( `+ ((margin.left)+30)+`,0)`).call(d3.axisLeft(yscale).tickSize(0).ticks(10).tickFormat(d3.format('.0%')) ).select(".domain").remove()
-    yaxis_label = yaxis_scale.append("g").append("text").text("CapX").attr("y",20).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label = yaxis_scale.append("g").append("text").text("capping").attr("y",20).attr("transform", "rotate(-90)").attr("text-align","middle")
     }else
     {
     yaxis_scale.append("g").style("font-size", 15).attr("transform", `translate( `+ ((margin.left)+30)+`,0)`).call(d3.axisLeft(yscale).tickSize(0).ticks(10).tickFormat(d => formatValue(d) )   ).select(".domain").remove()
@@ -1498,7 +1680,7 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
 
     
     color_legend.append("text").attr("x",170).attr("y",10).text("#simulations failed")
-    color_legend.append("text").attr("x",170).attr("y",25).text("for capx criteria")
+    color_legend.append("text").attr("x",170).attr("y",25).text("for capping criteria")
     color_legend.append("circle").attr("cx",315).attr("cy",15).attr("r",10).attr("fill","#5d8700")
     color_legend.append("text").attr("x",315).attr("y",19).attr("text-anchor","middle").text("0")
     i = 0
@@ -1717,9 +1899,9 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 $("#section_2_metric").change(function () {
         metric = this.value;
         if(metric=='capx'){
-            $("#section_2_ct").html("For a given target, higher agent comission have lower adherence to capx 18% ")
+            $("#section_2_ct").html("For a given target, higher agent comission have lower adherence to capping 18% ")
             $("#section_2_st").html("so, the staff comission should be minimum ")
-            $("#metric_select_chart").html("Capx")
+            $("#metric_select_chart").html("Capping")
             
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
         }else{
@@ -1737,7 +1919,7 @@ $("#section_2_metric").change(function () {
 
         metric = this.value;
         axis_details = {'x_axis':'Achievement_TTL', 'color_by':'cap_bucket', 'achievemed_min':achievemed_min, 'achievemed_max':achievemed_max}
-           draw_mixed_plot("#Actual_Achieved_byCapx",ALL_Results,axis_details,metric)
+           draw_mixed_plot("#Actual_Achieved_byCapping",ALL_Results,axis_details,metric)
       
     })
 
