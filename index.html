@@ -446,7 +446,7 @@ thead, tbody tr {
            &#10004 Target influences  Manager & General Manger payout. 
         </div>
         <div  style='background-color:#eee;'>
-            <div class='chart_title'>  Higher Targets have low avg.capping   <span class='chart_sub_title'> so, the targets should be minimum possible adhering to Capping 18%</span></div>
+            <div class='chart_title'>  Higher targets have low avg.capping   <span class='chart_sub_title'> so, the targets should be minimum possible to keep capping close to 18%</span></div>
            
             <div class='chart_description'> *Distribution of capping within target</div>
             <div id='Target_Capx_Achievement_Violin'></div>
@@ -459,10 +459,10 @@ thead, tbody tr {
 
         <div  class='Insights_title' style='padding-bottom:40px'>
 
-            &#10004 Staff comission should be minimum possible to to keep capping in control 
+            &#10004 Staff comission influences Net profit and Manager payout and thus, capping 
         </div>
         <div style='background-color:#eee;'>
-            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher agent comission have lower adherence to capping 18% </span> 
+            <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher staff comission have lower adherence to capping 18% </span> 
                  <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
             <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>capping</span> along staff comission within target  <span style='color:black;font-size:10px'> (click red boxes to see failed plans)</span> </div>
            
@@ -493,7 +493,7 @@ thead, tbody tr {
         <div  class='Insights_title' style='padding-bottom:40px'>
 
           &#10004 It is tough to achieve higher achievement% for higher targets  <br>
-          &#10004 So, targets can be further reduced by trading-off with achievement% with target
+          &#10004 So, targets can be further reduced by trading-off with achievement% within target
         </div>
         <div  style='background-color:#eee;'>
             <div class='chart_title'> Reaching high TTL Achievement <span style='font-size:12px' > (Target * achievement %)</span> is a rare scenario 
@@ -577,9 +577,9 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
         &#10004 A plan that is mostly close to capping 18% is choosen over others
      </div>
      <div  style='background-color:#eee;'>
-         <div class='chart_title'> probabillity distribution of best plan will have multiple peaks ~18% and a flat extreems  <span class='chart_sub_title'> Choose plan with peak closer to 18%</span></div>
+         <div class='chart_title'> probabillity distribution of capping for a plan ideas what happens to capping most of the time in that plan   <span class='chart_sub_title'> Choose plan with peak closer to 18% and flat tails to avoid uncertainity </span></div>
         
-         <div class='chart_description'> *    Probability distribution of capping for all simulations in the plan    </div>
+         <div class='chart_description'> * Probability distribution of capping for all simulations in the plan    </div>
          <div id='comparison_chart_area' >
 
         </div> 
@@ -1955,13 +1955,13 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 $("#section_2_metric").change(function () {
         metric = this.value;
         if(metric=='capx'){
-            $("#section_2_ct").html("For a given target, higher agent comission have lower adherence to capping 18% ")
+            $("#section_2_ct").html("For a given target, higher staff comission have lower adherence to capping 18% ")
             $("#section_2_st").html("so, the staff comission should be minimum ")
             $("#metric_select_chart").html("capping")
             
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
         }else{
-            $("#section_2_ct").html("For a given target, higher agent comission have lower Net Profit")
+            $("#section_2_ct").html("For a given target, higher staff comission have lower Net Profit")
             $("#section_2_st").html("so, the staff comission should be minimum")
             axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'Net_Profit'}
             $("#metric_select_chart").html("Net Profit")
