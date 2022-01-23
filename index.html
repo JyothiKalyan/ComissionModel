@@ -497,7 +497,7 @@ thead, tbody tr {
        
     </div>
 
-    <div id='section_4' class='analyzing_results' style=' color:white;clear:both;position:relative;width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ; background-image: linear-gradient( #0ea7a6, #03495c  );'> 
+    <div id='section_4' class='analyzing_results' style=' color:white;clear:both;position:relative;width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ; background-image: linear-gradient(  #ddc9b8, #4e2b0d  );'> 
         
 Filtering for Achievemnet% for which maximum Achievement is less than <span id='achievement_filter_value' style='font-size:25px'></span> 
     </div>
@@ -590,7 +590,7 @@ $("#add_scenario").click(function(){
 
 function draw_mixed_plot(chart_id,data,axis,metric){
 
-    console.log(metric)
+
     var margin = {top: 10, right: 30, bottom: 30, left: 40}, 
     chart_width = (80*metric) - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
 
@@ -681,7 +681,7 @@ yaxis_svg2 =  d3.select(chart_id).append("div").attr("class","horizontal_scroll_
 macha = d.max_Achieved
    
       
-      d3.selectAll(".Hist_bar").attr('style', d=>{ if(d.max_Achieved <= macha){return 'fill: #0c8e92;'} return 'fill: #bbb'} )
+      d3.selectAll(".Hist_bar").attr('style', d=>{ if(d.max_Achieved <= macha){return 'fill: #8a5f3a;'} return 'fill: #bbb'} )
       
       $("#achievement_filter_value").html( formatValue(d.max_Achieved)  )
       
@@ -692,19 +692,42 @@ macha = d.max_Achieved
          
         final_result =[]
         k = d3.rollup(ALL_Results_new.flat(), v => { 
-            if(d3.sum(v,  d =>  {if(d.cap_bucket!="green"){ if(d.Achievement_TTL <= macha ){return 1}} return 0 } ) == 0 ){ 
-                final_result.push( {'emar_percentage': v[0].agent_non_emar_comission_percentage, 'Target':v[0].TARGET } )
-            }
-            
-            return { 
+
+            if(v[0].Achievement_TTL <= macha){
+
+                if( d3.sum(v,  d =>  {if(d.cap_bucket!="green"){return 1} return 0 } ) == 0){
+                    final_result.push({
+                    'Target': v[0].TARGET,
+                    'comission': v[0].agent_non_emar_comission_percentage
+                })
+                }
+            }    return { 
             'numerator':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){ if(d.Achievement_TTL <= macha ){return 1}} return 0 } )
 }}  ,
-    d => d['agent_non_emar_comission_percentage'],d => d['TARGET']  )
+  d=>d['Achievement_TTL']<=macha,  d => d['agent_non_emar_comission_percentage'],d => d['TARGET']  )
     
    TargetSet =  d3.min(final_result.map(d=>d.Target)) 
-   Agent_Comission =  d3.max(final_result.map(d=> {if(d.Target ==TargetSet ){return (d.emar_percentage)}return(-100)} )) 
+   Agent_Comission =  d3.max(final_result.map(d=> {if(d.Target ==TargetSet ){return (d.comission)}return(-100)} )) 
     
-  
+
+  Other_Options_temp = []
+   k = d3.rollup(final_result, v => { 
+    Other_Options_temp.push({'TARGET':v[0].Target, 'max_staff_comission': d3.max(v,d=>d.comission)  })
+    return{
+
+    }
+   }, d=>  d['Target']  )
+
+   Other_Options = []
+   k = d3.rollup(Other_Options_temp, v => { 
+    Other_Options.push({'max_staff_comission':v[0].max_staff_comission, 'Target': d3.min(v,d=>d.TARGET)  })
+    return{
+
+    }
+   }, d=>  d['max_staff_comission']  )
+
+   console.log(Other_Options)
+
 if(set_compuattion){
    $("#target_computed").html(  formatValue(TargetSet)  )
    $('#staff_comission_coomputed').html(Agent_Comission*100+"%")
@@ -734,7 +757,7 @@ if(set_compuattion){
     yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2-50  });  
  
     yaxis_svg2.append("g").attr("class","red_axis").call(d3.axisRight(y2).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.00%'))   );
-    yaxis_label2 = yaxis_svg2.append("g").append("text").attr("font-family","Open Sans").attr("font-weight","150").text("Cumulative % simulations").attr("stroke","red").attr("y",54).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label2 = yaxis_svg2.append("g").append("text").attr("font-family","Open Sans").attr("font-weight","100").attr("font-size","12px").text("Cumulative % simulations").attr("stroke","red").attr("y",54).attr("transform", "rotate(-90)").attr("text-align","middle")
     yaxis_label2.attr('x', function() {return (nodeHeight(this)-height )/2-90  });  
 
  
@@ -1447,7 +1470,8 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
     data = d3.rollup(data, v => {return { 'x_axis_column': v[0][x_axis_column],'y_axis_column':v[0][y_axis_column] ,
     'sub_plots_x_column_name': v[0][sub_plots_x_column_name],'sub_plots_y_column_name': v[0][sub_plots_y_column_name], 
     'numerator':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){ if(d.Achievement_TTL <= axis.macha ){return 1}} return 0 } ),
-    'numerator_all':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){return 1} return 0 } )
+    'numerator_all':d3.sum(v,  d =>  {if(d.cap_bucket!="green"){return 1} return 0 } ),
+    'black_out':d3.sum(v,  d =>  {if(d.Achievement_TTL <= axis.macha){return 1} return 0 } )
     ,'denominator': d3.sum(v, d => 1), 'val' : (d3.sum(v,  d =>  {if(d.cap_bucket=="green"){return 1} else{return 0} } ) / d3.sum(v, d => 1))}}  ,
     d => d[sub_plots_x_column_name],d => d[sub_plots_y_column_name],d => d[y_axis_column],d => d[x_axis_column]  )
     
@@ -1456,25 +1480,55 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
     var top_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1400 ).attr("height", 80 ).attr("transform", "translate("+0+", 0)").append("g")
    
     //var svg_y = d3.select(chart_id).append("div").attr("class",'horizontal_scroll_side_div').append("svg").attr("width",80).attr("height", sub_plot_heght+ margin.top+margin.bottom).attr("transform", `translate(0, 0)`);
-    var svg = d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height','400px').append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", height ).append("g");
+    var svg= d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height','435px').append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", (height) ).append("g");
+    //var x_subplot = svg_wkng.append("g")
+    //var svg = svg_wkng.append("g").attr("transform", "translate(0, 50)");
 
-
-    sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([width - margin.right,margin.left]);
+    sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([margin.left,width - margin.right]);
     sub_plot_y_scale = d3.scaleBand().domain(sub_plot_y_domain).range([0,height - margin.bottom]);
 
-    top_svg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", 1400).attr("y2", 20); 
-    subplot_x_text = top_svg.append("g").attr("class","subplot_axis_label").append("text").text("EEEE Achievement%").attr("y", 0).attr("x", 0).attr("text-anchor","center")
-    subplot_x_text.attr('transform', function() {return `translate(${(1400 - nodeWidth(this)) / 2},${25})`});
+   // top_svg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", 1400).attr("y2", 20); 
+    
+    const myColor = d3.scaleLinear().range(["#e97452", "#8b0001"]).domain([1,10])
+    var color_legend = top_svg.append("g")
+
+    color_legend.append("circle").attr("cx",150).attr("cy",15).attr("r",10).attr("fill","black")
+    color_legend.append("text").attr("x",15).attr("y",16).attr("text-anchor","start").text("non probable case")
+    color_legend.append("text").attr("x",0).attr("y",27).attr("font-size","11px").attr("text-anchor","start").text("from Achievement threshold")
+
+    
+    color_legend.append("text").attr("x",170).attr("y",10).text("#simulations failed")
+    color_legend.append("text").attr("x",170).attr("y",25).text("for capx criteria")
+    color_legend.append("circle").attr("cx",315).attr("cy",15).attr("r",10).attr("fill","#5d8700")
+    color_legend.append("text").attr("x",315).attr("y",19).attr("text-anchor","middle").text("0")
+    i = 0
+    string_val = " simulation"
+while(i < 10){
+    var clr = "white";
+    if(i < 3){
+        clr = "black"
+    }
+    color_legend.append("circle").attr("cx",(i+1)*20+315).attr("cy",15).attr("r",10).attr("fill",myColor(i))
+    color_legend.append("text").attr("x",(i+1)*20+315).attr("y",19).attr("text-anchor","middle").text(i+1).attr("fill", clr )
+   i = i+1
+    }
+
+    color_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
 
 
-  
 
+
+    
+    //subplot_x_text =    //subplot_x_text.attr('transform', function() {return `translate(${(1400 - nodeWidth(this)) / 2},${25})`});
+
+    
     show_xaxis = true
     show_yaxis = true
+
     sub_plot_y_domain.forEach(
     
         sub_y_domain => {
-            show_yaxis = true;
+            show_xaxis = true;
             sub_plot_x_domain.forEach(
                 
                 sub_x_domain => {
@@ -1486,11 +1540,12 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
                     var working_svg = svg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", "+sub_plot_y_scale(sub_y_domain)+")")
                     //var axis_working = axissvg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", 0)")
 
-                HeatMap(sub_plot_data,working_svg,(sub_plot_width-70) ,(sub_plot_heght-70),sub_x_domain,true, true,'')
-                show_yaxis = false
+             
+                HeatMap(sub_plot_data,working_svg,(sub_plot_width-70) ,(sub_plot_heght-70),sub_x_domain,true, true,sub_x_domain,sub_y_domain)
+                show_xaxis = false
                     }
                 );
-                show_xaxis = false;    
+                
                 } 
             
                 
@@ -1500,15 +1555,19 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
 
 }
 
-function HeatMap(data,working_space,width,height,sub_x_domain, show_yaxis, show_xaxis,axissvg){
+function HeatMap(data,svg,width,height,sub_x_domain, show_yaxis, show_xaxis,x_axis_sub_group,y_axis_sub_group){
 chart_margin = 0; if(show_yaxis){chart_margin = 30;}
 const myGroups = Array.from(new Set(data.map(d => d.x_axis_column)))
 const myVars = Array.from(new Set(data.map(d => d.y_axis_column)))
 
+height = height -30
 const x = d3.scaleBand().range([ width,chart_margin ]).domain(myGroups).padding(0.02); 
-var borderPath = working_space.append("g").append("rect").attr("x", chart_margin).attr("y", 0).attr("height", height).attr("width", (width-chart_margin )).style("stroke", "black").style("fill", "none").style("stroke-width", "3px");
+var borderPath = svg.append("g").append("rect").attr("x", chart_margin).attr("y", 0).attr("height", 30).attr("width", (width-chart_margin ))
+.attr("stroke", "white").attr("stroke-width", "3px").attr("fill","#8a5f3a");
+var text = svg.append("g").append("text").attr("x", width/2).attr("y", 20).attr("text-anchor","middle").text("EEE Achievement = " + x_axis_sub_group + "   ; Non-EEE Achievement ="+ y_axis_sub_group).attr("font-size","14px");
 
-if(show_xaxis){working_space.append("g").style("font-size", 12).attr("transform", `translate(0, `+(-30)+`)`).call(d3.axisBottom(x).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()};
+var working_space= svg.append("g").attr("transform", `translate(0,30)`)
+if(show_xaxis){working_space.append("g").style("font-size", 12).attr("transform", `translate(0, `+(height)+`)`).call(d3.axisBottom(x).tickSize(0).tickFormat(d => formatValue(d) )).select(".domain").remove()};
   
 const y = d3.scaleBand().range([ height,0 ]).domain(myVars).padding(0.05);
 if(show_yaxis){
@@ -1527,7 +1586,9 @@ var i = 0
 
 
 working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
-.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() ).style("fill", function(d) { if(d.numerator==0) { if(d.numerator_all==0){return "#5d8700"} return "black" } else{ return myColor(Math.min(+d.numerator,10)) }   } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
+.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() )
+.style("fill", function(d) { if(d.black_out==0) return "black" ; if(d.numerator==0){return "#5d8700"} 
+return myColor(Math.min(+d.numerator,10))    } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
 legend = working_space.append("g")
 /* legend.selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;}).join("text").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) +5})
 .text(function(d) { return Math.round(d.val,2)*100} ).attr('text-size','6px')*/
