@@ -956,7 +956,7 @@ macha = d.max_Achieved
    var orecommendations = ""
    for(k in Other_Options){
        if (Other_Options[k].Target != TargetSet){
-       orecommendations = orecommendations + formatValue(Other_Options[k].Target) +"  Target with maximum staff comission at "+ Math.round(Other_Options[k].max_staff_comission*100) +"% <br>"
+       orecommendations = orecommendations + "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target with <u>maximum</u> staff comission at <b>"+ Math.round(Other_Options[k].max_staff_comission*100) +"%</b> <br>"
        }
     }
 
