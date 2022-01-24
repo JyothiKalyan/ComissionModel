@@ -258,7 +258,7 @@ thead, tbody tr {
     overflow-x: scroll;
     display: inline; 
     float: left;
-    width:1320px;
+    width:1270px;
     background-color:rgb(237 237 237);
 }
 .horizontal_scroll_side_div{
@@ -346,7 +346,7 @@ thead, tbody tr {
     <div >
         
         <div class='page-title'>  WHAT SHOULD TARGET BE ?? <br>
-            <span style='font-size:20px'>suggesting Target and staff comission combination which adhere capping <=18% for given parametes</span><br>
+            <span style='font-size:20px'>suggesting Target which adhere capping <=18% for given simulation parametes</span><br>
             <span class='chart_sub_title' style='background-color: black;color:#a5a5f3'> The Suggestion -- Explaination to arrival of suggestion -- Evaluating suggestion   </span>
         </div>
         <div style='padding-left:50px;padding-right:50px'> 
@@ -354,12 +354,12 @@ thead, tbody tr {
             <div>
         <span class='section-title'> Factors which are known</span> 
         <span class ='input_box_span' > Operation Cost: <input type="range" min="500000" max="5000000" value="2600000" step='50000' class="slider si" id="operational_cost" > <label id='operational_cost_label'>2,600,000</label> </span>
-        <span class ='input_box_span'> %EEEE Target: <input type="range" min="1" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label'>20</label> %</span> <br>
+        
+        <span class ='input_box_span' >  EEEE Target: <input type="range" min="1" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
         </div>
         <div style='clear:both;padding-top:20px'>
             <span class='section-title'> Factors which in Control</span> 
-        <span class ='input_box_span' >  Staff Comission: <input type="range" min="55" max="100" value="63" step='1' class="slider si" id="agent_comission">  <label id='agent_comission_label'>63</label>% </span>
-        <span class ='input_box_span' >  General Manager Target Factor:<input type="range" style='width:50px'  min="0" max='100' class="slider si reversedRange" step="1" value="20" id="gm_target_factor_inv">  <span id='gm_target_factor_label' > 80</span>% <label id='gm_target_factor_inv_label' style='display:none'></label></span> 
+       <span class ='input_box_span' >  General Manager Target Factor:<input type="range" style='width:50px'  min="0" max='100' class="slider si reversedRange" step="1" value="20" id="gm_target_factor_inv">  <span id='gm_target_factor_label' > 80</span>% <label id='gm_target_factor_inv_label' style='display:none'></label></span> 
         
         
 
@@ -385,8 +385,8 @@ thead, tbody tr {
                 <table class='plan_table'> 
                     <th> PLAN-3 (General Manager) </th>
                 <tr><td><85%</td><td>0</td></tr>
-                <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
-                <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
+                <tr><td>100% -125%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
+                <tr><td>125% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
                 <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c3_p3"></td></tr>
             </table>
         </div>
@@ -397,7 +397,9 @@ thead, tbody tr {
         <div></div>
         <div style='clear:both;position: relative;padding-top:60px' class='simulation_parameters'>
             <span class='section-title'> Factors which are Futuristic & are not in control</span> <br>
-            <div style='clear:both;padding-left:300px'>
+            <div style='clear:both;padding-left:100px'>
+            <span class ='input_box_span' >  Staff Comission: <input type="range" min="55" max="100" value="65" step='1' class="slider si" id="agent_comission">  <label id='agent_comission_label'>65</label>% </span>
+        
             <span  class ='input_box_span'> EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
             <span class ='input_box_span'> NON-EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
             </div>
@@ -431,12 +433,12 @@ thead, tbody tr {
 
   <div>
       
-    <div class='analyzing_results' style=' position:relative,width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ;background-image: linear-gradient(#c7d875, #8c9c35);'>
+    <div class='analyzing_results' style=' position:relative;width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ;background-image: linear-gradient(#c7d875, #8c9c35);'>
         
         
         from Analyzing  <span id='no_targets_analyzed' style='font-size:46px'></span> simulations<br>
 
-        The algorithm recommends to set target at <span id='target_computed' style='font-size:56px' ></span> with staff comission at <span style='font-size:56px' id='staff_comission_coomputed'></span> <br>
+        The algorithm recommends to set target at <br><span id='target_computed' style='font-size:56px' ></span> <span id='emar_volume_computed' style='font-size:20px'></span> when <b><u>maximum staff</u></b> comission at <span style='font-size:56px' id='staff_comission_coomputed'></span> <br>
         other recommendations are <span id='other_recommendations'> </span>
 
     </div>
@@ -450,7 +452,20 @@ thead, tbody tr {
             <div class='chart_title'>  Higher targets have low avg.capping   <span class='chart_sub_title'> so, the targets should be minimum possible yet high enough to keep capping close to 18%</span></div>
            
             <div class='chart_description'> *Distribution of capping within target</div>
-            <div id='Target_Capx_Achievement_Violin'></div>
+            <div style='position:relative;display: inline;width:30px;float:left;'> 
+                
+                    
+
+                <select  id="section_1_metric" style='transform: rotate(-90deg);top: 145px;left: -82px;position: relative;text-align:center'>
+                    <option value="cap">Capping</option>
+                    <option value="Net_Profit">NetProfit</option> 
+                    <option value="General_Manager_Payout"> General Manager Payout</option>
+                    <option value="Manager_Payout"> Manager Payout</option>
+                    
+                  </select>
+
+            </div>
+            <div style='position:relative;display: inline;width:1370px;float:left;' id='Target_Capx_Achievement_Violin'></div>
             
         </div>
        
@@ -464,7 +479,7 @@ thead, tbody tr {
         </div>
         <div style='background-color:#eee;'>
             <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher staff comission have lower adherence to capping 18% </span> 
-                 <span id='section_2_st'  class='chart_sub_title'> so, the staff comission should be minimum </span> </div>
+                 <span id='section_2_st'  class='chart_sub_title'> so, if expecetd staff comission gets higher, Target should be higher </span> </div>
             <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>capping</span> along staff comission within target  <span style='color:black;font-size:10px'> (click red boxes to see failed plans)</span> </div>
            
             <div>
@@ -534,7 +549,7 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
                  <div class='chart_title'> probable situations are simulations filtered for above TTL achievement critelia  <span class='chart_sub_title'> Choose minimum target</span></div>
                 
                  <div class='chart_description'> *   #failed simulation across achievement%, for staff comission & target     </div>
-                 <div id='Target_Capx_Achievement_Violin'></div>
+               
                  
              </div>
        
@@ -545,6 +560,12 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
         <div id='HeatMapSubPlot'>
 
         </div>
+
+     
+            <table id='scenario_table_2'>
+            
+            </table>
+        
     </div>
 
 </div>
@@ -584,6 +605,14 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
          <div id='comparison_chart_area' >
 
         </div> 
+
+        <div id='comparison_chart_area2' >
+
+        </div> 
+
+        <div id='comparison_chart_area3' >
+
+        </div> 
          
      </div>
 
@@ -610,7 +639,7 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
      <div class='chart_title'>  Mathematical Inference   <span class='chart_sub_title'> Action to be taken from inference</span></div>
     
      <div class='chart_description'> *Chart Title <span style='color:black;font-size:10px'>(actions enabled in chart)</span></div>
-     <div id='Target_Capx_Achievement_Violin'></div>
+   
      
  </div>
 </div>
@@ -632,16 +661,8 @@ var margin = {top: 20, right: 20, bottom: 60, left: 50}, width = 1400 - margin.l
 var x = d3.scaleLinear().domain( d3.extent(data.map(d=> d.cap))).range([0, width]);
 var y = d3.scaleLinear().domain( d3.extent(data.map(d=> d.per))).range([height, 0]);
 
-
 data = d3.group(data, d => d.Plan)
-
-
-
 var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + margin.left + "," + margin.top + ")");
-
-
-
-
 
 svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])}).attr('fill', 'none' ) 
 //.attr('fill-opacity', .3 )
@@ -654,11 +675,46 @@ svg.append("g").call(d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.form
 yaxis_label = svg.append("g").append("text").text("% Simulations").attr("font-family","Open Sans").attr("font-weight","150").attr("y",-35).attr("transform", "rotate(-90)").attr("text-align","middle")
     yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2-50  });  
  
-    xaxis_label = svg.append("g").append("text").text("Capping").attr("font-family","Open Sans").attr("font-weight","150").attr("y",height+10).attr("text-align","middle")
+    xaxis_label = svg.append("g").append("text").text("Capping").attr("font-family","Open Sans").attr("font-weight","150").attr("y",height+20).attr("text-align","middle")
     xaxis_label.attr('x', function() {return (width - nodeHeight(this))/2-50  });  
  
 
 }
+
+
+function draw_area_comparisionchart2(chart_id, data, metric){
+
+
+d3.select(chart_id).selectAll("*").remove();
+
+var margin = {top: 20, right: 20, bottom: 60, left: 50}, width = 1400 - margin.left - margin.right, height = 350 - margin.top - margin.bottom;
+
+
+var x = d3.scaleLinear().domain( d3.extent(data.map(d=> d.cap))).range([0, width]);
+var y = d3.scaleLinear().domain( d3.extent(data.map(d=> d.per))).range([height, 0]);
+
+data = d3.group(data, d => d.Plan)
+var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+svg.selectAll("path").data(data).join("path").attr("stroke-width",10).attr('stroke', d=> d[1][0].color ).attr("d", d => { return d3.line().x(d => x(d.cap)).y(d => y(+d.per) )(d[1])}).attr('fill', 'none' ) 
+//.attr('fill-opacity', .3 )
+
+svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat( d=> formatValue(d) ));
+
+// add the y Axis
+svg.append("g").call(d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat( d3.format('.00%') )   );
+
+yaxis_label = svg.append("g").append("text").text("% Simulations").attr("font-family","Open Sans").attr("font-weight","150").attr("y",-35).attr("transform", "rotate(-90)").attr("text-align","middle")
+    yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2-50  });  
+ 
+    xaxis_label = svg.append("g").append("text").text(metric).attr("font-family","Open Sans").attr("font-weight","150").attr("y",height+40).attr("text-align","middle")
+    xaxis_label.attr('x', function() {return (width - nodeHeight(this))/2-50  });  
+ 
+
+}
+
+
+
 
 
 
@@ -670,6 +726,8 @@ $("#clear_all_scenarios").click(function(){
     added_plan = 0
 
     d3.select("#comparison_chart_area").selectAll("*").remove();
+    d3.select("#comparison_chart_area2").selectAll("*").remove();
+    d3.select("#comparison_chart_area3").selectAll("*").remove();
 
     d3.select("#comparing_space").selectAll("*").remove();
    
@@ -680,7 +738,8 @@ $("#start_comparision").click(function(){
 
 
     plot_data = []
-   
+    plot_data2 = []
+    plot_data3=[]
     
     var i = 0;
     table_data = []
@@ -690,6 +749,8 @@ $("#start_comparision").click(function(){
         comparision_comission = $("#comparison_comission_"+i).val()
        
 temp_data = []
+temp_data2 = []
+temp_data3 = []
        
        
     k =  d3.rollup( ALL_Results , v => { 
@@ -703,18 +764,72 @@ temp_data = []
         'per':1,
         'color': comparison_color_pallet[i]
        })
+
+       
+
     }
 }
     ;
     return{'val':0}
     },d=> d.TARGET == comaprision_target,
      d => d.agent_non_emar_comission_percentage == comparision_comission , d => d.cap )
+
+
+
+     k =  d3.rollup( ALL_Results , v => { 
+
+if( v[0].agent_non_emar_comission_percentage == comparision_comission ){
+if( v[0].TARGET == comaprision_target ){
+
+temp_data2.push({
+'Plan': 'Target '+ formatValue(comaprision_target) +'  with agent comission '+ comparision_comission*100+'%',
+'Manager_payout': Math.round(v[0].Manager_payout/50000)*50000 ,
+'cnt':d3.sum(v,d=> {return 1}),
+'per':1,
+'color': comparison_color_pallet[i]
+})
+
+}
+}
+;
+return{'val':0}
+},d=> d.TARGET == comaprision_target,
+d => d.agent_non_emar_comission_percentage == comparision_comission , d => Math.round(d.Manager_payout/50000)*50000 )
+
+
+
+k =  d3.rollup( ALL_Results , v => { 
+
+if( v[0].agent_non_emar_comission_percentage == comparision_comission ){
+if( v[0].TARGET == comaprision_target ){
+
+temp_data3.push({
+'Plan': 'Target '+ formatValue(comaprision_target) +'  with agent comission '+ comparision_comission*100+'%',
+'cap': Math.round(v[0].General_Manager_Payout/50000)*50000 ,
+'cnt':d3.sum(v,d=> {return 1}),
+'per':1,
+'color': comparison_color_pallet[i]
+})
+
+}
+}
+;
+return{'val':0}
+},d=> d.TARGET == comaprision_target,
+d => d.agent_non_emar_comission_percentage == comparision_comission , d => Math.round(d.General_Manager_Payout/50000)*50000 )
+
+
+
      
      
      temp_data = temp_data.slice().sort((a, b) => d3.ascending( parseFloat(a.cap), parseFloat(b.cap)) || d3.ascending(parseFloat(a.cap), parseFloat(b.cap)))
- 
+     temp_data2 = temp_data2.slice().sort((a, b) => d3.ascending( parseFloat(a.Manager_payout), parseFloat(b.Manager_payout)) || d3.ascending(parseFloat(a.Manager_payout), parseFloat(b.Manager_payout)))
+     temp_data3 = temp_data3.slice().sort((a, b) => d3.ascending( parseFloat(a.cap), parseFloat(b.cap)) || d3.ascending(parseFloat(a.cap), parseFloat(b.cap)))
+
      var it = 0
        s =  d3.sum(d3.map(temp_data , d=> d.cnt)) 
+       s2 =  d3.sum(d3.map(temp_data2 , d=> d.cnt)) 
+       s3 =  d3.sum(d3.map(temp_data3 , d=> d.cnt)) 
        while(it < temp_data.length){
         temp_data[it]['per'] = temp_data[it]['cnt']/s;
         plot_data.push({
@@ -729,6 +844,36 @@ temp_data = []
         it = it + 1
 }
 
+it = 0
+while(it < temp_data2.length){
+    temp_data2[it]['per'] = temp_data2[it]['cnt']/s2;
+        plot_data2.push({
+             'Plan':  temp_data2[it]['Plan']  ,
+             'cap':  temp_data2[it]['Manager_payout']  ,
+             'cnt':  temp_data2[it]['cnt']  ,
+             'color':  temp_data2[it]['color']  ,
+             'per':  temp_data2[it]['per']  
+    
+    
+    })
+        it = it + 1
+}
+
+it = 0
+while(it < temp_data3.length){
+    temp_data3[it]['per'] = temp_data3[it]['cnt']/s3;
+        plot_data3.push({
+             'Plan':  temp_data3[it]['Plan']  ,
+             'cap':  temp_data3[it]['cap']  ,
+             'cnt':  temp_data3[it]['cnt']  ,
+             'color':  temp_data3[it]['color']  ,
+             'per':  temp_data3[it]['per']  
+    
+    
+    })
+        it = it + 1
+}
+
 
     i = i+1
         
@@ -737,6 +882,12 @@ temp_data = []
 
 
 draw_area_comparisionchart("#comparison_chart_area",plot_data)
+
+draw_area_comparisionchart2("#comparison_chart_area2",plot_data2,'Manager Payout')
+
+draw_area_comparisionchart2("#comparison_chart_area3",plot_data3,'General Manager Payout')
+
+
 
 
 
@@ -924,7 +1075,9 @@ macha = d.max_Achieved
                 if( d3.sum(v,  d =>  {if(d.cap_bucket!="green"){return 1} return 0 } ) == 0){
                     final_result.push({
                     'Target': v[0].TARGET,
-                    'comission': v[0].agent_non_emar_comission_percentage
+                    'comission': v[0].agent_non_emar_comission_percentage,
+                    'emaar_achieved_min':  d3.min(v, d => d['EMAAR_Target']) ,
+                    'emaar_achieved_max':  d3.max(v, d => d['EMAAR_Target'])
                 })
                 }
             }    return { 
@@ -934,9 +1087,10 @@ macha = d.max_Achieved
     
    TargetSet =  d3.min(final_result.map(d=>d.Target)) 
    Agent_Comission =  d3.max(final_result.map(d=> {if(d.Target ==TargetSet ){return (d.comission)}return(-100)} )) 
-    
-
-  Other_Options_temp = []
+  // emar_volume_computed_max = 1/.03 * TargetSet * .2
+   emar_volume_computed_min = 1/.045 *  TargetSet * .2
+   emar_volume_computed = "( EEEE max-Volume Target : "+formatValue(emar_volume_computed_min) +" computed with 4.5% volume -> sale  )"
+   Other_Options_temp = []
 
    k = d3.rollup(final_result, v => { 
     Other_Options_temp.push({'TARGET':v[0].Target, 'max_staff_comission': d3.max(v,d=>d.comission)  })
@@ -956,8 +1110,16 @@ macha = d.max_Achieved
    var orecommendations = ""
    for(k in Other_Options){
        if (Other_Options[k].Target != TargetSet){
-       orecommendations = orecommendations + "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target with <u>maximum</u> staff comission at <b>"+ Math.round(Other_Options[k].max_staff_comission*100) +"%</b> <br>"
-       }
+        
+        //e_max =  1/.045 * d3.max(final_result.map(d=> {if(d.Target ==Other_Options[k].Target ){ if(d.comission == Other_Options[k].max_staff_comission ){ return d.emaar_achieved_max} } return(-100)} )) 
+        //e_min = 1/.045 * d3.max(final_result.map(d=> {if(d.Target ==Other_Options[k].Target ){ if(d.comission == Other_Options[k].max_staff_comission ){ return d.emaar_achieved_min} } return(-100)} )) 
+  
+        e_max = 1/.03 * Other_Options[k].Target * .2
+        e_min = 1/.045 *  Other_Options[k].Target * .2
+       orecommendations =  "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target  <span style='font-size:14px'> ( EEEE max-Volume Target: "+ formatValue(e_min)  +" computed with 4.5% volume -> sale ) </span> with <u>maximum</u> staff comission at <b>"+ Math.round(Other_Options[k].max_staff_comission*100) +"%</b> <br>" + orecommendations
+       
+
+    }
     }
 
 
@@ -966,6 +1128,7 @@ if(set_compuattion){
    $("#target_computed").html(  formatValue(TargetSet)  )
    $('#staff_comission_coomputed').html(Math.round(Agent_Comission*100)+"%")
    $("#other_recommendations").html(orecommendations)
+   $("#emar_volume_computed").html(emar_volume_computed)
    set_compuattion = false
 }
    
@@ -1023,44 +1186,68 @@ function drawviolin(chart_id,data,axis){
 
     d3.select(chart_id).selectAll("*").remove();
 
-   
-
-   var data_new =  d3.rollup(data, v => {return{'TARGET':v[0].TARGET,
-   'cap':v[0].cap,'cnt':d3.sum(v,  d =>  { ;return 1}) }},d=> d.TARGET, d => d.cap)
 
     var chart_height = 300; var chart_width = 100 * axis.TARGETS_RANGE.length
+    var margin = {top: 10, right: 30, bottom: 30, left: 40}, width = 1200 - margin.left - margin.right, height = chart_height - margin.top - margin.bottom;
+    var yaxis_svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll_side_div").append("svg").attr("width","80px").attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 75 + "," + margin.top + ")");
+    var svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll").append("svg").attr("width", chart_width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 0 + "," + margin.top + ")");
+
+   
+if(axis.y_metric=='cap'){
+   var data_new =  d3.rollup(data, v => {return{'TARGET':v[0].TARGET,
+   'y_axis':v[0][axis.y_metric],'cnt':d3.sum(v,  d =>  { ;return 1}) }},d=> d.TARGET, d => d[axis.y_metric])
+
+
+   y = d3.scaleLinear().domain([d3.min(d3.map(data, d => +d[axis.y_metric])), d3.max(d3.map(data, d => +d[axis.y_metric]))]).range([height, 0])
+
+    yaxis_svg.append("g").call( d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.0%')) )  
+    yaxis_label = yaxis_svg.append("g").append("text").text("Capping").attr("y",-40).attr("transform", "rotate(-90)").attr("text-align","middle")
 
 
 
-var margin = {top: 10, right: 30, bottom: 30, left: 40}, width = 1200 - margin.left - margin.right, height = chart_height - margin.top - margin.bottom;
+
+}
+if(axis.y_metric=='Net_Profit'){
+
+   var data_new =  d3.rollup(data, v => {return{'TARGET':v[0].TARGET,
+   'y_axis':Math.round(v[0][axis.y_metric]/100000)*100000,'cnt':d3.sum(v,  d =>  { ;return 1}) }},d=> d.TARGET, d => Math.round(+d[axis.y_metric]/100000)  )
+   y_range =[]
+   it2 = (d3.min(d3.map(data, d => +d[axis.y_metric]))/100000)
+   max_y = (d3.max(d3.map(data, d => +d[axis.y_metric]))/100000)
+while(it2 < max_y){
+    y_range.push(it2*100000);
+    it2 = it2+1
+}
+  y = d3.scaleBand().domain(y_range).range([height, 0])
+  yaxis_svg.append("g").call( d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat( d => formatValue(d)) )  
+  yaxis_label = yaxis_svg.append("g").append("text").text( axis.y_metric ).attr("y",-40).attr("transform", "rotate(-90)").attr("text-align","middle")
+
+
+}
 
 
 
-var yaxis_svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll_side_div").append("svg").attr("width","80px").attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 75 + "," + margin.top + ")");
-var svg = d3.select(chart_id).append("div").attr("class","horizontal_scroll").append("svg").attr("width", chart_width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + 0 + "," + margin.top + ")");
 
 
-y = d3.scaleLinear().domain([axis.cap_min-.05, axis.cap_max]).range([height, 0])
-yaxis_svg.append("g").call( d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(d3.format('.0%')) )  
-yaxis_label = yaxis_svg.append("g").append("text").text("Capping").attr("y",-40).attr("transform", "rotate(-90)").attr("text-align","middle")
 yaxis_label.attr('x', function() {return (nodeHeight(this)-height )/2});
 
 
 var x = d3.scaleBand().domain(axis.TARGETS_RANGE).range([0,chart_width ]).paddingInner(0.05)  ;
 svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d => formatValue(d) )) 
     
-
+if(axis.y_metric=='cap'){
 svg.append("g").append("line").attr("x1", 0 ).attr("x2", chart_width ).attr("y1",y(.18)).attr("y2",y(.18)).attr("stroke","red") 
+}    
 
-    
+
     for ([key,value] of data_new.entries()){
         plot_data =[]
         for ([key2,value2] of value.entries()){plot_data.push(value2) }
-
+      
         max_cnt = d3.max(d3.map(plot_data,d=> d.cnt))
         working_space = svg.append("g").attr("transform", "translate("+x(key)+",0)")
         factor = x.bandwidth()/max_cnt
-        working_space.selectAll("rect").data(plot_data).enter().append("rect").attr("x", d => (x.bandwidth()-d.cnt*factor)/2 ).attr("y",d=>y(d.cap)).attr("width",d=>d.cnt*factor).attr("height", y(0)-y(0.01)  ).attr("fill","#8a9dbb")
+        working_space.selectAll("rect").data(plot_data).enter().append("rect").attr("x", d => (x.bandwidth()-d.cnt*factor)/2 ).attr("y",d=>y(d.y_axis)).attr("width",d=>d.cnt*factor).attr("height", y(0)-y(0.01)  ).attr("fill","#8a9dbb")
        
 
     }
@@ -1256,7 +1443,7 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
            /* axis_details = {'x_axis':'TARGET', 'y_axis':'agent_emar_comission_percentage','conditioned_column':'cap_bucket','conditioned_value':'green'}
             AreaChart("#Target_Staff_Percentage_Trend", ALL_Results,axis_details)*/
 
-            axis_details = {'TARGETS_RANGE':new_Target_Range, 'cap_min':cap_min,'cap_max':cap_max}
+            axis_details = {'TARGETS_RANGE':new_Target_Range, 'cap_min':cap_min,'cap_max':cap_max,'y_metric':'cap'}
             drawviolin("#Target_Capx_Achievement_Violin",ALL_Results_new.flat(),axis_details)
 
             axis_details = {'x_axis':'Achievement_TTL', 'color_by':'cap_bucket', 'achievemed_min':achievemed_min, 'achievemed_max':achievemed_max}
@@ -1362,10 +1549,11 @@ function compute_capx(f_TARGET,f_GM_TARGET_Per,plan,f_operation_cost, f_emar_tar
         
     else{
         cap = (f_General_Manager_Payout + f_Manager_payout)/f_Net_Profit
+        cap = parseFloat(cap.toFixed(2))
         if(cap < 0){
             cap = -.05
             cap_bucket = 'gray'}
-        else if(cap < .18){  
+        else if(cap <= .18){  
             cap_bucket ='green'
         } 
         else if(cap > .4){  
@@ -1374,7 +1562,8 @@ function compute_capx(f_TARGET,f_GM_TARGET_Per,plan,f_operation_cost, f_emar_tar
         else{ 
             cap_bucket ='red'}
     }
-    return({'TARGET':f_TARGET,'Achievement_TTL':f_Achivement,'GM_Target_per':f_GM_TARGET_Per,'GM_TARGET':f_GM_TARGET,'emar_target_percentage':f_emar_target_percentage,  'emar_achievement_percent':f_emar_achievement_percent, 'agent_emar_comission_percentage':plan['agent_emar_comission_percentage'], 'Agent_emar_payout':f_Agent_emar_payout,'non_emar_achievement_percent':f_non_emar_achievement_percent, 'agent_non_emar_comission_percentage':plan['agent_non_emar_comission_percentage'],'Agent_non_emar_payout':f_Agent_non_emar_payout,'cap_bucket':cap_bucket,'cap':cap.toFixed(2) , 'operation_cost':f_operation_cost  ,'Manager_payout':f_Manager_payout,'General_Manager_Payout':f_General_Manager_Payout,'Net_Profit':f_Net_Profit })
+   
+    return({'TARGET':f_TARGET,'Achievement_TTL':f_Achivement, 'EMAAR_Target': f_emar_target,'EMAAR_Achievement':f_emar_achievement  , 'GM_Target_per':f_GM_TARGET_Per,'GM_TARGET':f_GM_TARGET,'emar_target_percentage':f_emar_target_percentage,  'emar_achievement_percent':f_emar_achievement_percent, 'agent_emar_comission_percentage':plan['agent_emar_comission_percentage'], 'Agent_emar_payout':f_Agent_emar_payout,'non_emar_achievement_percent':f_non_emar_achievement_percent, 'agent_non_emar_comission_percentage':plan['agent_non_emar_comission_percentage'],'Agent_non_emar_payout':f_Agent_non_emar_payout,'cap_bucket':cap_bucket,'cap':cap.toFixed(2) , 'operation_cost':f_operation_cost  ,'Manager_payout':f_Manager_payout,'General_Manager_Payout':f_General_Manager_Payout,'Net_Profit':f_Net_Profit })
 }
    
 function Simulate(TARGET,GM_TARGET_Range,operation_cost_Range,agent_emar_comission_percentage_range,agent_non_emar_comission_percentage_range,emar_target_percentage_range,emar_achievement_percent_range,non_emar_achievement_percent_range){
@@ -1484,8 +1673,8 @@ function nested_x_axis_box_plot(chart_id,data,axis){
     var color_legend = svg_org.append("g")
 
     
-    color_legend.append("text").attr("x",0).attr("y",10).text("color by #simulations")
-    color_legend.append("text").attr("x",0).attr("y",25).text("failed capping criteria")
+    color_legend.append("text").attr("x",0).attr("y",10).text("#times simulation")
+    color_legend.append("text").attr("x",0).attr("y",25).text("failed capping >18%")
     color_legend.append("circle").attr("cx",150).attr("cy",15).attr("r",10).attr("fill","#5d8700")
     color_legend.append("text").attr("x",150).attr("y",19).attr("text-anchor","middle").text("0")
     i = 0
@@ -1628,40 +1817,19 @@ function populate_table(agent_comission, target_value){
   
    var dataSet = []
    i = 0
-   html_string = ""
+   
      ALL_Results.map(d => {
      if(d.TARGET==target_value){
          
          if(d.agent_emar_comission_percentage==agent_comission){
-             if(d.cap_bucket!='green'){
-                html_string = html_string+`
-          <tr>
-            <td">`+i+`</t>
-            <td>`+ formatValue(d.TARGET) +`</td>
-            <td>`+Math.round(d.emar_target_percentage*100)+`%</td>
-            <td >`+Math.round(d.GM_Target_per*100)+`%</td>
-
-            <td >`+Math.round(d.agent_emar_comission_percentage*100)+`%</td>
-
-            <td >`+ Math.round(d.emar_achievement_percent*100)  +`% </td>
-            <td >`+ Math.round(d.non_emar_achievement_percent*100) +`% </td>
-      
-
-            <td >`+ formatValue(d.operation_cost) +`</td>
-            <td>`+ Math.round(d.cap*100,2) +`%</td>
-            <td >`+ formatValue(d.Net_Profit) +`</td>
-            <td>`+ formatValue(d.Manager_payout) +`</td>
-      
-           
-          </tr>`
+          //   if(d.cap_bucket!='green'){
+         
           //datatable.rows.add();
-          dataSet.push([i,formatValue(d.TARGET),Math.round(d.emar_target_percentage*100),
-          Math.round(d.GM_Target_per*100),Math.round(d.agent_emar_comission_percentage*100),
-          Math.round(d.emar_achievement_percent*100),Math.round(d.non_emar_achievement_percent*100), formatValue(d.Achievement_TTL )
-          
-          ,formatValue(d.operation_cost), Math.round(d.cap*100,2) , formatValue(d.Net_Profit), formatValue(d.Manager_payout)])
+          dataSet.push([formatValue(d.operation_cost),formatValue(d.TARGET),formatValue(d.EMAAR_Target),Math.round(d.agent_emar_comission_percentage*100),
+          Math.round(d.emar_achievement_percent*100),Math.round(d.non_emar_achievement_percent*100), 
+          formatValue(d.Achievement_TTL ),Math.round(d.cap*100,2) ,  formatValue(d.Net_Profit), formatValue(d.Manager_payout), formatValue(d.General_Manager_Payout) ])
                 i = i+1
-             }
+           //  }
          }
         }
      });
@@ -1669,17 +1837,17 @@ function populate_table(agent_comission, target_value){
      sceanriotable = $('#scenario_table').DataTable( {
             data: dataSet,
             columns: [
-                { title: "#" },
+            { title: "Operational Cost" },
                 { title: "TARGET" },
-                { title: "%EEEE-TARGET" },
-                { title: "General Manager Target" },
+                { title: "EEEE-TARGET" },
                 { title: "Staff comission%" },
                 { title: "EEEE Achievement %" },
                 { title: "NON-EEEE Achievement % " },
                 { title: "Total Achievement" },
-                { title: "Operational Cost" },
-                { title: "capping" },
-                { title: "Managaer Payout" }
+                { title: "Capping%" },
+                { title: "Net_Profit" },
+                { title: "Manager Payout" },
+                { title: "General Manager Payout" }
             ]
         } );
     start_script = 1
@@ -1689,6 +1857,60 @@ function populate_table(agent_comission, target_value){
 
  //'Agent_emar_payout':,'Agent_non_emar_payout':  ,'Manager_payout':,'General_Manager_Payout':,'Net_Profit'
 
+
+
+}
+
+
+function populate_table2(agent_comission, target_value, Achiement_EEE, Achiement_NON_EEE){
+
+
+
+
+    if(start_script_2 == 1){
+        sceanriotable_2.clear();
+        sceanriotable_2.destroy();
+        start_script_2 = 0
+        }
+ 
+
+  
+   var dataSet = []
+   i = 0
+ 
+     ALL_Results.map(d => {
+     if(d.TARGET==target_value){
+         if(d.agent_emar_comission_percentage==agent_comission){
+             if(d.emar_achievement_percent==Achiement_EEE){
+                 if(d.non_emar_achievement_percent==Achiement_NON_EEE){
+          //datatable.rows.add();
+          dataSet.push([formatValue(d.operation_cost),formatValue(d.TARGET),formatValue(d.EMAAR_Target),Math.round(d.agent_emar_comission_percentage*100),
+          Math.round(d.emar_achievement_percent*100),Math.round(d.non_emar_achievement_percent*100), 
+          formatValue(d.Achievement_TTL ),Math.round(d.cap*100,2) ,  formatValue(d.Net_Profit), formatValue(d.Manager_payout), formatValue(d.General_Manager_Payout) ])
+               i = i+1
+             }}
+         }
+        }
+     });
+     
+     sceanriotable_2 = $('#scenario_table_2').DataTable( {
+            data: dataSet,
+            columns: [
+            { title: "Operational Cost" },
+            { title: "TARGET" },
+                { title: "EEEE-TARGET" },
+                { title: "Staff comission%" },
+                { title: "EEEE Achievement %" },
+                { title: "NON-EEEE Achievement % " },
+                { title: "Total Achievement" },
+                { title: "Capping%" },
+              
+                { title: "Net_Profit" },
+                { title: "Manager Payout" },
+                { title: "General Manager Payout" }
+            ]
+        } );
+    start_script_2 = 1
 
 
 }
@@ -1828,7 +2050,16 @@ var i = 0
 working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
 .join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() )
 .style("fill", function(d) { if(d.black_out==0) return "black" ; if(d.numerator==0){return "#5d8700"} 
-return myColor(Math.min(+d.numerator,10))    } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
+return myColor(Math.min(+d.numerator,10))    } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8).on("dblclick",function(event,d){
+
+if(start_script_2 == 1){
+    sceanriotable_2.clear();
+    sceanriotable_2.destroy();
+    
+    start_script_2 = 0
+}}).on("click",function(event,d){
+    populate_table2(d.y_axis_column, d.x_axis_column, x_axis_sub_group,y_axis_sub_group);
+})
 legend = working_space.append("g")
 /* legend.selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;}).join("text").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) +5})
 .text(function(d) { return Math.round(d.val,2)*100} ).attr('text-size','6px')*/
@@ -1950,6 +2181,7 @@ var svg = d3.select(chart_id).append("svg").attr("width", width + margin.left + 
 }
     $("#simulate_start").click()
     start_script = 0
+    start_script_2 = 0
 
  
     set_compuattion = true
@@ -1958,7 +2190,7 @@ $("#section_2_metric").change(function () {
         metric = this.value;
         if(metric=='capx'){
             $("#section_2_ct").html("For a given target, higher staff comission have lower adherence to capping 18% ")
-            $("#section_2_st").html("so, the staff comission should be minimum ")
+            $("#section_2_st").html("so, if expecetd staff comission gets higher, Target should be higher ")
             $("#metric_select_chart").html("capping")
             
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
@@ -1984,7 +2216,13 @@ $("#section_2_metric").change(function () {
 
 
 
+$("#section_1_metric").change(function(){
 
+
+    axis_details = {'TARGETS_RANGE':new_Target_Range, 'cap_min':cap_min,'cap_max':cap_max,'y_metric':this.value}
+    drawviolin("#Target_Capx_Achievement_Violin",ALL_Results_new.flat(),axis_details)
+
+})
 
 
 
