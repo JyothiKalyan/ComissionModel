@@ -1023,20 +1023,27 @@ function draw_mixed_plot(chart_id,data,axis,metric){
      TT_L =  d3.sum(d3.map(plot_data2 , d=> d.cnt))
 
   
-     
+     select_bar= 0
+     select_next = true
+     cumper = 0
 i = 0
      while(i <plot_data2.length){
         plot_data2[i].per = plot_data2[i].cnt/TT_L;
-      
+        cumper = cumper+plot_data2[i].per
+        if(cumper >= .8){
+        if(select_next){
+            select_bar = plot_data2[i].max_Achieved
+            select_next = false
+        }
+    }
          i = i+1
      }
      minval = d3.min(d3.map(plot_data2, d=> d.per ))
      maxval = d3.max(d3.map(plot_data2, d=> d.per ))
 
-     select_bar= 0
-     select_next = false
-     plot_data2.map(function(d) { if(select_next==true){select_bar = d.max_Achieved;select_next=false} if(d.per==maxval){ select_next = true;}return 0 } )
- 
+  
+     
+     
 
 
     
@@ -1111,8 +1118,7 @@ macha = d.max_Achieved
    }, d=>  d['Target']  )
 
 
-   console.log(final_result)
-console.log(Other_Options_temp)
+
    Other_Options = []
    k = d3.rollup(Other_Options_temp, v => { 
     Other_Options.push({'max_staff_commision':v[0].max_staff_commision, 'Target': d3.min(v,d=>d.TARGET)  })
