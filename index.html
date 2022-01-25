@@ -1996,7 +1996,7 @@ function Heat_Map_Sub_Plots(chart_id,dimension,data,axis){
     //var svg = svg_wkng.append("g").attr("transform", "translate(0, 50)");
 
     sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([margin.left,width - margin.right]);
-    sub_plot_y_scale = d3.scaleBand().domain(sub_plot_y_domain).range([0,height - margin.bottom]);
+    sub_plot_y_scale = d3.scaleBand().domain(sub_plot_y_domain).range([0,height - margin.bottom]).paddingInner(.02);
 
    // top_svg.append('line').style("stroke", "#aaa").style("stroke-width", 2).attr("x1", 25).attr("y1", 20).attr("x2", 1400).attr("y2", 20); 
     
