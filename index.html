@@ -480,7 +480,7 @@ thead, tbody tr {
         <div style='background-color:#eee;'>
             <div  class='chart_title'> <span id='section_2_ct'> For a given target, higher staff comission have lower adherence to capping 18% </span> 
                  <span id='section_2_st'  class='chart_sub_title'> so, if expecetd staff comission gets higher, Target should be higher </span> </div>
-            <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>capping</span> along staff comission within target  <span style='color:black;font-size:10px'> (click red boxes to see failed plans)</span> </div>
+            <div class='chart_description' style='padding-bottom:5px'> *Distribution of <span id='metric_select_chart'>capping</span> along staff comission within target  <span style='color:black;font-size:10px'> (click on box to see failed plans)</span> </div>
            
             <div>
                 <div style='position:relative;display: inline;width:30px;float:left;'> 
@@ -599,7 +599,7 @@ Filtering for Achievement% for which maximum Achievement is less than <span id='
         &#10004 A plan that is mostly close to capping 18% is choosen over others
      </div>
      <div  style='background-color:#eee;'>
-         <div class='chart_title'> probability distribution of capping for a plan ideas what happens to capping most of the time in that plan   <span class='chart_sub_title'> Choose plan with peak closer to 18% and flat tails to avoid uncertainity </span></div>
+         <div class='chart_title'> probability distribution of capping for a plan infers what happens to capping most of the time in that plan  <br> <span class='chart_sub_title'> Choose plan with peak closer to 18% and flat tails to avoid uncertainity </span></div>
         
          <div class='chart_description'> * Probability distribution of capping for all simulations in the plan    </div>
          <div id='comparison_chart_area' >
@@ -1116,7 +1116,7 @@ macha = d.max_Achieved
   
         e_max = 1/.03 * Other_Options[k].Target * .2
         e_min = 1/.045 *  Other_Options[k].Target * .2
-       orecommendations =  "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target  <span style='font-size:14px'> ( EEEE max-Volume Target: "+ formatValue(e_min)  +" computed with 4.5% volume -> sale ) </span> with <u>maximum</u> staff comission at <b>"+ Math.round(Other_Options[k].max_staff_comission*100) +"%</b> <br>" + orecommendations
+       orecommendations =  "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target  <span style='font-size:14px'> ( EEEE max-Volume Target: "+ formatValue(e_min)  +" computed with 4.5% volume -> sale ) </span> when <u>maximum</u> staff comission at <b>"+ Math.round(Other_Options[k].max_staff_comission*100) +"%</b> <br>" + orecommendations
        
 
     }
@@ -2190,7 +2190,7 @@ $("#section_2_metric").change(function () {
         metric = this.value;
         if(metric=='capx'){
             $("#section_2_ct").html("For a given target, higher staff comission have lower adherence to capping 18% ")
-            $("#section_2_st").html("so, if expecetd staff comission gets higher, Target should be higher ")
+            $("#section_2_st").html("so, if expected staff comission gets higher, Target should be higher ")
             $("#metric_select_chart").html("capping")
             
         axis_details =  {'x_axis_level_2_domain': new_Target_Range, 'x_axis_level_1_domain': agent_emar_comission_percentage_range, 'x_axis_level_2':'TARGET','x_axis_level_1':'agent_emar_comission_percentage', 'y_axis':'cap'}
