@@ -354,8 +354,9 @@ thead, tbody tr {
             <div>
         <span class='section-title'> Factors which are known</span> 
         <span class ='input_box_span' > Operation Cost: <input type="range" min="500000" max="5000000" value="2600000" step='50000' class="slider si" id="operational_cost" > <label id='operational_cost_label'>2,600,000</label> </span>
+        <span> 
         
-        <span class ='input_box_span' >  EEEE Target: <input type="range" min="1" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
+        <span class ='input_box_span' >  EEEE Target: <input type="range" min="10" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
         </div>
         <div style='clear:both;padding-top:20px'>
             <span class='section-title'> Factors which in Control</span> 
@@ -400,8 +401,8 @@ thead, tbody tr {
             <div style='clear:both;padding-left:100px'>
             <span class ='input_box_span' >  Staff commision: <input type="range" min="55" max="100" value="65" step='1' class="slider si" id="agent_commision">  <label id='agent_commision_label'>65</label>% </span>
         
-            <span  class ='input_box_span'> EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
-            <span class ='input_box_span'> NON-EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='1' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
+            <span  class ='input_box_span'> EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='50' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
+            <span class ='input_box_span'> NON-EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='50' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
             </div>
         
         </div>
@@ -437,7 +438,7 @@ thead, tbody tr {
         
         
         from Analyzing  <span id='no_targets_analyzed' style='font-size:46px'></span> simulations<br>
-
+<!-- with <input id='volume2sale' />   </span> EEEE Volume -> Sales conversion -->
         The algorithm recommends to set target at <br><span id='target_computed' style='font-size:56px' ></span> <span id='emar_volume_computed' style='font-size:20px'></span> when <b><u>maximum staff</u></b> commision at <span style='font-size:56px' id='staff_commision_coomputed'></span> <br>
         other recommendations are <span id='other_recommendations'> </span>
 
@@ -1098,8 +1099,8 @@ macha = d.max_Achieved
    TargetSet =  d3.min(final_result.map(d=>d.Target)) 
    Agent_commision =  d3.max(final_result.map(d=> {if(d.Target ==TargetSet ){return (d.commision)}return(-100)} )) 
   // emar_volume_computed_max = 1/.03 * TargetSet * $()
-   emar_volume_computed_min = 1/.045 *  TargetSet * parseInt($('#emar_target_percentage').val())/100  ;
-   emar_volume_computed = "( EEEE max-Volume Target : "+formatValue(emar_volume_computed_min) +" computed with 4.5% volume -> sale  )"
+   emar_volume_computed_min = 1/.035 *  TargetSet * parseInt($('#emar_target_percentage').val())/100  ;
+   emar_volume_computed = "( EEEE max-Volume Target : "+formatValue(emar_volume_computed_min) +" computed with 3.5% volume -> sale  )"
    Other_Options_temp = []
 
    k = d3.rollup(final_result, v => { 
@@ -1109,6 +1110,9 @@ macha = d.max_Achieved
     }
    }, d=>  d['Target']  )
 
+
+   console.log(final_result)
+console.log(Other_Options_temp)
    Other_Options = []
    k = d3.rollup(Other_Options_temp, v => { 
     Other_Options.push({'max_staff_commision':v[0].max_staff_commision, 'Target': d3.min(v,d=>d.TARGET)  })
@@ -1116,6 +1120,8 @@ macha = d.max_Achieved
 
     }
    }, d=>  d['max_staff_commision']  )
+
+   console.log(Other_Options)
 
    var orecommendations = ""
    for(k in Other_Options){
@@ -1125,8 +1131,8 @@ macha = d.max_Achieved
         //e_min = 1/.045 * d3.max(final_result.map(d=> {if(d.Target ==Other_Options[k].Target ){ if(d.commision == Other_Options[k].max_staff_commision ){ return d.emaar_achieved_min} } return(-100)} )) 
   
         e_max = 1/.03 * Other_Options[k].Target *  parseInt($('#emar_target_percentage').val())/100
-        e_min = 1/.045 *  Other_Options[k].Target * parseInt($('#emar_target_percentage').val())/100
-       orecommendations =  "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target  <span style='font-size:14px'> ( EEEE max-Volume Target: "+ formatValue(e_min)  +" computed with 4.5% volume -> sale ) </span> when <u>maximum</u> staff commision at <b>"+ Math.round(Other_Options[k].max_staff_commision*100) +"%</b> <br>" + orecommendations
+        e_min = 1/.035 *  Other_Options[k].Target * parseInt($('#emar_target_percentage').val())/100
+       orecommendations =  "<b>"+formatValue(Other_Options[k].Target) +"</b>  Target  <span style='font-size:14px'> ( EEEE max-Volume Target: "+ formatValue(e_min)  +" computed with 3.5% volume -> sale ) </span> when <u>maximum</u> staff commision at <b>"+ Math.round(Other_Options[k].max_staff_commision*100) +"%</b> <br>" + orecommendations
        
 
     }
@@ -1139,7 +1145,7 @@ if(set_compuattion){
    $('#staff_commision_coomputed').html(Math.round(Agent_commision*100)+"%")
    $("#other_recommendations").html(orecommendations)
    $("#emar_volume_computed").html(emar_volume_computed)
-   set_compuattion = false
+   set_compuattion = true
 }
    
   })
@@ -1335,11 +1341,12 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
 
        
         var gm_target_factor = 100 - parseInt($('#gm_target_factor_inv').val());
-        var simulate_iter = parseInt(gm_target_factor)
+       /* var simulate_iter = parseInt(gm_target_factor)
         while((simulate_iter+5) <= 100){
             GM_TARGET_Range.push((simulate_iter+5)/100)
             simulate_iter = simulate_iter +5
-        }
+        }*/
+        GM_TARGET_Range.push(gm_target_factor/100)
        
 
         var emar_target_percentage = $('#emar_target_percentage').val();
@@ -1356,9 +1363,9 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
             simulate_iter = simulate_iter+1
         }
 
-        var simulate_iter = 0
+        var simulate_iter = 10
         while(simulate_iter <= emar_target_percentage){
-            emar_target_percentage_range.push((simulate_iter+5)/100)
+            emar_target_percentage_range.push((simulate_iter)/100)
             simulate_iter = simulate_iter +5
         }
 
@@ -1437,7 +1444,7 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
             stop_in_next_3 = 0
             o = 0
            while(it < ALL_Results.length){
-                it = it + 5;
+               
                 new_Target_Range.push(ALL_Results[ALL_Results.length-it][0].TARGET)
                 ALL_Results_new.push(ALL_Results[ALL_Results.length-it])
                o = o+1
@@ -1451,7 +1458,7 @@ function formatNumber(n){return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')    
                     break;
                 }
                 
-                
+                it = it + 5; 
                 
             }
            
