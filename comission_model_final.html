@@ -1,5 +1,6 @@
+<!-- /* to be done */ -->
 <html>
-
+   
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -131,7 +132,7 @@
 
 <body>
 
-    <div class='page-title'>  Business Planning overview - Yearly <br>
+    <div class='page-title'>  Business Planning overview - Quaterly <br>
         <span style='font-size:20px'> Target Sale computation by balancing achievement% and headcount adhering  18% capping | Target Volume analysis</span><br>
 
         <span class='chart_sub_title' style='background-color: black;color:#a5a5f3'> The Suggestion -- Explaination to arrival of suggestion -- Evaluating suggestion   </span>
@@ -144,9 +145,9 @@
         <span  class='section-sub-title'>(The Maximum value of factors which are less probable to change. )</span></span><br>
 
     <br>
-    <span style='padding-left:40px'> Fixed Operation Cost: <input id='fixed_operation_cost' value=12000000>   <span id="fixed_operation_cost_Label"></span></span>
+    <span style='padding-left:40px'> Fixed Operation Cost: <input id='fixed_operation_cost' value=3000000>   <span id="fixed_operation_cost_Label"></span></span>
     <span style='padding-left:40px'> Operation Cost per person (per Month):  <input id='operation_cost_per_person' value=3500>  <span id="operation_cost_per_person_Label"></span></span>
-    <span style='padding-left:40px'> EEEE Volume Target:  <input id='EEEE_Volume_Target' value=200000000>  <span id="EEEE_Volume_Target_Label"></span></span>
+    <span style='padding-left:40px'> EEEE Volume Target:  <input id='EEEE_Volume_Target' value=50000000>  <span id="EEEE_Volume_Target_Label"></span></span>
 
     <br>Monthly Target Per Staff:     <span style='padding-left:40px'>Property Consultants Target:  <input id='PropertyConsultant_Target' value=45000>   </span> <span id="PropertyConsultant_Target_Label"></span>
     <span style='padding-left:40px'>  Sr. Property Consultants Target: <input id='SrPropertyConsultant_Target'  value=65000> </span><span id="SrPropertyConsultant_Target_Label"></span>
@@ -208,7 +209,7 @@
 <div style='clear:both'>
     <span class ='input_box_span' > EEEE Volume-> Sale Comission Percent Range: <input class="slider si" type="range"  min="2.5" max="10" value="3.5" step= .5 id='EEEE_Comission_Percentage_Range'> <span id="EEEE_Comission_Percentage_Range_Label"></span> </span>
     <span class ='input_box_span' >  NON-EEEE Volume-> Sale Comission Percent Range:  <input class="slider si" type="range" min="2.5" value="4" max="8" step= .5 id='NON_EEEE_Comission_Percentage_Range'> <span id="NON_EEEE_Comission_Percentage_Range_Label"></span></span>
-    <span class ='input_box_span' > Staff Comission Percent Range: <input class="slider si" type="range" min="55" max="70" step= 1 value="61" id='Staff_Comission_Percentage_Range'> <span id="Staff_Comission_Percentage_Range_Label"></span></span>
+    <span class ='input_box_span' > Staff Comission Percent Range: <input class="slider si" type="range" min="55" max="70" step= 1 value="65" id='Staff_Comission_Percentage_Range'> <span id="Staff_Comission_Percentage_Range_Label"></span></span>
 
 </div>
 </div>
@@ -219,6 +220,17 @@ Achievement%  <br>
 
   <button id='simulate' style='clear:both;position:relative;top:50px' type="button" class="btn btn-primary">What should target be?</button>
   </div>
+
+  <div class='analyzing_results' style=' top: 73px;  position:relative;width:100%;text-align: center;padding-top:20px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ;background-image: linear-gradient(#c7d875, #8c9c35);'>
+   
+For <select id='analyzing_manager'></select>
+</div>
+
+
+
+
+
+
     <div style='clear:both;position: relative;top:100px'>
 
         <div id='section1'>
@@ -266,9 +278,7 @@ Achievement%  <br>
                      No scenario of decreasing target</span> </div>
                <div class='chart_description' style='padding-bottom:5px'> Simulation Adherence to Managers Expectation & 18% Capping  
                 <select id='select_manager_names'>
-                <option value= "Aldo" > Aldo </option>
-                <option value='Elsayed'>Elsayed</option>
-                <option value='Ankit'>Ankit</option>
+               
             </select>
         </span> </div>
 
@@ -344,8 +354,8 @@ $("#add_default_manager").click(function(){
     List_Property_Consultants=[18,14,4]
     List_Sr_Property_Consultants=[13,4,0]
     List_Leasing_Consultants=[4,1,0]
-    List_Expectation = [700000,300000,300000]
-    List_Sales_type=[  "EEEE Balanced", "Non-EEEE Inclined", "EEEE Inclined"]
+    List_Expectation = [175000,75000,75000]
+    List_Sales_type=[  "EEEE Balanced", "Non EEEE Inclined", "EEEE Inclined"]
     no_managers = 3
     iter_manager = 0
     set_default_manager_value = true
@@ -406,20 +416,20 @@ $("#add_manager").click(function(){
     var sales_type = document.createElement('select');
     sales_type.id = "Manager_sales_type_"+added_manager;
    
-    var option = document.createElement("option");
-    option.value = "EEEE Balanced";
-    option.text = "EEEE Balanced"
-    sales_type.appendChild(option);
+    var option0= document.createElement("option");
+    option0.value = "EEEE Balanced";
+    option0.text = "EEEE Balanced"
+    sales_type.appendChild(option0);
 
     var option = document.createElement("option");
     option.value = "EEEE Inclined";
     option.text = "EEEE Inclined"
     sales_type.appendChild(option);
   
-    var option = document.createElement("option");
-    option.value = "Non-EEEE Inclined";
-    option.text = "Non-EEEE Inclined"
-    sales_type.appendChild(option);
+    var option2 = document.createElement("option");
+    option2.value = "Non EEEE Inclined";
+    option2.text = "Non EEEE Inclined"
+    sales_type.appendChild(option2);
     div.appendChild(sales_type);
 
     var br = document.createElement("br");
@@ -488,7 +498,7 @@ $("#simulate").click(function(){
     operation_cost_per_manager = $("#fixed_operation_cost").val()/added_manager;
     operation_cost_per_person = $("#operation_cost_per_person").val()
 
-    Months_left = 12
+    Months_left = 3
 
     LeasingConsultants_Target =  $("#LeasingConsultants_Target").val()
     SrPropertyConsultant_Target = $("#SrPropertyConsultant_Target").val()
@@ -517,10 +527,10 @@ $("#simulate").click(function(){
 
     Staff_Comission_Percentage_Range = []
     min_val = .55
-    max_val = $("#Staff_Comission_Percentage_Range").val()/100
-    while(min_val < max_val){
+    max_val = Math.round($("#Staff_Comission_Percentage_Range").val())/100
+    while(min_val <= max_val){
         Staff_Comission_Percentage_Range.push(min_val)
-        min_val = min_val + .01
+        min_val = Math.round((min_val + .01)*100)/100
     }
 
 
@@ -547,11 +557,12 @@ $("#simulate").click(function(){
         operation_cost = operation_cost_per_manager + (parseInt(operation_cost_per_person)*parseInt(head_count)*parseInt(Months_left))
 
         sales_type = $("#Manager_sales_type_"+manager_iter).val() 
+     
         if(sales_type == "EEEE Inclined"){
             EMAR_Target_Percentage_Simulation_Range = [.70,.80,.90,1.00]
           
         }
-        if(sales_type == "Non-EEEE Inclined"){
+        if(sales_type == "Non EEEE Inclined"){
             EMAR_Target_Percentage_Simulation_Range = [0,.10,.20,.30]
             
         }
@@ -566,7 +577,7 @@ $("#simulate").click(function(){
         {
         
            
-        results = computeTarget(Manager_name,start_target,Target, operation_cost, EMAR_Target_Percentage_Simulation_Range, LeasingConsultants, PropertyConsultant, SrPropertyConsultant, Staff_Comission_Percentage_Range, Non_EMAR_Volume_to_Sale_Range, EMAR_Volume_to_Sale_Range ,Achievement_Percentage_Range,Expectation)
+        results = computeTarget(sales_type,Manager_name,start_target,Target, operation_cost, EMAR_Target_Percentage_Simulation_Range, LeasingConsultants, PropertyConsultant, SrPropertyConsultant, Staff_Comission_Percentage_Range, Non_EMAR_Volume_to_Sale_Range, EMAR_Volume_to_Sale_Range ,Achievement_Percentage_Range,Expectation)
         if(results == "none")
         {
            break;
@@ -631,7 +642,8 @@ $("#simulate").click(function(){
     populate_heat_map("#section1_chart",dimension,plt_data, axis  );
     
 
-    compute_stepped_increase();
+    /* to be done */
+   /* compute_stepped_increase();*/
 
 })
 
@@ -693,14 +705,14 @@ color_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeW
 
 
 
-
+recommendation = []
 
 //subplot_x_text =    //subplot_x_text.attr('transform', function() {return `translate(${(1400 - nodeWidth(this)) / 2},${25})`});
 
 
 show_xaxis = true
 show_yaxis = true
-results_computing_manageriter = 0
+
 
 var data = d3.group(data, d => d.sub_plot_dimension_1)
 
@@ -721,35 +733,174 @@ var data = d3.group(data, d => d.sub_plot_dimension_1)
             
             
         
-            
+            console.log(recommendation)
+    
             
         
 
 
 }
 
-function HeatMap(data,svg,width,height,sub_x_domain, show_yaxis, show_xaxis){
 
+function create_summary(sub_x_domain, data){
     res_comp = []
     k = d3.rollup(data,v=>{
         res_comp.push({
             'people_inc_factor': v[0].y_axis_column,
-            'Achievement': Math.round((parseFloat(d3.max(v,d=> { if(d.color > 0){return parseFloat(d.x_axis_column)}  }) )+ parseFloat(.1)))/100,
+            'Achievement': Math.round(100*(parseFloat(d3.max(v,d=> { if(d.color > 0){return parseFloat(d.x_axis_column)}  }) )+ parseFloat(.1)))/100,
 
         })
         return{}
     }, d=> d.y_axis_column)
-    console.log("&&&")
-    console.log(res_comp)
+
+   
+    min_head_count_inc = 100000
+    Final_Achievemnet = 0
+    for(k in res_comp){
+        
+        if( parseFloat(res_comp[k].Achievement) <= parseFloat(2.5))
+        {
+            
+            if(res_comp[k].people_inc_factor < min_head_count_inc){
+                min_head_count_inc = res_comp[k].people_inc_factor
+                Final_Achievemnet = res_comp[k].Achievement
+            }
+                
+        }
+    }
+
+  
+   
+   
 
 
- 
+    select = document.getElementById('analyzing_manager');
+    var opt = document.createElement('option');
+    opt.value = sub_x_domain;
+    opt.innerHTML = sub_x_domain;
+    select.appendChild(opt);
+
+    select = document.getElementById('select_manager_names');
+    var opt = document.createElement('option');
+    opt.value = sub_x_domain;
+    opt.innerHTML = sub_x_domain;
+    select.appendChild(opt);
+
+    parent_div = document.getElementById('analyzing_results')
+    var new_div = document.createElement('div');
+    new_div.id = sub_x_domain
+
+    /*@@@@@@ */
+
+    /*
+    result = {'Manager_name':Manager_name,'TARGET':Target, 'expectation_reached':expectation_reached,
+    'Achievement_TTL':TTL_ACHIEVEMENT,  'emar_target_percentage':EMAR_Target_Percentage,
+    'EMAAR_Target': EMAR_Target,'NON_EMAAR_Target': NON_EMAR_Target,
+    'emar_achievement_percent':EMAR_ACHIEVEMENT_PER,
+    'non_emar_achievement_percent':NON_EMAR_ACHIEVEMENT_PER, 
+    'GM_TARGET':Target*.8,'Staff_comission_percentage':Staff_Commission_Percentage, 
+    'Agent_Payout':Staff_PAYOUT,
+     'Manager_payout':MANAGER_PAYOUT,
+     'General_Manager_Payout':GENERAL_MANAGER_PAYOUT,
+     'cap_bucket':cap_bucket,'cap':cap.toFixed(2) , 
+     'operation_cost':operation_cost  ,'Net_Profit':NET_PROFIT ,'isGMGM':isGMGM  , 'people_add_factor': people_add_factor,
+    'Achievement_per_TTL': Math.round((TTL_ACHIEVEMENT/Target) * 10) / 10
+
+    
+    } */
+    recommendation_temp = []
+    var ff_sales_type = ''
+   
+    d3.rollup(consolidated_results, v => { 
+       
+       if(v[0].Manager_name==sub_x_domain){
+        ff_sales_type = v[0].sales_type
+           if(v[0].people_add_factor == min_head_count_inc){
+          
+               if( v[0].Achievement_per_TTL == Final_Achievemnet)
+               {
+                   
+                if( Math.round(v[0].Staff_comission_percentage*100) == $("#Staff_Comission_Percentage_Range").val())
+               {
+               
+                recommendation_temp.push(v)
+               }
+               
+               }
+           }
+       }
+        return { } }  ,  d=>d.Manager_name == sub_x_domain,
+         d=>d.Achievement_per_TTL==Final_Achievemnet,
+         d=> d.people_add_factor == min_head_count_inc ,
+         d=> Math.round(d.Staff_comission_percentage*100) == $("#Staff_Comission_Percentage_Range").val()
+         
+         )
+
+         recommendation_temp  =   recommendation_temp[0]       
+   
+
+         if(ff_sales_type == "EEEE Inclined"){
+             max_EEE = -1
+           for(k in recommendation_temp){
+                if(recommendation_temp[k].EMAAR_Target > max_EEE ){
+                    max_EEE = recommendation_temp[k].EMAAR_Target
+                }
+           }
+
+           d3.rollup(recommendation_temp, v => { 
+
+            if(v[0].EMAAR_Target == max_EEE){
+
+                recommendation.push(v)
+            }
+
+           }, d=> d.EMAAR_Target == max_EEE )
+          
+        }
+        if(ff_sales_type == "Non EEEE Inclined"){
+          
+            max_NON_EEE = -1
+           for(k in recommendation_temp){
+             
+                if(recommendation_temp[k].NON_EMAAR_Target > max_NON_EEE ){
+                    max_NON_EEE = recommendation_temp[k].NON_EMAAR_Target
+                }
+           }
+          
+
+           d3.rollup(recommendation_temp, v => { 
+
+            if(v[0].NON_EMAAR_Target == max_NON_EEE){
+
+                recommendation.push(v)
+            }
+
+           }, d=> d.NON_EMAAR_Target == max_NON_EEE )
+            
+        }
+        if(ff_sales_type == "EEEE Balanced"){
+            recommendation.push(recommendation_temp)
+            
+        }
+
+
+
+       
+   
 
 
 
 
+}
 
-    results_computing_manageriter = results_computing_manageriter + 1
+function HeatMap(data,svg,width,height,sub_x_domain, show_yaxis, show_xaxis){
+
+    /* to be done */ 
+   
+
+    create_summary(sub_x_domain, data)
+
+
 chart_margin = 0; if(show_yaxis){chart_margin = 30;}
 data.sort(function(a, b) { return d3.ascending(a.x_axis_column, b.x_axis_column)}); 
 const myGroups = Array.from(new Set(data.map(d => d.x_axis_column)))
@@ -824,7 +975,8 @@ function check_results(results,Expectation){
 }
 
 
-function computeTarget(Manager_name,start_target, TARGET, operation_cost, EMAR_Target_Percentage_Simulation_Range, LeasingConsultants, PropertyConsultant, SrPropertyConsultant, Staff_Comission_Percentage_Range, Non_EMAR_Volume_to_Sale_Range, EMAR_Volume_to_Sale_Range ,Achievement_Percentage_Range,Expectation){
+function computeTarget(ff1_sales_type,Manager_name,start_target, TARGET, operation_cost, EMAR_Target_Percentage_Simulation_Range, LeasingConsultants, PropertyConsultant, SrPropertyConsultant, Staff_Comission_Percentage_Range, Non_EMAR_Volume_to_Sale_Range, EMAR_Volume_to_Sale_Range ,Achievement_Percentage_Range,Expectation){
+var f_sales_type = ff1_sales_type;
 
     All_results_per_Target =  []
    
@@ -949,7 +1101,9 @@ while(emar_achievement_per_start <= Achievement_Percentage_Range){
     
    
 
-    result = {'Manager_name':Manager_name,'TARGET':Target, 'expectation_reached':expectation_reached,
+    result = {
+        'sales_type':f_sales_type,
+        'Manager_name':Manager_name,'TARGET':Target, 'expectation_reached':expectation_reached,
     'Achievement_TTL':TTL_ACHIEVEMENT,  'emar_target_percentage':EMAR_Target_Percentage,
     'EMAAR_Target': EMAR_Target,'NON_EMAAR_Target': NON_EMAR_Target,
     'emar_achievement_percent':EMAR_ACHIEVEMENT_PER,
