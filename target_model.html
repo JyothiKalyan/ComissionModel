@@ -346,51 +346,57 @@ thead, tbody tr {
     <div >
         
         <div class='page-title'>  WHAT SHOULD TARGET BE ?? <br>
-            <span style='font-size:20px'>suggesting Target which adhere capping <=18% for given simulation parameters</span><br>
+            <span style='font-size:20px'>suggesting Target which assures minimum payout to managers at 100% achievement level holding the capping of 18%</span><br>
             <span class='chart_sub_title' style='background-color: black;color:#a5a5f3'> The Suggestion -- Explaination to arrival of suggestion -- Evaluating suggestion   </span>
         </div>
         <div style='padding-left:50px;padding-right:50px'> 
         <div class='inputs' style='padding-left:150px'>
             <div>
         <span class='section-title'> Factors which are known</span> 
-        <span class ='input_box_span' > Operation Cost: <input type="range" min="500000" max="5000000" value="2600000" step='50000' class="slider si" id="operational_cost" > <label id='operational_cost_label'>2,600,000</label> </span>
-        <span> 
+        <span class ='input_box_span' > Operation Cost - Constant: <input type="range" min="500000" max="5000000" value="2600000" step='50000' class="slider si" id="operational_cost" > <label id='operational_cost_label'>2,600,000</label> </span>
+        <span class ='input_box_span' > Operation Cost - Per Staff: <input type="range" min="500000" max="5000000" value="10500" step='1000' class="slider si" id="operational_cost_person" > <label id='operational_cost_person_label'>10,500</label> </span>
         
-        <span class ='input_box_span' >  EEEE Target: <input type="range" min="10" max="100" value="20" step='1' class="slider si" id="emar_target_percentage" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
-        </div>
-        <div style='clear:both;padding-top:20px'>
-            <span class='section-title'> Factors which in Control</span> 
-       <span class ='input_box_span' >  General Manager Target Factor:<input type="range" style='width:50px'  min="0" max='100' class="slider si reversedRange" step="1" value="20" id="gm_target_factor_inv">  <span id='gm_target_factor_label' > 80</span>% <label id='gm_target_factor_inv_label' style='display:none'></label></span> 
-        
+        <span class ='input_box_span' > Minimum Manager Payout <input type="range" min="500000" max="5000000" value="10500" step='1000' class="slider si" id="minimum_manager_payout" > <label id='operational_cost_person_label'>10,500</label> </span>
         
 
         <div style='clear:both;padding-top:20px'>
-                <table class='plan_table' >
-                    <th>PLAN-1 (EEEE, Target_Achieved)</th> 
-                    <tr><td><100%</td><td> 0 </td></tr>
-                    <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c1_p1"></td></tr>
-                    <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c2_p1"></td></tr>
-                    <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="8" id="cap_c3_p1"></td></tr>
-                    <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="10" id="cap_c4_p1"></td></tr>
-                </table>
-        
-                <table class='plan_table' > 
-                <th>PLAN-2 (NON EEEE)</th>
-                <tr><td><85%</td><td> 0 </td></tr>
-                <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p2"></td></tr>
-                <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p2"></td></tr>
-                <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="4" id="cap_c3_p2"></td></tr>
-                <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="5" id="cap_c4_p2"></td></tr>
+            <table class='plan_table' >
+                <th>PLAN-1 (EEEE, Target_Achieved)</th> 
+                <tr><td><100%</td><td> 0 </td></tr>
+                <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c1_p1"></td></tr>
+                <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c2_p1"></td></tr>
+                <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="8" id="cap_c3_p1"></td></tr>
+                <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="10" id="cap_c4_p1"></td></tr>
             </table>
+    
+            <table class='plan_table' > 
+            <th>PLAN-2 (NON EEEE)</th>
+            <tr><td><85%</td><td> 0 </td></tr>
+            <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p2"></td></tr>
+            <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p2"></td></tr>
+            <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="4" id="cap_c3_p2"></td></tr>
+            <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="5" id="cap_c4_p2"></td></tr>
+        </table>
+    
+            <table class='plan_table'> 
+                <th> PLAN-3 (General Manager) </th>
+            <tr><td><100%</td><td>0</td></tr>
+            <tr><td>100% -125%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
+            <tr><td>125% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
+            <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c3_p3"></td></tr>
+        </table>
+    </div>
+
         
-                <table class='plan_table'> 
-                    <th> PLAN-3 (General Manager) </th>
-                <tr><td><100%</td><td>0</td></tr>
-                <tr><td>100% -125%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
-                <tr><td>125% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
-                <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c3_p3"></td></tr>
-            </table>
-        </div>
+    </div>
+        <div style='clear:both;padding-top:20px'>
+            <span class='section-title'> Factors which are Desirable</span> 
+       
+            <span class ='input_box_span' >  EEEE Volume Target: <input type="range" min="10" max="100" value="20" step='1' class="slider si" id="emar_volume_target" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
+            
+        
+
+        
     </div>
     
 
@@ -401,9 +407,11 @@ thead, tbody tr {
             <div style='clear:both;padding-left:100px'>
             <span class ='input_box_span' >  Staff commission: <input type="range" min="55" max="100" value="65" step='1' class="slider si" id="agent_commission">  <label id='agent_commission_label'>65</label>% </span>
         
-            <span  class ='input_box_span'> EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='50' class="slider si" id="emar_achievement_percentage" > <label id='emar_achievement_percentage_label'>400</label>% </span> 
-            <span class ='input_box_span'> NON-EEEE Achievement Percentage: <input type="range" min="50" max="800" value="400" step='50' class="slider si" id="non_emar_achievement_percentage" > <label id='non_emar_achievement_percentage_label'>400</label>% </span> 
-            </div>
+           
+            <span class ='input_box_span' >  EEEE Volume to Sale Percentage: <input type="range" min="10" max="100" value="20" step='1' class="slider si" id="emar_volume_to_sale_percentage" > <label id='emar_target_percentage_label' >20</label> %</span> <br>
+               
+        
+        </div>
         
         </div>
         </div>
@@ -722,6 +730,10 @@ yaxis_label = svg.append("g").append("text").text("% Simulations").attr("font-fa
  
 
 }
+
+
+
+
 
 
 comparison_color_pallet = ["#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]

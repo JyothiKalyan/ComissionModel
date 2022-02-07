@@ -1,0 +1,226 @@
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <link href=https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css rel=stylesheet>
+  
+  <!--<table data-sort-name=stargazers_count data-sort-order=desc  -->
+    <script src=https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js></script>
+
+
+    <Style>
+
+        .Manager_expected_payout{
+            width:100px;
+        }
+        .staff_type{
+            width:40px
+        }
+        .manager_detail_class{
+            position:relative;
+            width: 200px;
+            position: relative;
+            float: left;
+            display: inline-block;
+        }
+    </Style>
+<body>
+
+<div>
+
+<div class="manager_input" style='position:Relative; width:20%;'>
+Target: <input id="taregt" /> <br>
+    <button id='add_manager' style='position:relative;background-color: #5b8f01;' type="button" class="btn btn-primary"> +Add Manager to Split Target</button>
+
+    <div id='manager_target_computation'>
+
+    </div>
+    <div id='Manager_details' style='width:200px' >
+
+    </div>
+
+</div>
+<div style='position:absolute;left:200px'>
+
+Target :  <br>
+Head Count : <br>
+Head Count to Add :  <br>
+
+
+<div id="head_count_chart">
+
+</div>
+
+<div id="achievement_revised_target">
+
+</div>
+
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+ 
+
+</body>
+
+<script>
+
+function head_count_computation(){
+
+    PC_HeadCount_ToIncrease = 0
+    SRPC_HeadCount_ToIncrease = 0
+    LC_HeadCount_ToIncrease = 0
+
+    Target = 10000
+    PC_HeadCount = [10,20,30]
+    Sr_HeadCount = [10,20,30]
+    leasing_HeadCount = [10,20,30]
+
+    PC_HeadCount_TTL = d3.sum(PC_HeadCount)
+    Sr_HeadCount_TTL = d3.sum(Sr_HeadCount)
+    leasing_HeadCount_TTL = d3.sum(leasing_HeadCount)
+
+    sr_ratio = Sr_HeadCount_TTL/PC_HeadCount_TTL
+    l_ratio = leasing_HeadCount_TTL/PC_HeadCount_TTL
+
+    increase = (    Target - (PC_HeadCount_TTL * PC_value + Sr_HeadCount_TTL * SC_value + leasing_HeadCount_TTL* LC_value) )/(PC_value+sr_ratio*SC_value + l_ratio*LC_value )
+
+    if(increase > 0){
+        PC_HeadCount_ToIncrease = increase
+        SRPC_HeadCount_ToIncrease = increase * sr_ratio
+        LC_HeadCount_ToIncrease = increase * l_ratio
+    }
+    
+    Manager_expectations = [1000,2000,3000]
+    Manager_expectations_sum = d3.sum(Manager_expectations)
+    Manager_TTL = []
+    for(e in Manager_expectations){
+        expectation = Manager_expectations[e]
+        ratio = expectation/Manager_expectations_sum
+        Manager_Target = Target *ratio
+    }
+
+
+}
+
+function Manager_Head_Count(ManagerTarget, PC_HeadCount_TTL, Sr_HeadCount_TTL, leasing_HeadCount_TTL ){
+
+    sr_ratio = Sr_HeadCount_TTL/PC_HeadCount_TTL
+    l_ratio = leasing_HeadCount_TTL/PC_HeadCount_TTL
+    increase = (    Target - (PC_HeadCount_TTL * PC_value + Sr_HeadCount_TTL * SC_value + leasing_HeadCount_TTL* LC_value) )/(PC_value+sr_ratio*SC_value + l_ratio*LC_value )
+
+    if(increase > 0){
+        PC_HeadCount_ToIncrease = increase
+        SRPC_HeadCount_ToIncrease = increase * sr_ratio
+        LC_HeadCount_ToIncrease = increase * l_ratio
+    }
+    console.log(PC_HeadCount_ToIncrease)
+    console.log(SRPC_HeadCount_ToIncrease)
+    console.log(LC_HeadCount_ToIncrease)
+
+}
+
+function Target_Revision_Achievement_Percentage(target, time_percent, achievement){
+
+    if(achievement/(target * time_percent )){
+        console.log( "achievement overshoot" )
+    }
+    
+}
+
+</script>
+<script>
+Manager_color_pallet = ["#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c"]
+Manager_text_color_pallet = ["black","balck","black","black","white"]
+
+    added_manager = 0
+$("#add_manager").click(function(){
+
+    var br = document.createElement("br");
+   
+    if(added_manager < 5){
+
+    var div = document.createElement("div");
+    div.className ='manager_detail_class'
+    div.style.backgroundColor =Manager_color_pallet[added_manager]
+    div.style.color = Manager_text_color_pallet[added_manager]
+  
+   var Title = document.createElement("div");
+   var text = document.createTextNode("Manager Name");
+
+   Title.appendChild(text);
+   var manager_name = document.createElement("input");
+   manager_name.id = "Manager_name_"+added_manager;
+   Title.appendChild(manager_name);
+   var br = document.createElement("br");
+   div.appendChild(Title);
+
+   Title = document.createElement("div");
+   text = document.createTextNode("Manager Expected Payout");
+   Title.appendChild(text);
+   var manager_name = document.createElement("input");
+   manager_name.className ='Manager_expected_payout'
+   manager_name.id = "Manager_expected_payout_"+added_manager;
+   Title.appendChild(manager_name);
+   div.appendChild(Title);
+
+
+   var StaffStats = document.createElement("div");
+   StaffStats.className = "StaffType"
+   var text = document.createTextNode("Staff Statistics");
+   
+   StaffStats.appendChild(text);
+   StaffStats.appendChild(br);
+   
+   var StaffStats_sub =  document.createElement("div");
+   StaffStats_sub.className = "StaffType_Sub"
+   var text = document.createTextNode("Property Consultant");
+   var value = document.createElement("input");
+   value.className ='staff_type'
+   value.id = "No_Property_Consultants_"+added_manager;
+   StaffStats_sub.appendChild(text);
+   StaffStats_sub.appendChild(value);
+   StaffStats_sub.appendChild(br)
+  
+   var text = document.createTextNode("Sr. Property Consultant");
+   var value = document.createElement("input");
+   value.id = "No_Sr_Property_Consultants_"+added_manager;
+   value.className ='staff_type'
+   StaffStats_sub.appendChild(text);
+   StaffStats_sub.appendChild(value);
+   StaffStats_sub.appendChild(br);
+
+   var text = document.createTextNode("Leasing Consultant");
+   var value = document.createElement("input");
+   value.className ='staff_type'
+   value.id = "Leasing_Consultants_"+added_manager;
+   StaffStats_sub.appendChild(text);
+   StaffStats_sub.appendChild(value);
+   StaffStats_sub.appendChild(br);
+
+
+   StaffStats.appendChild(StaffStats_sub)
+   div.appendChild(StaffStats)
+    
+    
+
+ var element = document.getElementById("Manager_details");
+     
+   element.appendChild(div);       
+    added_manager = added_manager + 1
+    }
+})
+
+    </script>
+    
+
+</html>
