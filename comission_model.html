@@ -1,0 +1,1207 @@
+<!-- /* to be done */ -->
+<html>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  
+  
+  <link href=https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css rel=stylesheet>
+  
+  <!--<table data-sort-name=stargazers_count data-sort-order=desc  -->
+    <script src=https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js></script>
+
+<script>
+
+GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af","#b7ab66","#a99d50","#918644","#61592d"]
+
+</script>
+
+
+
+    <style>
+        .Insights_title{
+    color:white;
+    font-size: 30px;
+    background-color: black;
+   
+    padding-top:30px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+   
+}
+.input_box_span{
+    position: relative;
+    display: inline;
+    float: left;
+    width: 300px;
+    margin-left:100px;
+}
+.page-title{
+    position:relative;
+    z-index:100;
+    color:white;
+    font-size:35;
+    background-color: black;
+    text-align: center;
+}
+
+.chart_title{
+            clear:both;
+            font-family: 'Open Sans', sans-serif;
+            font-size:24px;
+            text-align:center;
+            font-weight: bold;
+            padding-bottom:10px;
+            background-color: #d1d1d1;
+        }
+        .chart_sub_title{
+            font-size:14px;
+            font-family: 'Open Sans', sans-serif;
+            text-align:center;
+            color:blue;
+            background-color: #d1d1d1;
+        }
+
+.section-title{
+            clear:both;
+            font-family: 'Open Sans', sans-serif;
+            font-size:24px;
+            
+            position:relative;
+            float: left;
+            display: inline;
+            text-align:center;
+           
+            font-weight:bold;
+            
+        }
+
+
+          .manager_detail_class{
+            padding:10px;
+            position: relative;
+            width: 400px;
+            display: inline;
+            float: left;
+        }
+
+        .plan_table{
+            position:relative;
+            width:30%;
+            top:20px;
+            display:inline;
+            float:left;
+            padding-left:20px;
+        }
+
+        .section-sub-title{
+            font-size: 15px;
+        }
+
+
+.si{
+    position: relative;
+    display: inline;
+    width: 200px !important;
+}
+
+.chart_description{
+    clear:both;
+    color:red;
+    font-size: 14px;
+    text-align:center;
+}
+
+.custom-scroll{
+    position:relative;
+    /*direction:rtl;*/
+   
+    position: relative;
+    margin-bottom: 100px;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    overflow-x: scroll;
+    background-color:rgb(238 238 238);
+    
+
+}
+
+    </style>
+
+<body>
+
+    <div class='page-title'>  Business Planning overview - Quaterly <br>
+        <span style='font-size:20px'> Target Sale computation by balancing achievement% and headcount adhering  18% capping | Target Volume analysis</span><br>
+
+        <span class='chart_sub_title' style='background-color: black;color:#a5a5f3'> The Suggestion -- Explaination to arrival of suggestion -- Evaluating suggestion   </span>
+    </div>
+
+    <div style='padding-left:50px;padding-right:50px'> 
+        <div class='inputs' style='padding-left:150px'>
+    <div>
+    <span class='section-title'> Known factors 
+        <span  class='section-sub-title'>(The Maximum value of factors which are less probable to change. )</span></span><br>
+
+    <br>
+    <span style='padding-left:40px'> Fixed Operation Cost: <input id='fixed_operation_cost' value=2200000>   <span id="fixed_operation_cost_Label"></span></span>
+    <span style='padding-left:40px'> Operation Cost per person (per Month):  <input id='operation_cost_per_person' value=3500>  <span id="operation_cost_per_person_Label"></span></span>
+    <span style='padding-left:40px'> EEEE Volume Target:  <input id='EEEE_Volume_Target' value=50000000>  <span id="EEEE_Volume_Target_Label"></span></span>
+
+    <br>Monthly Target Per Staff:     <span style='padding-left:40px'>Property Consultants Target:  <input id='PropertyConsultant_Target' value=45000>   </span> <span id="PropertyConsultant_Target_Label"></span>
+    <span style='padding-left:40px'>  Sr. Property Consultants Target: <input id='SrPropertyConsultant_Target'  value=65000> </span><span id="SrPropertyConsultant_Target_Label"></span>
+    <span style='padding-left:40px'>  Leasing Consultants Target: <input id='LeasingConsultants_Target'  value=55000> </span><span id="LeasingConsultants_Target_Label"></span>
+
+
+    <div style='clear:both;padding-top:20px'>
+        <table class='plan_table' >
+            <th>PLAN-1 (EEEE, Target_Achieved)</th> 
+            <tr><td><100%</td><td> 0 </td></tr>
+            <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c1_p1"></td></tr>
+            <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c2_p1"></td></tr>
+            <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="8" id="cap_c3_p1"></td></tr>
+            <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="10" id="cap_c4_p1"></td></tr>
+        </table>
+
+        <table class='plan_table' > 
+        <th>PLAN-2 (NON EEEE)</th>
+        <tr><td><85%</td><td> 0 </td></tr>
+        <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p2"></td></tr>
+        <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p2"></td></tr>
+        <tr><td>150% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="4" id="cap_c3_p2"></td></tr>
+        <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="5" id="cap_c4_p2"></td></tr>
+    </table>
+
+        <table class='plan_table'> 
+            <th> PLAN-3 (General Manager) </th>
+        <tr><td><100%</td><td>0</td></tr>
+        <tr><td>100% -125%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
+        <tr><td>125% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
+        <tr><td>200+%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c3_p3"></td></tr>
+    </table>
+    </div>
+    <br>
+
+
+<div id="Manager_details" style="clear:both;top:50px;position: relative;">
+
+    <button id='add_default_manager' style='position:relative;background-color: #5b8f01;' type="button" class="btn btn-primary"> +Add Default 3 Managers </button>
+
+    <button id='add_manager' style='position:relative;background-color: #5b8f01;' type="button" class="btn btn-primary"> +Add Manager </button>
+
+    <div id='Manager_details_generate'>
+
+    </div>
+
+ 
+
+
+
+</div>
+
+</div>
+
+<div style="clear:both ;position:relative;top:50px">
+<br>
+    <span class='section-title'> Volatile Parameters
+        <span  class='section-sub-title'>(These influence payout multiplicatively, and are highly variable )</span></span> <br>
+<div style='clear:both'>
+    <span class ='input_box_span' > EEEE Volume-> Sale Comission Percent Range: <input class="slider si" type="range"  min="2.5" max="10" value="5" step= .5 id='EEEE_Comission_Percentage_Range'> <span id="EEEE_Comission_Percentage_Range_Label"></span> </span>
+   <!-- <span class ='input_box_span' >  NON-EEEE Volume-> Sale Comission Percent Range:  <input class="slider si" type="range" min="2.5" value="4" max="8" step= .5 id='NON_EEEE_Comission_Percentage_Range'> <span id="NON_EEEE_Comission_Percentage_Range_Label"></span></span> -->
+    <span class ='input_box_span' > Staff Comission Percent Range: <input class="slider si" type="range" min="55" max="70" step= 1 value="65" id='Staff_Comission_Percentage_Range'> <span id="Staff_Comission_Percentage_Range_Label"></span></span>
+
+</div>
+</div>
+    
+<br>
+
+  <button id='simulate' style='clear:both;position:relative;top:50px' type="button" class="btn btn-primary">What should target be?</button>
+  </div>
+
+  
+</div>
+
+<div>
+    <div id='section_1' style='position:relative;top:70px'>
+
+        <div class="Insights_title">
+            <select id='section_1_Manager_Selection' style='color:black'></select>
+            <span style='font-size:18px'>Target in accordance to given head count -</span> <span id="section_1_Manager_Selection_Target"></span>
+            <span style='font-size:18px'>EMAR Target in accordance EMAR Volume <span style='font-size:10px'>translated to sale at maximum %</span> -</span> <span id="section_1_Manager_Selection_EEE_Target"></span>
+        
+   Simulations are run for        
+           
+           PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
+           Leasing Consulatnts =  <span id="section_1_Manager_Selection_LC"></span>
+          Sr.Property Consultants <span id="section_1_Manager_Selection_srPC"></span>
+   
+
+        </div>
+
+        <div id='Heat_plot_manager_decission_making'>
+
+        </div>
+        <div id='section_1_table'  style='clear:both;position:relative;max-height:400px;overflow-y: scroll;'>
+            <table id='section_1_filter_table' style='position:relative;max-height:400px;overflow-y: scroll;'>
+            
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+    <script>
+
+formatValue2_digit = d3.format(".2s");
+formatValue3_digit = d3.format(".3s");
+function formatValue(d){
+    if(d < 0){return formatValue2_digit(d)}
+    if(d < 100){return d}
+    if(d < 10000000){return formatValue2_digit(d)}
+    else{return formatValue3_digit(d)}
+}
+
+var nodeWidth = (d) => d.getBBox().width;
+
+var nodeHeight= (d) => d.getBBox().height;
+
+
+
+ $("#fixed_operation_cost_Label").html( formatValue($('#fixed_operation_cost').val() ))
+ $("#operation_cost_per_person_Label").html( formatValue($('#operation_cost_per_person').val() ))
+ $("#EEEE_Volume_Target_Label").html( formatValue($('#EEEE_Volume_Target').val() ))
+
+ $("#PropertyConsultant_Target_Label").html( formatValue($('#PropertyConsultant_Target').val() ))
+ $("#SrPropertyConsultant_Target_Label").html(formatValue( $('#SrPropertyConsultant_Target').val() ))
+ $("#LeasingConsultants_Target_Label").html( formatValue($('#LeasingConsultants_Target').val() ))
+
+ $("#EEEE_Comission_Percentage_Range_Label").html( formatValue($('#EEEE_Comission_Percentage_Range').val() ))
+ $("#NON_EEEE_Comission_Percentage_Range_Label").html( formatValue($('#NON_EEEE_Comission_Percentage_Range').val() ))
+ $("#Staff_Comission_Percentage_Range_Label").html( formatValue($('#Staff_Comission_Percentage_Range').val() ))
+ $("#Achievement_Percentage_Range_Label").html( formatValue($('#Achievement_Percentage_Range').val() ))
+
+   
+
+
+
+
+
+$("input").change(function(){
+        $('#'+$(this).attr('id')+'_Label').html(formatValue($(this).val()))
+      
+       
+      });
+
+
+  
+added_manager = 0
+set_default_manager_value = false
+
+$("#add_default_manager").click(function(){
+    
+    List_ManagerName =['Aldo','Elsayed','Ankit']
+    List_Property_Consultants=[18,14,4]
+    List_Sr_Property_Consultants=[13,4,0]
+    List_Leasing_Consultants=[4,1,0]
+    List_Expectation = [175000,75000,75000]
+    List_Sales_type=[  "EEEE Balanced", "Non EEEE Inclined", "EEEE Inclined"]
+    no_managers = 3
+    iter_manager = 0
+    set_default_manager_value = true
+    while(iter_manager < no_managers){
+        MANAGER_ADD = List_ManagerName[iter_manager]
+        PC_ADD = List_Property_Consultants[iter_manager]
+        SrPC_ADD = List_Sr_Property_Consultants[iter_manager]
+        LC_ADD = List_Leasing_Consultants[iter_manager]
+        Expectation_ADD = List_Expectation[iter_manager]
+        Sales_type_ADD= List_Sales_type[iter_manager]
+        $("#add_manager").click();
+       
+        iter_manager = iter_manager+1
+       
+    }
+    set_default_manager_value = false
+    $("#add_default_manager").hide();
+})
+
+
+$("#add_manager").click(function(){
+
+
+    var div = document.createElement("div");
+    div.className ='manager_detail_class'
+   
+
+    var tag = document.createElement("span");
+    var text = document.createTextNode("Manager Name");
+    tag.appendChild(text);
+    div.appendChild(tag);
+    var Manager_name_input = document.createElement("input");
+    Manager_name_input.id = "Manager_name_input_"+added_manager;
+    if(set_default_manager_value){Manager_name_input.value = MANAGER_ADD }
+    div.appendChild(Manager_name_input);
+
+    var br = document.createElement("br");
+    div.appendChild(br);
+
+    var text = document.createTextNode(" Minimum Payout ");
+    div.appendChild(text);
+    var br = document.createElement("br");
+    var Manager_name_input = document.createElement("input");
+    Manager_name_input.id = "Manager_minimum_payout_"+added_manager;
+    if(set_default_manager_value){Manager_name_input.value = Expectation_ADD }
+    div.appendChild(Manager_name_input);
+
+ 
+    
+
+    var br = document.createElement("br");
+    div.appendChild(br);
+
+    var text = document.createTextNode(" Select Sales Type: ");
+    div.appendChild(text);
+    var br = document.createElement("br");
+    div.appendChild(br);
+    var sales_type = document.createElement('select');
+    sales_type.id = "Manager_sales_type_"+added_manager;
+   
+    var option0= document.createElement("option");
+    option0.value = "EEEE Balanced";
+    option0.text = "EEEE Balanced"
+    sales_type.appendChild(option0);
+
+    var option = document.createElement("option");
+    option.value = "EEEE Inclined";
+    option.text = "EEEE Inclined"
+    sales_type.appendChild(option);
+  
+    var option2 = document.createElement("option");
+    option2.value = "Non EEEE Inclined";
+    option2.text = "Non EEEE Inclined"
+    sales_type.appendChild(option2);
+    div.appendChild(sales_type);
+
+
+   
+
+
+    var br = document.createElement("br");
+    div.appendChild(br);
+   
+
+    var text = document.createTextNode("Property Consultant: ");
+    div.appendChild(text);
+   
+    var headcount = document.createElement('input');
+    headcount.id = "Property_consulatnt_HeadCount_"+added_manager;
+    headcount.style.width = "50px"
+    if(set_default_manager_value){headcount.value = PC_ADD }
+    div.appendChild(headcount);
+
+
+    var br = document.createElement("br");
+    div.appendChild(br);
+    var text = document.createTextNode("Sr.Property Consultant: ");
+    div.appendChild(text);
+   
+    var headcount = document.createElement('input');
+    headcount.id = "Sr_Property_consulatnt_HeadCount_"+added_manager;
+    if(set_default_manager_value){headcount.value = SrPC_ADD }
+    headcount.style.width = "50px"
+    div.appendChild(headcount);
+
+    var br = document.createElement("br");
+    div.appendChild(br);
+    var text = document.createTextNode("Leasing Consultant: ");
+    div.appendChild(text);
+    
+    var headcount = document.createElement('input');
+    headcount.id = "Leasing_consulatnt_HeadCount_"+added_manager;
+    if(set_default_manager_value){headcount.value = LC_ADD }
+    headcount.style.width = "50px"
+    div.appendChild(headcount);
+
+    var target_computation = document.createElement("div");
+    target_computation.className ='target_computation'
+    target_computation.id ='target_computation_'+added_manager;
+    div.appendChild(target_computation);
+
+    var element = document.getElementById("Manager_details_generate");
+    element.appendChild(div);       
+
+
+  
+    if(set_default_manager_value){
+       
+        $("#Manager_sales_type_"+added_manager+" option[value='"+Sales_type_ADD+"']").attr('selected', 'selected')
+      
+    }
+
+   added_manager = added_manager + 1
+    
+
+
+
+})
+
+
+    </script>
+
+    <script>
+
+$("#simulate").click(function(){
+
+    $('#section_1_Manager_Selection').find('option').remove().end()
+    plan  = {'c1_p1':.03,'c2_p1':.06,'c3_p1':.08,'c4_p1':.10,'c1_p2':.02,'c2_p2':.03,'c3_p2':.04,'c4_p2':.05,'c1_p3':.02 ,'c2_p3':.03, 'c3_p3':.06}
+    Months_left = 3
+
+    operation_cost_TTL = parseInt($("#fixed_operation_cost").val());
+    operation_cost_per_person = parseInt($("#operation_cost_per_person").val())
+    LeasingConsultants_Target =  parseInt($("#LeasingConsultants_Target").val())
+    SrPropertyConsultant_Target = parseInt($("#SrPropertyConsultant_Target").val())
+    PropertyConsultant_Target =  parseInt($("#PropertyConsultant_Target").val())
+
+    TTL_EMAR_Target = $("#EEEE_Volume_Target").val() * $("#EEEE_Comission_Percentage_Range").val()/100
+
+    var manager_iter = 0; Managers_JSON = []; TTL_Target = 0; TTL_HeadCount = 0
+
+    while(manager_iter < added_manager){
+        var LeasingConsultant = parseInt($("#Leasing_consulatnt_HeadCount_"+manager_iter).val())
+        var PropertyConsultant = parseInt($("#Property_consulatnt_HeadCount_"+manager_iter).val())
+        var SrPropertyConsultant = parseInt($("#Sr_Property_consulatnt_HeadCount_"+manager_iter).val())
+
+        TTL_HeadCount = parseInt(TTL_HeadCount) + LeasingConsultant+PropertyConsultant+ SrPropertyConsultant
+        manager_iter = manager_iter + 1
+    }
+
+   
+   
+    var manager_iter = 0; 
+    Managers_Master_List = []
+    while(manager_iter < added_manager){
+        var Managers_JSON_temp ={}
+        var LeasingConsultant = parseInt($("#Leasing_consulatnt_HeadCount_"+manager_iter).val())
+        var PropertyConsultant = parseInt($("#Property_consulatnt_HeadCount_"+manager_iter).val())
+        var SrPropertyConsultant =parseInt( $("#Sr_Property_consulatnt_HeadCount_"+manager_iter).val())
+     
+        head_count = LeasingConsultant + PropertyConsultant + SrPropertyConsultant
+        
+        var operational_cost_fixed = parseInt(operation_cost_TTL) * parseInt(head_count) / parseInt(TTL_HeadCount)
+        var operational_cost_per_person = operation_cost_per_person * Months_left * head_count
+
+        
+        var Manager_Name = $("#Manager_name_input_"+manager_iter).val()
+        Managers_Master_List.push(Manager_Name)
+        select = document.getElementById('section_1_Manager_Selection');
+        var opt = document.createElement('option');
+        opt.value = Manager_Name;
+        opt.innerHTML = Manager_Name;
+        select.appendChild(opt);
+/*
+    select = document.getElementById('select_manager_names');
+    var opt = document.createElement('option');
+    opt.value = Manager_Name;
+    opt.innerHTML = Manager_Name;
+    select.appendChild(opt);*/
+
+
+    Managers_JSON_temp["Fixed_Operational_Cost"] =  operational_cost_fixed
+    Managers_JSON_temp["LeasingConsultants"] =  LeasingConsultant
+    Managers_JSON_temp["PropertyConsultant"] =  PropertyConsultant
+    Managers_JSON_temp["given_order"] =  manager_iter
+    Managers_JSON_temp["SrPropertyConsultant"] =  SrPropertyConsultant
+    Managers_JSON_temp["Expectation"] =   $("#Manager_minimum_payout_"+manager_iter).val()
+    Managers_JSON_temp["head_count"] = LeasingConsultant+ PropertyConsultant+SrPropertyConsultant
+    Managers_JSON_temp["Target"] =  Months_left*(parseInt(LeasingConsultant) *  parseInt(LeasingConsultants_Target) +  parseInt(PropertyConsultant) *  parseInt(PropertyConsultant_Target) +  parseInt(SrPropertyConsultant_Target) *  parseInt(SrPropertyConsultant))
+    TTL_Target = TTL_Target + Managers_JSON_temp["Target"]
+    Managers_JSON_temp["sales_type"] = $("#Manager_sales_type_"+manager_iter).val() 
+    if(Managers_JSON_temp["sales_type"] == "EEEE Inclined"){ Managers_JSON_temp["sort_order"] = 1}
+    if(Managers_JSON_temp["sales_type"] == "Non EEEE Inclined"){Managers_JSON_temp["sort_order"] = 3}
+    if(Managers_JSON_temp["sales_type"] == "EEEE Balanced"){Managers_JSON_temp["sort_order"] = 2}
+            Managers_JSON_temp["Manager_name"] = Manager_Name
+            Managers_JSON.push(Managers_JSON_temp)
+        manager_iter = manager_iter + 1
+
+    }
+
+    Managers_JSON.sort(function(a, b) { return d3.ascending(a.sort_order, b.sort_order)}); 
+
+    Remaining_EEE_Target = TTL_EMAR_Target
+    for(k in Managers_JSON){
+        EEE_Target_Assign = Math.min(Managers_JSON[k]['Target'],Remaining_EEE_Target)
+        Managers_JSON[k]['EEE_Target'] = EEE_Target_Assign
+        Remaining_EEE_Target = Remaining_EEE_Target -  EEE_Target_Assign
+    }
+
+   
+    
+
+    consolidated_results = []
+   
+
+    manager_iter = 0
+    Managers_JSON.sort(function(a, b) { return d3.ascending(a.given_order, b.given_order)}); 
+  
+   
+    while(manager_iter < added_manager){
+        Target = Managers_JSON[manager_iter]["Target"]
+        try_new_target = true
+        people_iter = 1
+        PC_Inc = 0
+        SrPC_Inc = 0
+        LC_Inc = 0
+        while(try_new_target){
+           // console.log("Trying target "+ formatValue(Target) + " for " +  Managers_JSON[manager_iter]["Manager_name"])
+            EEEE_target = Managers_JSON[manager_iter]["EEE_Target"]
+            results = simulate_achievement(Managers_JSON[manager_iter],Target,PC_Inc, SrPC_Inc, LC_Inc)
+            consolidated_results.push(results)
+            try_new_target = check_if_expectation_achieved_below_250_per(results,Managers_JSON[manager_iter]["Expectation"] ) 
+           if(!try_new_target){
+               break;
+           }
+            if(people_iter == 1){  
+            Target = Target + PropertyConsultant_Target
+            people_iter = people_iter + 1
+            PC_Inc = PC_Inc+1
+            }
+            if(people_iter == 2){  
+            Target = Target + (LeasingConsultants_Target - PropertyConsultant_Target)
+            people_iter = people_iter + 1
+            LC_Inc = LC_Inc + 1
+            PC_Inc = PC_Inc-1
+            }
+            if(people_iter == 3){  
+            Target = Target +  (SrPropertyConsultant_Target - LeasingConsultants_Target )  
+            people_iter = 1
+            SrPC_Inc = SrPC_Inc + 1
+            LC_Inc = LC_Inc - 1
+            }
+            
+        }
+        Managers_JSON[manager_iter]['max_LC'] = LC_Inc
+        Managers_JSON[manager_iter]['max_SrPC'] = SrPC_Inc
+        Managers_JSON[manager_iter]['max_PC'] = PC_Inc
+        manager_iter = manager_iter + 1
+        
+        
+    }
+       
+    consolidated_results = consolidated_results.flat();
+    grouped_data =  d3.group(consolidated_results, d => d.Manager_name)
+
+
+    mn = Managers_Master_List[1]
+    $("#section_1_Manager_Selection  option[value='"+mn+"']").attr('selected', 'selected')
+    
+
+    t = 0
+    for(i in Managers_JSON){
+        if(Managers_JSON[i]["Manager_name"]== mn){
+            t = Managers_JSON[i]["Target"]
+            e =  Managers_JSON[i]["EEE_Target"]
+            lc_sel =  Managers_JSON[i]["max_LC"]
+            srpc_sel = Managers_JSON[i]["max_SrPC"]
+            pc_sel = Managers_JSON[i]["max_PC"]
+            break
+        }
+    }
+    $("#section_1_Manager_Selection_Target").html(formatValue(t))
+    $("#section_1_Manager_Selection_EEE_Target").html(formatValue(e))
+
+    $("#section_1_Manager_Selection_LC").html(formatValue(lc_sel))
+    $("#section_1_Manager_Selection_srPC").html(formatValue(srpc_sel))
+    $("#section_1_Manager_Selection_PC").html(formatValue(pc_sel))
+  
+
+
+
+    non_e = Math.max( (t-e), (lc_sel + srpc_sel + pc_sel) )
+
+
+    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, mn , e , non_e  )
+      
+
+})
+
+function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t){
+
+    if(emar_t==0 ){
+        var  axis= {'sub_plot_dimension_1':'Manager_name', 
+       'x_axis_column':'NON_EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+
+    }
+    else if( non_emar_t == 0){
+        var  axis= {'sub_plot_dimension_1':'Manager_name', 
+       'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+
+        
+}
+else{
+    var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
+       'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'NON_EMAR_ACHIVEMENT' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'num'  , 'y_axis_column_format': 'num' , 'selection':mn  }
+
+}
+    
+      data_process = data.get(mn)
+      var data_process_final = data_process
+     //  d3.rollup(data_process, v => { if(v[0].cap_bucket == "green"){data_process_final.push(v)} return{} }, d=> d.cap_bucket)
+  // data_process_final = data_process_final[0]
+     
+
+       /*
+       'sales_type':f_sales_type,
+        'Manager_name':ff_manager_name,'TARGET':Target,
+    'Achievement_TTL':TTL_ACHIEVEMENT,  
+    'EMAAR_Target': EMAR_Target,'NON_EMAAR_Target': NON_EMAR_Target,
+    'emar_achievement_percent':EMAR_ACHIEVEMENT_PER,
+    'non_emar_achievement_percent':NON_EMAR_ACHIEVEMENT_PER, 
+    'GM_TARGET':Target*.8,'Staff_comission_percentage':Staff_Commission_Percentage, 'Agent_Payout':Staff_PAYOUT,
+     'Manager_payout':MANAGER_PAYOUT,
+     'General_Manager_Payout':GENERAL_MANAGER_PAYOUT,
+     'cap_bucket':cap_bucket,'cap':cap.toFixed(2) , 
+     'operation_cost':ff_operation_cost  ,'Net_Profit':NET_PROFIT ,'isGMGM':isGMGM  , 
+     'LC_inc':ff_LC_Inc,'PC_inc': ff_PC_Inc, 'Sr_in':ff_SrPC_Inc, 
+    'Achievement_per_TTL': Math.round((TTL_ACHIEVEMENT/Target) * 10) / 10,
+    'Expectation_reached_bkt': expectation_reached_bkt,
+    'EMAR_ACHIVEMENT': EMAR_ACHIVEMENT, 'NON_EMAR_ACHIVEMENT':NON_EMAR_ACHIVEMENT, 'Head_Count_Summary': Head_Count_Summary
+
+       */
+      
+       sub_plot_x_domain = []
+    k = d3.rollup(data_process_final, v => { 
+       
+        sub_plot_x_domain.push(v[0][axis.sub_plot_dimension_1]) 
+        return { } }  ,  d=>d[axis.sub_plot_dimension_1] )
+
+        x_domain = []
+    k = d3.rollup(data_process_final, v => { 
+        x_domain.push(v[0][axis.x_axis_column]) 
+        return { } }  ,  d=>d[axis.x_axis_column] )
+
+        y_domain = []
+    k = d3.rollup(data_process_final, v => { 
+        y_domain.push(v[0][axis.y_axis_column]) 
+        return { } }  ,  d=>d[axis.y_axis_column] )
+
+     
+    
+   
+   var plt_data = []
+   
+ 
+    k = d3.rollup(data_process_final, v => { 
+      
+      //  console.log("**********")
+       // console.log(v)
+    plt_data.push({
+        'sub_plot_dimension_1': v[0][axis.sub_plot_dimension_1],
+        'x_axis_column': v[0][axis.x_axis_column],
+        'y_axis_column':  v[0][axis.y_axis_column],
+        'color':    d3.sum(v,  d =>  { ;return d[axis.color_column]} ), 
+        'text':   Math.round(100*d3.sum(v,  d =>  {   if(d[axis.text_column]!="green"){return 1}else{return 0} } )/  d3.sum(v,  d =>  { return 1} ))
+        }) 
+      //  console.log("**********")
+        return { } 
+    }  ,  d=>d[axis.sub_plot_dimension_1],  d => d[axis.x_axis_column],d => d[axis.y_axis_column]  )
+
+   
+   
+        axis['sub_plot_x_domain'] = sub_plot_x_domain;
+ 
+    var dimension ={'subx' : x_domain.length, 'suby': y_domain.length }
+   
+    populate_heat_map("#Heat_plot_manager_decission_making",dimension,plt_data, axis  );
+
+
+
+
+
+
+
+
+
+
+    
+}
+
+
+function populate_heat_map(chart_id,dimension,data,axis){
+
+   
+d3.select(chart_id).selectAll("*").remove();
+
+
+var sub_plots_x_column_name = axis.sub_plot_dimension_1; 
+var y_axis_column = axis.x_axis_column; 
+var x_axis_column = axis.y_axis_column; 
+
+sub_plot_x_domain = axis.sub_plot_x_domain; 
+
+ var sub_plot_width = (dimension.subx*40+50); 
+ var sub_plot_heght= (dimension.suby*20+50)+400; 
+ var margin = {top: 80, right: 25, bottom: 30, left: 40},
+ width = (sub_plot_width*sub_plot_x_domain.length) - margin.left - margin.right,
+ height = sub_plot_heght - margin.top - margin.bottom-20;
+
+
+var top_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1400 ).attr("height", 80 ).attr("transform", "translate("+0+", 0)").append("g")
+var svg= d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height', Math.min( height+30, 650) ).append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", (height) ).append("g");
+
+sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([margin.left,width - margin.right]);
+
+var color_legend = top_svg.append("g")
+
+
+
+color_legend.append("text").attr("x",170).attr("y",10).text("#simulations failed")
+color_legend.append("text").attr("x",170).attr("y",25).text("too meet Manager Expectation")
+color_legend.append("circle").attr("cx",315).attr("cy",15).attr("r",10).attr("fill","#5d8700")
+color_legend.append("text").attr("x",315).attr("y",19).attr("text-anchor","middle").text("0")
+i = 0
+string_val = " simulation"
+while(i < 11){var clr = "white";
+if(i < 3){clr = "black"}
+color_legend.append("circle").attr("cx",(i+1)*20+315).attr("cy",15).attr("r",10).attr("fill",GreenBrown_Pallet[i])
+color_legend.append("text").attr("x",(i+1)*20+315).attr("y",19).attr("text-anchor","middle").text(i+1).attr("fill", clr )
+i = i+1
+}
+
+color_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
+
+
+
+
+
+//subplot_x_text =    //subplot_x_text.attr('transform', function() {return `translate(${(1400 - nodeWidth(this)) / 2},${25})`});
+
+
+show_xaxis = true
+show_yaxis = true
+
+
+var data = d3.group(data, d => d.sub_plot_dimension_1)
+
+        sub_plot_x_domain.forEach(
+            
+            sub_x_domain => {
+            
+                  
+                    consider_data = data.get(sub_x_domain)
+                   var working_svg = svg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", 0)")
+                //var axis_working = axissvg.append("g").attr("transform", "translate("+sub_plot_x_scale(sub_x_domain)+", 0)")
+
+         
+                HeatMap(axis,consider_data,working_svg,(sub_plot_width-70) ,(sub_plot_heght-70)-100,sub_x_domain,true, true)
+
+                }
+            );
+            
+                        
+        
+
+
+}
+
+
+function HeatMap(axis,data,svg,width,height,sub_x_domain, show_yaxis, show_xaxis){
+
+/* to be done */ 
+
+
+
+
+chart_margin = 0; if(show_yaxis){chart_margin = 30;}
+data.sort(function(a, b) { return d3.ascending(parseInt(a.x_axis_column), parseInt(b.x_axis_column))}); 
+const myGroups = Array.from(new Set(data.map(d => d.x_axis_column)))
+data.sort(function(a, b) { return d3.ascending(parseInt(a.y_axis_column)  , parseInt(b.y_axis_column) )}); 
+const myVars = Array.from(new Set(data.map(d => d.y_axis_column)))
+
+
+
+height = height -30
+const x = d3.scaleBand().range([ width,chart_margin ]).domain(myGroups).padding(0.02); 
+var borderPath = svg.append("g").append("rect").attr("x", chart_margin).attr("y", 0).attr("height", 30).attr("width", (width-chart_margin ))
+.attr("stroke", "white").attr("stroke-width", "3px").attr("fill","#8a5f3a");
+if(axis.sub_plot_dimension_1 == "Staff_comission_percentage")
+{
+    var text = svg.append("g").append("text").attr("x", width/2).attr("y", 20).attr("text-anchor","middle").text( "Staff Commission:"  +Math.round(sub_x_domain*100) +"%" ).attr("font-size","18px").attr("fill","white");
+
+}else{
+    var text = svg.append("g").append("text").attr("x", width/2).attr("y", 20).attr("text-anchor","middle").text( sub_x_domain ).attr("font-size","18px").attr("fill","white");
+
+}
+
+
+
+var working_space= svg.append("g").attr("transform", `translate(0,30)`)
+if(show_xaxis){working_space.append("g").style("font-size", 12).attr("transform", `translate(0, `+(height)+`)`).call(d3.axisBottom(x).tickSize(0).tickFormat(  d => formatValue(d)   )).select(".domain").remove()};
+
+const y = d3.scaleBand().range([ height,0 ]).domain(myVars).padding(0.05);
+if(show_yaxis){
+working_space.append("g").style("font-size", 12).attr("transform", `translate( `+chart_margin+`,0)`).call(d3.axisLeft(y).tickSize(0).tickFormat( d => formatValue(d) ) ).select(".domain").remove()
+yaxis_label = working_space.append("text").text("Staff commission %").attr("stroke","#aaa").attr("text-anchor", "middle").attr("x", height/2+20).attr("y",-10).attr("transform", "rotate(-90)")
+// yaxis_label.attr('x', function() {return (-1* nodeHeight(this)/2 ) });
+}
+
+
+
+
+var i = 0
+working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
+.join("rect").attr("x", function(d) { return x(d.x_axis_column) }).attr("y", function(d) { return y(d.y_axis_column) }).attr("width", x.bandwidth() ).attr("height", y.bandwidth() )
+.style("fill", function(d) {  if(d.color<0){return "#e68049"} return GreenBrown_Pallet[d.color]    } ).style("stroke-width", 4).style("stroke", "none").style("opacity", 0.8)
+.on("click",function(event,d){
+   
+    populate_section1_table(sub_x_domain, d.x_axis_column, d.y_axis_column, axis)
+
+})
+working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
+.join("text").attr("font-size","8px").attr("x", function(d) { return x(d.x_axis_column)+ (x.bandwidth()-nodeWidth(this))/2 -5  }).attr("y", function(d) { return y(d.y_axis_column)+y.bandwidth()/2 }).text(d=>d.text)
+
+
+}
+
+
+function check_if_expectation_achieved_below_250_per(res, f_expectation){
+
+    
+    max_achievement = 0
+k = d3.rollup(res, v => { 
+    
+
+    //if(v[0].cap_bucket == "green"){
+
+    
+ 
+    if( v[0].Achievement_per_TTL <= 2.5){
+        
+        if(v[0].Staff_comission_percentage*100 == $("#Staff_Comission_Percentage_Range").val() )
+        max_achievement = d3.max(v,d=> { return d.Manager_payout })
+    }
+//}
+
+        return {
+            
+         } }//, d=> d.cap_bucket == "green"
+         , d=>d.Achievement_per_TTL <= 2.5, d=>d.Staff_comission_percentage*100 == $("#Staff_Comission_Percentage_Range").val() )
+
+
+      
+
+         if(max_achievement >= f_expectation){
+             return false
+                        }
+                        return true
+}
+
+function simulate_achievement(F_Manager_JSON, f_Target, PC_Inc, SrPC_Inc, LC_Inc){
+    var f_consolidated_results = []
+    var Manager_Name = F_Manager_JSON["Manager_name"]
+    var Fixed_operational_cost = F_Manager_JSON["Fixed_Operational_Cost"]
+    var variable_operational_cost = (F_Manager_JSON["head_count"]+ PC_Inc + SrPC_Inc + LC_Inc)*Months_left*operation_cost_per_person
+    var operation_cost = Fixed_operational_cost + variable_operational_cost
+    var Expectation = F_Manager_JSON["Expectation"] 
+    var EEEE_Target =  F_Manager_JSON["EEE_Target"]
+    var sales_type = F_Manager_JSON["sales_type"]
+    var NON_EEEE_Target =  f_Target - EEEE_Target
+    staff_comission = 55
+    var return_val = []
+    
+  
+    while(staff_comission <= $("#Staff_Comission_Percentage_Range").val()){
+       
+        
+        if(EEEE_Target == 0){
+            var Achievement_simulation_EEEE = [100]
+            var Achievement_simulation_NON_EEEE = [100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300]
+        }else{
+            var Achievement_simulation_EEEE = [100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300]
+            var Achievement_simulation_NON_EEEE = [100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300]
+        }
+        for(eee in Achievement_simulation_EEEE){
+            eee_achievement = Achievement_simulation_EEEE[eee]
+            for(non_eee in Achievement_simulation_NON_EEEE){
+                non_eee_achievement = Achievement_simulation_NON_EEEE[non_eee]
+                f_consolidated_results.push(compute_simulation(Manager_Name,sales_type,Expectation,operation_cost, f_Target, EEEE_Target, eee_achievement,non_eee_achievement, staff_comission/100 , PC_Inc, SrPC_Inc, LC_Inc))
+            }
+        }
+
+
+
+        staff_comission = staff_comission + 1
+
+    }
+
+  
+return f_consolidated_results
+  
+
+}
+
+function compute_simulation(ff_manager_name, f_sales_type,ff_expectation, ff_operation_cost, ff_Target,  ff_EEEE_Target,
+ ff_eee_achievement,ff_non_eee_achievement, ff_staff_comission, ff_PC_Inc, ff_SrPC_Inc, ff_LC_Inc){
+
+var Target = ff_Target;
+
+var  EMAR_ACHIEVEMENT_PER = ff_eee_achievement/100
+var NON_EMAR_ACHIEVEMENT_PER = ff_non_eee_achievement/100
+var EMAR_Target = ff_EEEE_Target
+var EMAR_ACHIVEMENT = EMAR_ACHIEVEMENT_PER * EMAR_Target
+var  NON_EMAR_Target = parseInt(Target) - parseInt(EMAR_Target)
+var NON_EMAR_ACHIVEMENT = NON_EMAR_ACHIEVEMENT_PER * NON_EMAR_Target
+var TTL_ACHIEVEMENT = NON_EMAR_ACHIVEMENT + EMAR_ACHIVEMENT
+var Staff_Commission_Percentage = ff_staff_comission
+
+var Staff_EMAR_Payout = EMAR_ACHIVEMENT * Staff_Commission_Percentage
+var Staff_NON_EMAR_Payout = NON_EMAR_ACHIVEMENT * Staff_Commission_Percentage
+var Staff_PAYOUT = Staff_NON_EMAR_Payout + Staff_EMAR_Payout
+var NET_EMAR = EMAR_ACHIVEMENT - Staff_EMAR_Payout
+var NET_NON_EMAR = NON_EMAR_ACHIVEMENT - Staff_NON_EMAR_Payout
+
+
+var slab1 = 0;var slab2 = 0;var slab3=0;var slab4=0
+        
+var MANAGER_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
+
+if(EMAR_ACHIEVEMENT_PER >= 1){
+    slab1 =  Math.min(1,EMAR_ACHIEVEMENT_PER)*plan['c1_p1']*(1-Staff_Commission_Percentage)
+    slab2 =  Math.max(Math.min(.5, EMAR_ACHIEVEMENT_PER-1),0)*plan['c2_p1']*(1-Staff_Commission_Percentage)
+    slab3 =  Math.max(Math.min(.5, EMAR_ACHIEVEMENT_PER-1),0)*plan['c3_p1']*(1-Staff_Commission_Percentage)
+    slab4 =  Math.max(EMAR_ACHIEVEMENT_PER-2,0)*plan['c4_p1']*(1-Staff_Commission_Percentage)
+    }   
+else if(EMAR_ACHIEVEMENT_PER >= .85){
+        slab1 =  Math.min(1,EMAR_ACHIEVEMENT_PER)*plan['c1_p2']*(1-Staff_Commission_Percentage)
+    }
+var MANAGER_EMAR_PAYOUT =  (slab1+slab2+slab3+slab4)*EMAR_Target
+
+var MANAGER_NON_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
+
+                if(NON_EMAR_ACHIEVEMENT_PER >= .85){
+            slab1 =  Math.min(1,NON_EMAR_ACHIEVEMENT_PER)*plan['c1_p2']*(1-Staff_Commission_Percentage)
+            slab2 =  Math.max(Math.min(.5, NON_EMAR_ACHIEVEMENT_PER-1),0)*plan['c2_p2']*(1-Staff_Commission_Percentage)
+            slab3 =  Math.max(Math.min(.5, NON_EMAR_ACHIEVEMENT_PER-1),0)*plan['c3_p2']*(1-Staff_Commission_Percentage)
+            slab4 =  Math.max(NON_EMAR_ACHIEVEMENT_PER-2,0)*plan['c4_p2']*(1-Staff_Commission_Percentage)
+        }
+            
+        var MANAGER_NON_EMAR_PAYOUT =  (slab1+slab2+slab3+slab4)*NON_EMAR_Target
+        
+        var MANAGER_PAYOUT = MANAGER_NON_EMAR_PAYOUT + MANAGER_EMAR_PAYOUT
+    
+        expectation_reached_bkt = MANAGER_PAYOUT >= ff_expectation
+        Diff_expectation =  ((MANAGER_PAYOUT - ff_expectation)/ff_expectation)*10
+       if(Diff_expectation < -10){
+        Diff_expectation = -10
+       }
+       else if(Diff_expectation >10){
+        Diff_expectation = 10
+       }
+       else{Diff_expectation = Math.round(Diff_expectation)
+       }
+        NET_REMAINED = TTL_ACHIEVEMENT -Staff_PAYOUT -MANAGER_PAYOUT
+        
+        GM_ACHIEVEMENT_PERCENTAGE = TTL_ACHIEVEMENT/(Target*.8)
+        
+        if(GM_ACHIEVEMENT_PERCENTAGE >= 2){
+            GENERAL_MANAGER_PAYOUT = NET_REMAINED * plan['c3_p3']
+        }
+        else if( GM_ACHIEVEMENT_PERCENTAGE >= 1.25){
+            GENERAL_MANAGER_PAYOUT = NET_REMAINED * plan['c2_p3']
+        }
+        else if( GM_ACHIEVEMENT_PERCENTAGE >= 1){
+            GENERAL_MANAGER_PAYOUT = NET_REMAINED * plan['c1_p3']
+        }
+        else{
+            GENERAL_MANAGER_PAYOUT = 0
+        }
+
+        
+        NET_PROFIT = NET_REMAINED - GENERAL_MANAGER_PAYOUT - ff_operation_cost
+        
+        
+        if(NET_PROFIT<=0){
+            cap = -.05
+            cap_bucket = 'gray'
+            
+        }
+            
+        else{
+            cap = (GENERAL_MANAGER_PAYOUT + MANAGER_PAYOUT)/NET_PROFIT
+            cap = parseFloat(cap.toFixed(2))
+            if(cap < 0){
+                cap = -.05
+                cap_bucket = 'gray'}
+            else if(cap <= .18){  
+                cap_bucket ='green'
+            } 
+            else{ 
+                cap_bucket ='red'}
+
+               if(cap > .4){  
+                cap = .4
+            } 
+        }
+    
+        isGMGM =  GENERAL_MANAGER_PAYOUT > MANAGER_PAYOUT
+        Head_Count_Summary  = ""
+        if(parseInt(ff_PC_Inc) > 0){
+            Head_Count_Summary  = ff_PC_Inc+ " Property Consultants"
+        }
+        if(parseInt(ff_LC_Inc) > 0){
+            Head_Count_Summary  =Head_Count_Summary + "+ "+ff_LC_Inc+ " Leasing Consultants"
+        }
+        if(parseInt(ff_SrPC_Inc) > 0){
+            Head_Count_Summary  = Head_Count_Summary + "+ "+ff_SrPC_Inc+ " Sr.Property Consultants"
+        }
+       
+    
+      
+
+    result = {
+        'sales_type':f_sales_type,
+        'Manager_name':ff_manager_name,'TARGET':Target,
+    'Achievement_TTL':TTL_ACHIEVEMENT,  
+    'EMAAR_Target': EMAR_Target,'NON_EMAAR_Target': NON_EMAR_Target,
+    'emar_achievement_percent':EMAR_ACHIEVEMENT_PER,
+    'non_emar_achievement_percent':NON_EMAR_ACHIEVEMENT_PER, 
+    'GM_TARGET':Target*.8,'Staff_comission_percentage':Staff_Commission_Percentage, 'Agent_Payout':Staff_PAYOUT,
+     'Manager_payout':MANAGER_PAYOUT,
+     'General_Manager_Payout':GENERAL_MANAGER_PAYOUT,
+     'cap_bucket':cap_bucket,'cap':cap.toFixed(2) , 
+     'operation_cost':ff_operation_cost  ,'Net_Profit':NET_PROFIT ,'isGMGM':isGMGM  , 
+     'LC_inc':ff_LC_Inc,'PC_inc': ff_PC_Inc, 'Sr_in':ff_SrPC_Inc, 
+    'Achievement_per_TTL': Math.round((TTL_ACHIEVEMENT/Target) * 10) / 10,
+    'Expectation_reached_bkt': expectation_reached_bkt,
+    'EMAR_ACHIVEMENT': EMAR_ACHIVEMENT, 'NON_EMAR_ACHIVEMENT':NON_EMAR_ACHIVEMENT, 
+    'Diff_Expectation': Diff_expectation,
+    'Head_Count_Summary': Head_Count_Summary
+
+    }   
+    
+    return result
+   
+
+
+
+
+
+}
+
+
+$("#section_1_Manager_Selection").change(function(){
+    var ms = $("#section_1_Manager_Selection").val()
+    t = 0
+    for(i in Managers_JSON){
+        if(Managers_JSON[i]["Manager_name"]== ms){
+            t = Managers_JSON[i]["Target"]
+            e =  Managers_JSON[i]["EEE_Target"]
+            lc_sel =  Managers_JSON[i]["max_LC"]
+            srpc_sel = Managers_JSON[i]["max_SrPC"]
+            pc_sel = Managers_JSON[i]["max_PC"]
+            break
+        }
+    }
+    $("#section_1_Manager_Selection_Target").html(formatValue(t))
+    $("#section_1_Manager_Selection_EEE_Target").html(formatValue(e))
+
+    $("#section_1_Manager_Selection_LC").html(formatValue(lc_sel))
+    $("#section_1_Manager_Selection_srPC").html(formatValue(srpc_sel))
+    $("#section_1_Manager_Selection_PC").html(formatValue(pc_sel))
+  
+
+
+
+    non_e = Math.max( (t-e), (lc_sel + srpc_sel + pc_sel) )
+   
+    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, ms , e , non_e  )
+
+
+})
+
+
+
+
+
+
+function populate_section1_table(sub_x_domain, x_axis_column, y_axis_column, axis){
+
+
+var dataSet = []
+var sort_data = []
+
+
+  set_target = true
+consolidated_results.map(d => {
+if(d[axis.sub_plot_dimension_1] == sub_x_domain ){
+    if( d[axis.x_axis_column] == x_axis_column ){
+        if( d[axis.y_axis_column] == y_axis_column ){ 
+           if(d.Manager_name == axis.selection ){
+     dataSet.push([
+          d.operation_cost,
+         d.TARGET,
+           d.EMAAR_Target,  d.NON_EMAAR_Target,
+     Math.round(d.emar_achievement_percent*100),Math.round(d.non_emar_achievement_percent*100), 
+        Math.round(d.Staff_comission_percentage*100),
+      d.Manager_payout, 
+      d.General_Manager_Payout,
+      Math.round(d.cap*100,2) ,
+      d.Net_Profit,
+      d.Head_Count_Summary])     
+}    
+       }
+    }
+   }
+});
+
+
+
+var sceanriotable_section_1 = $('#section_1_filter_table').DataTable(
+           {"destroy": true,"responsive": true, "iDisplayLength": -1, "bProcessing": true,"bDeferRender": true,
+"paging": true,"aaData": dataSet, "aoColumns": [
+       { title: "Op-Cost" },
+          { title: "TARGET" },
+           { title: "EEEE-TARGET" },
+           { title: "NON-EEEE-TARGET" },
+           { title: "EEEE-Ach%" },
+           { title: "NON-EEEE-Ach% " },
+           { title: "Staff commission%" },
+           { title: "Manager Payout" },
+           { title: "General Manager Payout" },
+           { title: "Capping%" },
+           { title: "Net_Profit" },{title:'HeadCount_Inc'}
+       ],
+"columnDefs": [
+{
+   "render": function ( data, type, row ) {
+                   return formatValue(data);
+               },
+               "data-sort": function ( data, type, row ) {
+                   return  data;
+               },
+               "targets": [0,1,2,3,7,8,10]}
+  
+
+   
+]})
+
+ 
+
+
+
+}
+
+    </script>
+</html>
