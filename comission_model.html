@@ -132,12 +132,16 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
 
 }
 
+.Chart_parm_selection{
+    font-size:14px
+}
+
     </style>
 
 <body>
 
     <div class='page-title'>  Business Planning overview - Quaterly <br>
-        <span style='font-size:20px'> Target Sale computation by balancing achievement% and headcount adhering  18% capping | Target Volume analysis</span><br>
+        <span style='font-size:20px'>  Suggesting how much headcount to be increased | achievement % to aim at to assure manager's payout expectation ( & capping )  </span><br>
 
         <span class='chart_sub_title' style='background-color: black;color:#a5a5f3'> The Suggestion -- Explaination to arrival of suggestion -- Evaluating suggestion   </span>
     </div>
@@ -211,8 +215,8 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
     <span class='section-title'> Volatile Parameters
         <span  class='section-sub-title'>(These influence payout multiplicatively, and are highly variable )</span></span> <br>
 <div style='clear:both'>
-    <span class ='input_box_span' > EEEE Volume-> Sale Comission Percent Range: <input class="slider si" type="range"  min="2.5" max="10" value="5" step= .5 id='EEEE_Comission_Percentage_Range'> <span id="EEEE_Comission_Percentage_Range_Label"></span> </span>
-   <!-- <span class ='input_box_span' >  NON-EEEE Volume-> Sale Comission Percent Range:  <input class="slider si" type="range" min="2.5" value="4" max="8" step= .5 id='NON_EEEE_Comission_Percentage_Range'> <span id="NON_EEEE_Comission_Percentage_Range_Label"></span></span> -->
+    <span class ='input_box_span' >  Whats the maximum Achievement% for which Simulation to be run <input class="slider si" type="range"  min="100" max="500" value="200" step= 10 id='Simu_Achievement_Per_Input'> <span id="Simu_Achievement_Per_Input_Label"></span> </span>
+    <!-- <span class ='input_box_span' >  NON-EEEE Volume-> Sale Comission Percent Range:  <input class="slider si" type="range" min="2.5" value="4" max="8" step= .5 id='NON_EEEE_Comission_Percentage_Range'> <span id="NON_EEEE_Comission_Percentage_Range_Label"></span></span> -->
     <span class ='input_box_span' > Staff Comission Percent Range: <input class="slider si" type="range" min="55" max="70" step= 1 value="65" id='Staff_Comission_Percentage_Range'> <span id="Staff_Comission_Percentage_Range_Label"></span></span>
 
 
@@ -222,31 +226,60 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
     <span class ='input_box_span' >  Whats the maximum Achievement% for which the expectation can be fulfilled? <input class="slider si" type="range"  min="100" max="500" value="200" step= 10 id='Achievement_Per_Input'> <span id="Achievement_Per_Input_Label"></span> </span>
 </div>
 
+<div style="position:relative;padding-top:30px">
+<span class='section-title'> Other Info Parameters</span>
+<div>
+<span class ='input_box_span' > EEEE Volume-> Sale Comission Percent Range: <input class="slider si" type="range"  min="2.5" max="10" value="5" step= .5 id='EEEE_Comission_Percentage_Range'> <span id="EEEE_Comission_Percentage_Range_Label"></span> </span>
+</div>  
 
 </div>
+
 </div>
+ 
+
+</div>
+
+<button id='simulate' style='clear:both;position:relative;top:230px' type="button" class="btn btn-primary">What should target be?</button>
+
     
 <br>
 
-  <button id='simulate' style='clear:both;position:relative;top:50px' type="button" class="btn btn-primary">What should target be?</button>
-  </div>
+   </div>
 
   
 </div>
 
 <div>
-    <div id='section_1' style='position:relative;top:70px'>
+    <div id='section_1' style='position:relative;top:150px; clear:both'>
 
-        <div class="Insights_title">
-            <select id='section_1_Manager_Selection' style='color:black'></select>
-            <span style='font-size:18px'>Target in accordance to given head count -</span> <span id="section_1_Manager_Selection_Target"></span>
-            <span style='font-size:18px'>EMAR Target in accordance EMAR Volume <span style='font-size:10px'>translated to sale at maximum %</span> -</span> <span id="section_1_Manager_Selection_EEE_Target"></span>
+
+        <div  class='Insights_title' style='padding-bottom:40px'>
+            &#10004 As achievement % impacts  Manager's payout and capx       
+        </div>
+
+        <div  class='chart_title'> <span id='section_2_ct'> beyond different thresholds of Achievement% both Manager expected payout & capping are fulfilled </span> <br>
+            <span id='section_2_st'  class='chart_sub_title'> for best return to effort, Manager should aim for that achievement%'s which cross the threshold'   </span> </div>
+       <div class='chart_description' style='padding-bottom:5px'>
+         Manager payout across Staff comission & Achievement%  
+       </div>
+
+
+
+        <div class="chart_description">
+            For 
+            <select id='section_1_Manager_Selection' style='color:black'></select>, 
+            the target in accordance to given head count  is 
+             <span style='font-size:18px; font-weight:bold' id="section_1_Manager_Selection_Target"></span>
+           EEEE Target <span style='font:8px'> in accordance Companie's EEEE Volume Target & stales type of 
+            other Managers</span> 
+            <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_EEE_Target"></span>
         
-   Simulations are run for        
+   . &nbsp;Simulations are with <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_srPC"></span>
+    increased head count adhereing the tuning parameter that is set
            
-           PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
-           Leasing Consulatnts =  <span id="section_1_Manager_Selection_LC"></span>
-          Sr.Property Consultants <span id="section_1_Manager_Selection_srPC"></span>
+       <span class='display:none'>    PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
+           Leasing Consulatnts =  <span id="section_1_Manager_Selection_LC"></span></span>
+         
    
 
         </div>
@@ -296,6 +329,12 @@ var nodeHeight= (d) => d.getBBox().height;
  $("#Staff_Comission_Percentage_Range_Label").html( formatValue($('#Staff_Comission_Percentage_Range').val() ))
  $("#Achievement_Percentage_Range_Label").html( formatValue($('#Achievement_Percentage_Range').val() ))
 
+ $("#Simu_Achievement_Per_Input_Label").html( formatValue($('#Simu_Achievement_Per_Input').val() ))
+
+ $("#Achievement_Per_Input_Label").html( formatValue($('#Achievement_Per_Input').val() ))
+
+
+ 
    
 
 
@@ -634,34 +673,63 @@ $("#simulate").click(function(){
     non_e = Math.max( (t-e), (lc_sel + srpc_sel + pc_sel) )
 
 
-    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, mn , e , non_e  )
+    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, mn , e , non_e , (lc_sel + srpc_sel + pc_sel)  )
       
 
 })
 
-function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t){
+function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t, people_add){
 
     if(emar_t==0 ){
+
+        if(people_add == 0){
+            var  axis= {'sub_plot_dimension_1':'Manager_name', 
+       'x_axis_column':'non_emar_achievement_percent'  , 'y_axis_column': 'Staff_comission_percentage' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+
+        }
+        else{  
         var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'NON_EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
        'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+    }
 
     }
     else if( non_emar_t == 0){
-        var  axis= {'sub_plot_dimension_1':'Manager_name', 
+        if(people_add == 0){
+            var  axis= {'sub_plot_dimension_1':'Manager_name', 
+       'x_axis_column':'emar_achievement_percent'  , 'y_axis_column': 'Staff_comission_percentage' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+        }
+        else{
+            var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
        'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
-
+       
+        } 
+      
         
 }
 else{
-    var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
+    if(people_add == 0){
+        var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
+       'x_axis_column':'emar_achievement_percent'  , 'y_axis_column': 'non_emar_achievement_percent' ,
+       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+        'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
+
+    }
+    else{
+        var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
        'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'NON_EMAR_ACHIVEMENT' ,
        'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'num' , 'selection':mn  }
 
+    }
+  
 }
     
       data_process = data.get(mn)
@@ -767,7 +835,7 @@ sub_plot_x_domain = axis.sub_plot_x_domain;
 
 
 var top_svg = d3.select(chart_id).append("div").append("svg").attr("width", 1400 ).attr("height", 80 ).attr("transform", "translate("+0+", 0)").append("g")
-var svg= d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height', Math.min( height+30, 650) ).append("div").attr("class",'anti-dir').append("svg").attr("width", width ).attr("height", (height) ).append("g");
+var svg= d3.select(chart_id).append("div").attr("class",'custom-scroll').style('height', Math.min( height+30, 650) ).append("div").attr("class",'anti-dir').append("svg").attr("width", (width +300)).attr("height", (height) ).append("g");
 
 sub_plot_x_scale = d3.scaleBand().domain(sub_plot_x_domain).range([margin.left,width - margin.right]);
 
@@ -775,20 +843,23 @@ var color_legend = top_svg.append("g")
 
 
 
-color_legend.append("text").attr("x",170).attr("y",10).text("#simulations failed")
-color_legend.append("text").attr("x",170).attr("y",25).text("too meet Manager Expectation")
-color_legend.append("circle").attr("cx",315).attr("cy",15).attr("r",10).attr("fill","#5d8700")
-color_legend.append("text").attr("x",315).attr("y",19).attr("text-anchor","middle").text("0")
+color_legend.append("text").attr("x",170).attr("y",10).text("%difference")
+color_legend.append("text").attr("x",170).attr("y",25).text("with expectation")
+color_legend.append("circle").attr("cx",315).attr("cy",15).attr("r",13).attr("fill","#e68049")
+color_legend.append("text").attr("x",315).attr("y",19).attr("text-anchor","middle").text("-ve")
 i = 0
 string_val = " simulation"
 while(i < 11){var clr = "white";
 if(i < 3){clr = "black"}
-color_legend.append("circle").attr("cx",(i+1)*20+315).attr("cy",15).attr("r",10).attr("fill",GreenBrown_Pallet[i])
-color_legend.append("text").attr("x",(i+1)*20+315).attr("y",19).attr("text-anchor","middle").text(i+1).attr("fill", clr )
+color_legend.append("circle").attr("cx",(i+1)*26+315).attr("cy",15).attr("r",13).attr("fill",GreenBrown_Pallet[i])
+color_legend.append("text").attr("x",(i+1)*26+315).attr("y",19).attr("text-anchor","middle").text(i*10).attr("fill", clr )
 i = i+1
 }
 
 color_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
+Text_legend = top_svg.append("g")
+Text_legend.append("text").attr("x",315).attr("y",50).attr("text-anchor","middle").text("X axis : " + axis.x_axis_column + "                   "+ "Y axis : " + axis.y_axis_column).attr("fill", "black" )
+Text_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
 
 
 
@@ -1134,7 +1205,7 @@ $("#section_1_Manager_Selection").change(function(){
 
     non_e = Math.max( (t-e), (lc_sel + srpc_sel + pc_sel) )
    
-    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, ms , e , non_e  )
+    Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, ms , e , non_e , (lc_sel + srpc_sel + pc_sel) )
 
 
 })
