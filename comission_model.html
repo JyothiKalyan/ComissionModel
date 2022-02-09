@@ -269,15 +269,15 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
             For 
             <select id='section_1_Manager_Selection' style='color:black'></select>, 
             the target in accordance to given head count  is 
-             <span style='font-size:18px; font-weight:bold' id="section_1_Manager_Selection_Target"></span>
-           EEEE Target <span style='font:8px'> in accordance Companie's EEEE Volume Target & stales type of 
-            other Managers</span> 
+             <span style='font-size:18px; font-weight:bold' id="section_1_Manager_Selection_Target"></span>, 
+           &nbsp;&nbsp;&nbsp; EEEE Target <span style='font-size:12px'> (in accordance Companie's EEEE Volume Target & stales type of 
+            other Managers) </span> is 
             <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_EEE_Target"></span>
         
    . &nbsp;Simulations are with <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_srPC"></span>
     increased head count adhereing the tuning parameter that is set
            
-       <span class='display:none'>    PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
+       <span style='display:none'>    PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
            Leasing Consulatnts =  <span id="section_1_Manager_Selection_LC"></span></span>
          
    
@@ -645,7 +645,7 @@ $("#simulate").click(function(){
     grouped_data =  d3.group(consolidated_results, d => d.Manager_name)
 
 
-    mn = Managers_Master_List[1]
+    mn = Managers_Master_List[0]
     $("#section_1_Manager_Selection  option[value='"+mn+"']").attr('selected', 'selected')
     
 
