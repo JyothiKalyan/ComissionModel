@@ -215,6 +215,14 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
    <!-- <span class ='input_box_span' >  NON-EEEE Volume-> Sale Comission Percent Range:  <input class="slider si" type="range" min="2.5" value="4" max="8" step= .5 id='NON_EEEE_Comission_Percentage_Range'> <span id="NON_EEEE_Comission_Percentage_Range_Label"></span></span> -->
     <span class ='input_box_span' > Staff Comission Percent Range: <input class="slider si" type="range" min="55" max="70" step= 1 value="65" id='Staff_Comission_Percentage_Range'> <span id="Staff_Comission_Percentage_Range_Label"></span></span>
 
+
+
+    <span class='section-title'> Recommendation Tuning Parameters</span>
+    <div>
+    <span class ='input_box_span' >  Whats the maximum Achievement% for which the expectation can be fulfilled? <input class="slider si" type="range"  min="100" max="500" value="200" step= 10 id='Achievement_Per_Input'> <span id="Achievement_Per_Input_Label"></span> </span>
+</div>
+
+
 </div>
 </div>
     
@@ -563,23 +571,23 @@ $("#simulate").click(function(){
             EEEE_target = Managers_JSON[manager_iter]["EEE_Target"]
             results = simulate_achievement(Managers_JSON[manager_iter],Target,PC_Inc, SrPC_Inc, LC_Inc)
             consolidated_results.push(results)
-            try_new_target = check_if_expectation_achieved_below_250_per(results,Managers_JSON[manager_iter]["Expectation"] ) 
+            try_new_target = check_if_expectation_achieved_below_per(results,Managers_JSON[manager_iter]["Expectation"] ) 
            if(!try_new_target){
                break;
            }
             if(people_iter == 1){  
-            Target = Target + PropertyConsultant_Target
+            Target = Target + (PropertyConsultant_Target)*Months_left
             people_iter = people_iter + 1
             PC_Inc = PC_Inc+1
             }
             if(people_iter == 2){  
-            Target = Target + (LeasingConsultants_Target - PropertyConsultant_Target)
+            Target = Target + (LeasingConsultants_Target*Months_left - PropertyConsultant_Target*Months_left)
             people_iter = people_iter + 1
             LC_Inc = LC_Inc + 1
             PC_Inc = PC_Inc-1
             }
             if(people_iter == 3){  
-            Target = Target +  (SrPropertyConsultant_Target - LeasingConsultants_Target )  
+            Target = Target +  (SrPropertyConsultant_Target*Months_left - LeasingConsultants_Target*Months_left )
             people_iter = 1
             SrPC_Inc = SrPC_Inc + 1
             LC_Inc = LC_Inc - 1
@@ -876,9 +884,9 @@ working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_co
 }
 
 
-function check_if_expectation_achieved_below_250_per(res, f_expectation){
+function check_if_expectation_achieved_below_per(res, f_expectation){
 
-    
+    ac_threshold = $("#Achievement_Per_Input").val()
     max_achievement = 0
 k = d3.rollup(res, v => { 
     
@@ -887,7 +895,7 @@ k = d3.rollup(res, v => {
 
     
  
-    if( v[0].Achievement_per_TTL <= 2.5){
+    if( v[0].Achievement_per_TTL <= ac_threshold){
         
         if(v[0].Staff_comission_percentage*100 == $("#Staff_Comission_Percentage_Range").val() )
         max_achievement = d3.max(v,d=> { return d.Manager_payout })
@@ -897,7 +905,7 @@ k = d3.rollup(res, v => {
         return {
             
          } }//, d=> d.cap_bucket == "green"
-         , d=>d.Achievement_per_TTL <= 2.5, d=>d.Staff_comission_percentage*100 == $("#Staff_Comission_Percentage_Range").val() )
+         , d=>d.Achievement_per_TTL <= ac_threshold, d=>d.Staff_comission_percentage*100 == $("#Staff_Comission_Percentage_Range").val() )
 
 
       
