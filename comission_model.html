@@ -257,8 +257,11 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
   
 </div>
 
+<div class='analyzing_results' id='results_summary' style='clear:both; position:relative;width:100%;text-align: center;top:250px;font-size: 20px;font-family: "Montserrat", sans-serif;padding-bottom:10px ;background-image: linear-gradient(#c7d875, #8c9c35);'>
+      
+</div>
 <div>
-    <div id='section_1' style='position:relative;top:150px; clear:both'>
+    <div id='section_1' style='position:relative;top:200px; clear:both'>
 
 
         <div  class='Insights_title' style='padding-bottom:40px'>
@@ -592,14 +595,19 @@ $("#simulate").click(function(){
 
     Managers_JSON.sort(function(a, b) { return d3.ascending(a.sort_order, b.sort_order)}); 
 
+    eee_sring = ""
     Remaining_EEE_Target = TTL_EMAR_Target
     for(k in Managers_JSON){
         EEE_Target_Assign = Math.min(Managers_JSON[k]['Target'],Remaining_EEE_Target)
+        eee_sring = eee_sring + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EEEE Volume for "+ Managers_JSON[k]['Manager_name'] +"  is "+  formatValue( 100* parseInt(EEE_Target_Assign)/ ($("#EEEE_Comission_Percentage_Range").val()) )
         Managers_JSON[k]['EEE_Target'] = EEE_Target_Assign
         Remaining_EEE_Target = Remaining_EEE_Target -  EEE_Target_Assign
+
+        
     }
 
    
+    $("#results_summary").html(eee_sring)
     
 
     consolidated_results = []
