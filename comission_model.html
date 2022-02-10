@@ -278,9 +278,11 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
             <select id='section_1_Manager_Selection' style='color:black'></select>, 
             the target in accordance to given head count  is 
              <span style='font-size:18px; font-weight:bold' id="section_1_Manager_Selection_Target"></span>, 
-           &nbsp;&nbsp;&nbsp; EEEE Target <span style='font-size:12px'> (in accordance Companie's EEEE Volume Target & stales type of 
-            other Managers) </span> is 
+           &nbsp;&nbsp;&nbsp; EEEE Target as
             <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_EEE_Target"></span>
+           yeilding minimum EEEE volume as <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_EEE_Volume_Target"></span>
+           <span style='font-size:12px'> (in accordance Companie's EEEE Volume Target & stales type of 
+            other Managers) </span>
         
    . &nbsp;Simulations are with <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_srPC"></span>
     increased head count adhereing the tuning parameter that is set
@@ -671,6 +673,7 @@ $("#simulate").click(function(){
     }
     $("#section_1_Manager_Selection_Target").html(formatValue(t))
     $("#section_1_Manager_Selection_EEE_Target").html(formatValue(e))
+    $("#section_1_Manager_Selection_EEE_Volume_Target").html(formatValue( 100* parseInt(e)/ ($("#EEEE_Comission_Percentage_Range").val()) ))
 
     $("#section_1_Manager_Selection_LC").html(formatValue(lc_sel))
     $("#section_1_Manager_Selection_srPC").html(formatValue(srpc_sel))
@@ -1204,6 +1207,8 @@ $("#section_1_Manager_Selection").change(function(){
     }
     $("#section_1_Manager_Selection_Target").html(formatValue(t))
     $("#section_1_Manager_Selection_EEE_Target").html(formatValue(e))
+    $("#section_1_Manager_Selection_EEE_Volume_Target").html(formatValue( 100* parseInt(e)/ ($("#EEEE_Comission_Percentage_Range").val()) ))
+
 
     $("#section_1_Manager_Selection_LC").html(formatValue(lc_sel))
     $("#section_1_Manager_Selection_srPC").html(formatValue(srpc_sel))
