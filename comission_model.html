@@ -58,6 +58,11 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
     text-align: center;
 }
 
+.small-text{
+    font-size: 10px;
+    position: relative;
+    top:-3px;
+}
 .chart_title{
             clear:both;
             font-family: 'Open Sans', sans-serif;
@@ -161,18 +166,19 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
         <span  class='section-sub-title'>(The Maximum value of factors which are less probable to change. )</span></span><br>
 
     <br>
-    <span style='padding-left:40px'> Fixed Operation Cost: <input id='fixed_operation_cost' value=2200000>   <span id="fixed_operation_cost_Label"></span></span>
-    <span style='padding-left:40px'> Operation Cost per person (per Month):  <input id='operation_cost_per_person' value=3500>  <span id="operation_cost_per_person_Label"></span></span>
-    <span style='padding-left:40px'> EEEE Volume Target:  <input id='EEEE_Volume_Target' value=50000000>  <span id="EEEE_Volume_Target_Label"></span></span>
+    <span style='padding-left:40px'> <b>Fixed Operation Cost:</b> <input id='fixed_operation_cost' value=2200000>   <span id="fixed_operation_cost_Label"></span></span>
+    <span style='padding-left:40px'> <b>Operation Cost per person (per Month): </b> <input id='operation_cost_per_person' value=3500>  <span id="operation_cost_per_person_Label"></span></span> 
+    <span id="TTL_Operation_Cost"></span> <br>
+    <span style='padding-left:40px'> <b>EEEE Volume Target:</b>  <input id='EEEE_Volume_Target' value=50000000>  <span id="EEEE_Volume_Target_Label"></span></span>
 
-    <br>Monthly Target Per Staff:     <span style='padding-left:40px'>Property Consultants Target:  <input id='PropertyConsultant_Target' value=45000>   </span> <span id="PropertyConsultant_Target_Label"></span>
-    <span style='padding-left:40px'>  Sr. Property Consultants Target: <input id='SrPropertyConsultant_Target'  value=65000> </span><span id="SrPropertyConsultant_Target_Label"></span>
-    <span style='padding-left:40px'>  Leasing Consultants Target: <input id='LeasingConsultants_Target'  value=55000> </span><span id="LeasingConsultants_Target_Label"></span>
+    <br> <b style="color:blue">Monthly Target Per Staff:  </b> <br>   <span style='padding-left:40px'> <b>Property Consultants Target:</b> <input id='PropertyConsultant_Target' value=45000>   </span> <span id="PropertyConsultant_Target_Label"></span>
+    <span style='padding-left:40px'>  <b>Sr. Property Consultants Target:</b> <input id='SrPropertyConsultant_Target'  value=65000> </span><span id="SrPropertyConsultant_Target_Label"></span>
+    <span style='padding-left:40px'>  <b>Leasing Consultants Target:</b> <input id='LeasingConsultants_Target'  value=55000> </span><span id="LeasingConsultants_Target_Label"></span>
 
 
     <div style='clear:both;padding-top:20px'>
         <table class='plan_table' >
-            <th>PLAN-1 (EEEE, Target_Achieved)</th> 
+            <th> <b>PLAN-1 (EEEE, Target_Achieved)</b></th> 
             <tr><td><100%</td><td> 0 </td></tr>
             <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c1_p1"></td></tr>
             <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="6" id="cap_c2_p1"></td></tr>
@@ -181,7 +187,7 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
         </table>
 
         <table class='plan_table' > 
-        <th>PLAN-2 (NON EEEE)</th>
+        <th><b> PLAN-2 (NON EEEE)</b></th>
         <tr><td><85%</td><td> 0 </td></tr>
         <tr><td>85% -100%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p2"></td></tr>
         <tr><td>100% -150%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p2"></td></tr>
@@ -190,7 +196,7 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
     </table>
 
         <table class='plan_table'> 
-            <th> PLAN-3 (General Manager) </th>
+            <th> <b> PLAN-3 (General Manager)</b> </th>
         <tr><td><100%</td><td>0</td></tr>
         <tr><td>100% -125%</td><td><input style='width:50px' type="number" min="0"  step="1" value="2" id="cap_c1_p3"></td></tr>
         <tr><td>125% -200%</td><td><input style='width:50px' type="number" min="0"  step="1" value="3" id="cap_c2_p3"></td></tr>
@@ -268,7 +274,7 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
         </div>
 
         <div  class='chart_title'> <span id='section_2_ct'> beyond different thresholds of Achievement% both Manager expected payout & capping are fulfilled </span> <br>
-            <span id='section_2_st'  class='chart_sub_title'> for best return to effort, Manager should aim for that achievement%'s which cross the threshold'   </span> </div>
+            <span id='section_2_st'  class='chart_sub_title'> for best return to effort, Manager should aim for that achievement%'s which cross the threshold  </span> </div>
        <div class='chart_description' style='padding-bottom:5px'>
          Manager payout across Staff comission & Achievement%  
        </div>
@@ -285,6 +291,7 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
            yeilding minimum EEEE volume as <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_EEE_Volume_Target"></span>
            <span style='font-size:12px'> (in accordance Companie's EEEE Volume Target & stales type of 
             other Managers) </span>
+
         
    . &nbsp;Simulations are with <span style='font-size:18px; font-weight:bold'  id="section_1_Manager_Selection_srPC"></span>
     increased head count adhereing the tuning parameter that is set
@@ -292,7 +299,14 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
        <span style='display:none'>    PropertyConsultants_max = <span id="section_1_Manager_Selection_PC"></span>
            Leasing Consulatnts =  <span id="section_1_Manager_Selection_LC"></span></span>
          
-   
+   <br>
+   <div style="color:black">
+  <b> X Axis: </b> <span id="chart_xaxis"> </span> 
+  <b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Y Axis:</b> <span id="chart_yaxis"> </span>
+ <b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Text:</b>  <select id='section_1_text_option' style='color:black'>
+<option value="cap_bucket"> Capx</option>
+<option value="incentive"  selected> Incentive</option>
+</select></div>
 
         </div>
 
@@ -305,6 +319,10 @@ GreenBrown_Pallet = ["#bbddab","#6bb247","#4c7f32","#556d45","#5d6849","#d9d3af"
             
             </table>
         </div>
+
+    </div>
+
+    <div id="section_2"  style='position:relative;top:200px; clear:both'>
 
     </div>
 
@@ -351,9 +369,6 @@ var nodeHeight= (d) => d.getBBox().height;
    
 
 
-
-
-
 $("input").change(function(){
         $('#'+$(this).attr('id')+'_Label').html(formatValue($(this).val()))
       
@@ -368,9 +383,9 @@ set_default_manager_value = false
 $("#add_default_manager").click(function(){
     
     List_ManagerName =['Aldo','Elsayed','Ankit']
-    List_Property_Consultants=[18,14,4]
-    List_Sr_Property_Consultants=[13,4,0]
-    List_Leasing_Consultants=[4,1,0]
+    List_Property_Consultants=[15,13,7]
+    List_Sr_Property_Consultants=[12,4,0]
+    List_Leasing_Consultants=[5,1,0]
     List_Expectation = [175000,75000,75000]
     List_Sales_type=[  "EEEE Balanced", "Non EEEE Inclined", "EEEE Inclined"]
     no_managers = 3
@@ -517,12 +532,14 @@ $("#add_manager").click(function(){
 
     <script>
 
-$("#simulate").click(function(){
 
+$("#simulate").click(function(){
+    Total_Target = 0
     $('#section_1_Manager_Selection').find('option').remove().end()
     plan  = {'c1_p1':.03,'c2_p1':.06,'c3_p1':.08,'c4_p1':.10,'c1_p2':.02,'c2_p2':.03,'c3_p2':.04,'c4_p2':.05,'c1_p3':.02 ,'c2_p3':.03, 'c3_p3':.06}
     Months_left = 3
 
+   
     operation_cost_TTL = parseInt($("#fixed_operation_cost").val());
     operation_cost_per_person = parseInt($("#operation_cost_per_person").val())
     LeasingConsultants_Target =  parseInt($("#LeasingConsultants_Target").val())
@@ -537,12 +554,17 @@ $("#simulate").click(function(){
         var LeasingConsultant = parseInt($("#Leasing_consulatnt_HeadCount_"+manager_iter).val())
         var PropertyConsultant = parseInt($("#Property_consulatnt_HeadCount_"+manager_iter).val())
         var SrPropertyConsultant = parseInt($("#Sr_Property_consulatnt_HeadCount_"+manager_iter).val())
-
+        Total_Target = parseInt(Total_Target) + (parseInt(LeasingConsultants_Target) * parseInt(LeasingConsultant) * Months_left)
+     
+        Total_Target = parseInt(Total_Target) + (parseInt(PropertyConsultant_Target) * parseInt(PropertyConsultant) * Months_left)
+        Total_Target = parseInt(Total_Target) + (parseInt(SrPropertyConsultant_Target) * parseInt(SrPropertyConsultant) * Months_left)
+       
         TTL_HeadCount = parseInt(TTL_HeadCount) + LeasingConsultant+PropertyConsultant+ SrPropertyConsultant
         manager_iter = manager_iter + 1
+       
     }
 
-   
+    $("#TTL_Operation_Cost").html( "<b>Total Operating Cost: </b>" + formatValue( parseInt(operation_cost_TTL) + (parseInt(Months_left)*parseInt(TTL_HeadCount) * parseInt(operation_cost_per_person) ) ))
    
     var manager_iter = 0; 
     Managers_Master_List = []
@@ -594,28 +616,30 @@ $("#simulate").click(function(){
 
     Managers_JSON.sort(function(a, b) { return d3.ascending(a.sort_order, b.sort_order)}); 
 
-    eee_sring = ""
+   
     Remaining_EEE_Target = TTL_EMAR_Target
     for(k in Managers_JSON){
         EEE_Target_Assign = Math.min(Managers_JSON[k]['Target'],Remaining_EEE_Target)
-        eee_sring = eee_sring + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EEEE Volume for "+ Managers_JSON[k]['Manager_name'] +"  is "+  formatValue( 100* parseInt(EEE_Target_Assign)/ ($("#EEEE_Comission_Percentage_Range").val()) )
         Managers_JSON[k]['EEE_Target'] = EEE_Target_Assign
         Remaining_EEE_Target = Remaining_EEE_Target -  EEE_Target_Assign
 
         
     }
 
-   
-    $("#results_summary").html(eee_sring)
     
 
     consolidated_results = []
    
+  
 
     manager_iter = 0
     Managers_JSON.sort(function(a, b) { return d3.ascending(a.given_order, b.given_order)}); 
   
-   
+
+    manager_iter = 0
+
+
+
     while(manager_iter < added_manager){
         Target = Managers_JSON[manager_iter]["Target"]
         try_new_target = true
@@ -623,15 +647,36 @@ $("#simulate").click(function(){
         PC_Inc = 0
         SrPC_Inc = 0
         LC_Inc = 0
+        firts_run = true
         while(try_new_target){
-           // console.log("Trying target "+ formatValue(Target) + " for " +  Managers_JSON[manager_iter]["Manager_name"])
             EEEE_target = Managers_JSON[manager_iter]["EEE_Target"]
             results = simulate_achievement(Managers_JSON[manager_iter],Target,PC_Inc, SrPC_Inc, LC_Inc)
             consolidated_results.push(results)
             try_new_target = check_if_expectation_achieved_below_per(results,Managers_JSON[manager_iter]["Expectation"] ) 
+            if(firts_run){
+              //  results_interested = results.filter(function(n,i){ return n.cap_bucket == "green"}) 
+                results_interested = results.filter(function(n,i){ return n.Expectation_reached_bkt == true}) 
+                res_in = []
+                d3.rollup(results, v => { 
+                    res_in.push({
+
+                  'Achievement_bkt': v[0].Achievement_per_TTL,
+                  'per':  d3.sum(v,  d =>  {   if(d.Expectation_reached_bkt!=true ||  d.cap_bucket != "green"){return 1}else{return 0} }) / d3.sum(v,  d =>  { return 1} )
+                })
+                     return{} }, d=> d.Achievement_per_TTL )
+                    
+                Managers_JSON[manager_iter]["min_Achievement_Per"] = d3.min(results_interested,d=> { return d.Achievement_per_TTL })
+                if(results_interested.length == 0){
+                    Managers_JSON[manager_iter]["min_Achievement_Per"] = -1
+                }
+                
+                
+                firts_run = false 
+            }
            if(!try_new_target){
                break;
            }
+
             if(people_iter == 1){  
             Target = Target + (PropertyConsultant_Target)*Months_left
             people_iter = people_iter + 1
@@ -649,6 +694,7 @@ $("#simulate").click(function(){
             SrPC_Inc = SrPC_Inc + 1
             LC_Inc = LC_Inc - 1
             }
+           
             
         }
         Managers_JSON[manager_iter]['max_LC'] = LC_Inc
@@ -662,6 +708,47 @@ $("#simulate").click(function(){
     consolidated_results = consolidated_results.flat();
     grouped_data =  d3.group(consolidated_results, d => d.Manager_name)
 
+    eee_sring = "Total Manager Target <span class='small-text'>(for given head count of "+TTL_HeadCount+")</span>" + formatValue(Total_Target) + "<br>"
+    eee_sring = eee_sring + "<span class='small-text'>GM Target is " + formatValue(parseInt(Total_Target) /.8) + "</span>" + "<br>"
+    manager_iter = 0
+    txt_added = true
+    while(manager_iter < added_manager){
+        if( Managers_JSON[manager_iter]["max_SrPC"] > 0){
+            if(txt_added){
+    txt_added = false
+    eee_sring =eee_sring +  "To meet Managers expectations, head count for "+ Managers_JSON[manager_iter]['Manager_name'] + " should be increased by " +  Managers_JSON[manager_iter]["max_SrPC"]
+   }else{
+    eee_sring = eee_sring + ", for "+ Managers_JSON[manager_iter]['Manager_name'] + " should be increased by " +  Managers_JSON[manager_iter]["max_SrPC"]
+  
+   }
+        }
+        manager_iter = manager_iter + 1
+  
+}
+eee_sring = eee_sring+"<br>"
+
+    manager_iter = 0
+    while(manager_iter < added_manager){
+    eee_sring = eee_sring + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EEEE Volume for "+ Managers_JSON[manager_iter]['Manager_name'] +"  is "+  formatValue( 100* parseInt( Managers_JSON[manager_iter]['EEE_Target'] )/ ($("#EEEE_Comission_Percentage_Range").val()) )
+    manager_iter = manager_iter + 1
+}
+eee_sring = eee_sring+"<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Minimum Achievement % required to meet expectation "
+manager_iter = 0
+    while(manager_iter < added_manager){
+        if(Managers_JSON[manager_iter]["min_Achievement_Per"] != -1){
+
+        
+    eee_sring = eee_sring + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp"+ Managers_JSON[manager_iter]['Manager_name'] +"  is "+   Math.round(Managers_JSON[manager_iter]["min_Achievement_Per"] *100) +"%" 
+}
+    manager_iter = manager_iter + 1
+}
+
+
+
+
+
+
+$("#results_summary").html(eee_sring)
 
     mn = Managers_Master_List[0]
     $("#section_1_Manager_Selection  option[value='"+mn+"']").attr('selected', 'selected')
@@ -693,9 +780,59 @@ $("#simulate").click(function(){
 
 
     Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, mn , e , non_e , (lc_sel + srpc_sel + pc_sel)  )
-      
+    Generate_org_chart()
+
+    populate_capx_simulation("section_2",Managers_Master_List)
 
 })
+
+function populate_capx_simulation(id,Managers_Master_List){
+    var wkng_div = document.getElementById(id)
+
+    
+
+
+    for(manager_iter in Managers_Master_List){
+        Manager_name = Managers_Master_List[manager_iter]['Manager_name']
+        var div = document.createElement("div");
+        div.className ='manager_detail_class'
+        div.className =Manager_name+'_Achievement'
+        var tag = document.createElement("span");
+        var text = document.createTextNode(Manager_name+":");
+        tag.appendChild(text);
+        div.appendChild(tag);
+
+
+        var br = document.createElement("br");
+        div.appendChild(br);
+        
+        var emar_achievement_per =  document.createElement("input");
+        emar_achievement_per.id = Manager_name + "_emar_achievement_per"
+        div.appendChild(emar_achievement_per);
+
+        var br = document.createElement("br");
+        div.appendChild(br);
+
+        var non_emar_achievement_per =  document.createElement("input");
+        non_emar_achievement_per.id = Manager_name + "_non_emar_achievement_per"
+        div.appendChild(non_emar_achievement_per);
+        
+        wkng_div.appendChild(div);
+    }
+}
+
+function Generate_org_chart(){
+    console.log("Generate_org_chart .... ")
+    grouped_data_agent_comission =  d3.group(consolidated_results, d => d.Staff_comission_percentage)
+    grouped_data_agent_comission.forEach(
+        data_agent_comission => {
+            //console.log(data_agent_comission)
+            data_agent_comission_managers = d3.group(data_agent_comission, d => d.Manager_name)
+            console.log(data_agent_comission_managers.get('Aldo').length)
+            console.log(formatValue(data_agent_comission_managers.get('Aldo').length * data_agent_comission_managers.get('Elsayed').length * data_agent_comission_managers.get('Ankit').length))
+        }
+    )
+}
 
 function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t, people_add){
 
@@ -704,14 +841,14 @@ function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t, peop
         if(people_add == 0){
             var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'non_emar_achievement_percent'  , 'y_axis_column': 'Staff_comission_percentage' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
 
         }
         else{  
         var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'NON_EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
     }
 
@@ -720,13 +857,13 @@ function Generate_Section_1_chart(chart_id, data, mn , emar_t , non_emar_t, peop
         if(people_add == 0){
             var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'emar_achievement_percent'  , 'y_axis_column': 'Staff_comission_percentage' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
         }
         else{
             var  axis= {'sub_plot_dimension_1':'Manager_name', 
        'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'Staff_comission_percentage' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'per' , 'selection':mn  }
        
         } 
@@ -737,14 +874,14 @@ else{
     if(people_add == 0){
         var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
        'x_axis_column':'emar_achievement_percent'  , 'y_axis_column': 'non_emar_achievement_percent' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'per'  , 'y_axis_column_format': 'per' , 'selection':mn  }
 
     }
     else{
         var  axis= {'sub_plot_dimension_1':'Staff_comission_percentage', 
        'x_axis_column':'EMAR_ACHIVEMENT'  , 'y_axis_column': 'NON_EMAR_ACHIVEMENT' ,
-       'color_column': 'Diff_Expectation', 'text_column':'cap_bucket' ,
+       'color_column': 'Diff_Expectation', 'text_column':$("#section_1_text_option").val() ,
         'x_axis_column_format':'num'  , 'y_axis_column_format': 'num' , 'selection':mn  }
 
     }
@@ -797,23 +934,37 @@ else{
    
    var plt_data = []
    
- 
+   if($("#section_1_text_option").val()=='incentive'){
     k = d3.rollup(data_process_final, v => { 
-      
-      //  console.log("**********")
-       // console.log(v)
     plt_data.push({
         'sub_plot_dimension_1': v[0][axis.sub_plot_dimension_1],
         'x_axis_column': v[0][axis.x_axis_column],
         'y_axis_column':  v[0][axis.y_axis_column],
         'color':    d3.sum(v,  d =>  { ;return d[axis.color_column]} ), 
-        'text':   Math.round(100*d3.sum(v,  d =>  {   if(d[axis.text_column]!="green"){return 1}else{return 0} } )/  d3.sum(v,  d =>  { return 1} ))
+        'text':   Math.round(d3.sum(v,  d =>  {  return d[axis.text_column] } )/  d3.sum(v,  d =>  { return 1} ))
         }) 
-      //  console.log("**********")
+    
         return { } 
     }  ,  d=>d[axis.sub_plot_dimension_1],  d => d[axis.x_axis_column],d => d[axis.y_axis_column]  )
 
-   
+}
+
+console.log(axis.text_column)
+
+if($("#section_1_text_option").val()=='cap_bucket'){
+    k = d3.rollup(data_process_final, v => { 
+    plt_data.push({
+        'sub_plot_dimension_1': v[0][axis.sub_plot_dimension_1],
+        'x_axis_column': v[0][axis.x_axis_column],
+        'y_axis_column':  v[0][axis.y_axis_column],
+        'color':    d3.sum(v,  d =>  { ;return d[axis.color_column]} ), 
+        'text':   Math.round(100*d3.sum(v,  d =>  {   if(d[axis.text_column]=="green"){return 1}else{return 0} } )/  d3.sum(v,  d =>  { return 1} ))
+        }) 
+    
+        return { } 
+    }  ,  d=>d[axis.sub_plot_dimension_1],  d => d[axis.x_axis_column],d => d[axis.y_axis_column]  )
+
+}
    
         axis['sub_plot_x_domain'] = sub_plot_x_domain;
  
@@ -877,8 +1028,12 @@ i = i+1
 
 color_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
 Text_legend = top_svg.append("g")
-Text_legend.append("text").attr("x",315).attr("y",50).attr("text-anchor","middle").text("X axis : " + axis.x_axis_column + "                   "+ "Y axis : " + axis.y_axis_column).attr("fill", "black" )
-Text_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
+$("#chart_xaxis").html(axis.x_axis_column)
+$("#chart_yaxis").html(axis.y_axis_column)
+ 
+//Text_legend.append("text").attr("x",315).attr("y",50).attr("text-anchor","middle").text("X axis : " +  + "                   "+ "Y axis : " + axis.y_axis_column ).attr("fill", "black" )
+//Text_legend.append("text").attr("x",315).attr("y",70).attr("text-anchor","middle").text("        Text: "+axis.text_column).attr("fill", "black" )
+//Text_legend.attr("transform", function() {return ( "translate(" + (1300 - nodeWidth(this))/2 + ",10)"  )});
 
 
 
@@ -968,7 +1123,7 @@ working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_co
 
 })
 working_space.append("g").selectAll().data(data, function(d) {return d.x_axis_column+':'+d.y_axis_column;})
-.join("text").attr("font-size","8px").attr("x", function(d) { return x(d.x_axis_column)+ (x.bandwidth()-nodeWidth(this))/2 -5  }).attr("y", function(d) { return y(d.y_axis_column)+y.bandwidth()/2 }).text(d=>d.text)
+.join("text").attr("font-size","8px").attr("x", function(d) { return x(d.x_axis_column)+ (x.bandwidth()-nodeWidth(this))/2 -5  }).attr("y", function(d) { return y(d.y_axis_column)+y.bandwidth()/2 }).text(d=> formatValue(d.text) )
 
 
 }
@@ -1016,7 +1171,7 @@ function simulate_achievement(F_Manager_JSON, f_Target, PC_Inc, SrPC_Inc, LC_Inc
     var EEEE_Target =  F_Manager_JSON["EEE_Target"]
     var sales_type = F_Manager_JSON["sales_type"]
     var NON_EEEE_Target =  f_Target - EEEE_Target
-    staff_comission = 55
+    staff_comission = 58
     var return_val = []
     
   
@@ -1128,13 +1283,15 @@ var MANAGER_NON_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
 
         
         NET_PROFIT = NET_REMAINED - GENERAL_MANAGER_PAYOUT - ff_operation_cost
-        
+        incentive = 0
         
         if(NET_PROFIT<=0){
             cap = -.05
             cap_bucket = 'gray'
             
         }
+
+    
             
         else{
             cap = (GENERAL_MANAGER_PAYOUT + MANAGER_PAYOUT)/NET_PROFIT
@@ -1144,6 +1301,7 @@ var MANAGER_NON_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
                 cap_bucket = 'gray'}
             else if(cap <= .18){  
                 cap_bucket ='green'
+                incentive = (.18 - cap)*NET_PROFIT
             } 
             else{ 
                 cap_bucket ='red'}
@@ -1185,7 +1343,8 @@ var MANAGER_NON_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
     'Expectation_reached_bkt': expectation_reached_bkt,
     'EMAR_ACHIVEMENT': EMAR_ACHIVEMENT, 'NON_EMAR_ACHIVEMENT':NON_EMAR_ACHIVEMENT, 
     'Diff_Expectation': Diff_expectation,
-    'Head_Count_Summary': Head_Count_Summary
+    'Head_Count_Summary': Head_Count_Summary,
+    'incentive': incentive
 
     }   
     
@@ -1199,7 +1358,7 @@ var MANAGER_NON_EMAR_PAYOUT = 0;slab1 = 0;slab2 = 0;slab3=0;slab4=0
 }
 
 
-$("#section_1_Manager_Selection").change(function(){
+function chart_dropdown_change(){
     var ms = $("#section_1_Manager_Selection").val()
     t = 0
     for(i in Managers_JSON){
@@ -1229,12 +1388,18 @@ $("#section_1_Manager_Selection").change(function(){
     Generate_Section_1_chart("#Heat_plot_manager_decission_making",grouped_data, ms , e , non_e , (lc_sel + srpc_sel + pc_sel) )
 
 
+}
+
+
+$("#section_1_Manager_Selection").change(function(){
+    chart_dropdown_change()
 })
 
 
 
-
-
+$("#section_1_text_option").change(function(){
+    chart_dropdown_change()
+})
 
 function populate_section1_table(sub_x_domain, x_axis_column, y_axis_column, axis){
 
@@ -1259,7 +1424,9 @@ if(d[axis.sub_plot_dimension_1] == sub_x_domain ){
       d.General_Manager_Payout,
       Math.round(d.cap*100,2) ,
       d.Net_Profit,
-      d.Head_Count_Summary])     
+      d.Head_Count_Summary,
+      d.incentive
+      ])     
 }    
        }
     }
@@ -1281,7 +1448,8 @@ var sceanriotable_section_1 = $('#section_1_filter_table').DataTable(
            { title: "Manager Payout" },
            { title: "General Manager Payout" },
            { title: "Capping%" },
-           { title: "Net_Profit" },{title:'HeadCount_Inc'}
+           { title: "Net_Profit" },{title:'HeadCount_Inc'},
+           {title:"Incentive"}
        ],
 "columnDefs": [
 {
@@ -1291,7 +1459,7 @@ var sceanriotable_section_1 = $('#section_1_filter_table').DataTable(
                "data-sort": function ( data, type, row ) {
                    return  data;
                },
-               "targets": [0,1,2,3,7,8,10]}
+               "targets": [0,1,2,3,7,8,10,12]}
   
 
    
